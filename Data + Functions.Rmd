@@ -1,0 +1,7301 @@
+---
+title: "Data + Documentation"
+output: html_document
+date: "2025-10-02"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2)
+library(mosaic)
+library(dplyr)
+library(tidyverse)
+library(usethis)
+```
+
+```{r}
+## code to prepare `DATASET` dataset goes here
+#      usethis::use_data(Squirrels)
+
+```
+
+
+
+
+# *Create a place for raw data*
+```{r}
+
+read_list <- function(raw_data) {
+  # 1. Use read.delim() to read the text block.
+  # This function treats the input string as a file connection, automatically handling
+  # newlines (\n) as row separators and tabs/spaces as column separators.
+
+  output_dataset <- read.delim(
+    text = raw_data,
+    header = TRUE,            # Use the first row as column names
+    stringsAsFactors = FALSE, # Keep character columns as strings, not factors
+    sep = ""                # Specify tab as the separator
+  )
+  return(output_dataset)
+}
+```
+
+## Load and save datasets (example with built-in cars & iris) (1.2 and 1.3 dataset)
+```{r}
+DungBeetles <- tribble(
+  ~time,   ~treatment,
+  34.2,    "clearcap",
+  38.46,   "clearcap",
+  58.13,   "clearcap",
+  43.77,   "clearcap",
+  16.17,   "clearcap",
+  70.7,    "clearcap",
+  37.23,   "clearcap",
+  49.5,    "clearcap",
+  36.86,   "clearcap",
+  152.21,  "blackcap",
+  123.61,  "blackcap",
+  123.56,  "blackcap",
+  114.29,  "blackcap",
+  156.99,  "blackcap",
+  84.18,   "blackcap",
+  112.78,  "blackcap",
+  131.54,  "blackcap",
+  139.77,  "blackcap"
+)
+```
+## next set:  (1.4 and 1.5)
+```{r}
+Squirrels <- read_list("Location	Length
+          Hemet	263
+          Hemet	256
+          Hemet	251
+          Hemet	242
+          Hemet	248
+          BigBear	274
+          BigBear	256
+          BigBear	249
+          BigBear	264
+          Susanville	245
+          Susanville	272
+          Susanville	263
+          Susanville	260
+          Susanville	271
+          Loophill	273
+          Loophill	291
+          Loophill	278
+          Loophill	281")
+```
+## 2.1
+
+```{r}
+MeltingTimes <- read_list("student	time	chiptype
+KH	133	chocolate
+JvK	114	chocolate
+HH	102	chocolate
+LO	154	chocolate
+SG	85	chocolate
+CL	188	chocolate
+LC	105	chocolate
+EH	64	chocolate
+JR	135	chocolate
+BB	126	chocolate
+LR	115	chocolate
+MB	95	chocolate
+JO	92	chocolate
+MG	112	chocolate
+IQ	142	chocolate
+ML	172	chocolate
+RUR	185	chocolate
+EP	119	chocolate
+NL	131	chocolate
+TS	60	chocolate
+KH2	108	chocolate
+NN	192	chocolate
+NH	120	chocolate
+PS	95	chocolate
+KJ	104	chocolate
+KH3	90	chocolate
+SS	192	chocolate
+JS	162	chocolate
+GA	120	chocolate
+DC	91	chocolate
+TA	94	chocolate
+KH	94	butterscotch
+JvK	112	butterscotch
+HH	130	butterscotch
+LO	129	butterscotch
+SG	108	butterscotch
+CL	179	butterscotch
+LC	91	butterscotch
+EH	65	butterscotch
+JR	132	butterscotch
+BB	105	butterscotch
+LR	100	butterscotch
+MB	81	butterscotch
+JO	72	butterscotch
+MG	95	butterscotch
+IQ	170	butterscotch
+ML	195	butterscotch
+RUR	187	butterscotch
+EP	102	butterscotch
+NL	110	butterscotch
+TS	50	butterscotch
+KH2	89	butterscotch
+NN	178	butterscotch
+NH	82	butterscotch
+PS	83	butterscotch
+KJ	91	butterscotch
+KH3	57	butterscotch
+SS	148	butterscotch
+JS	101	butterscotch
+GA	77	butterscotch
+DC	68	butterscotch
+TA	79	butterscotch")
+```
+
+## Strawberries 2.2
+```{r}
+Strawberries <- read_list("Firmness	Storage	Variety
+6.7	Air	Allstar
+4	Air	Bounty
+6.3	Air	Kent
+7.9	Air	Selva
+3.2	Air	Vesper
+9.5	ModifiedAir	Allstar
+5	ModifiedAir	Bounty
+7.3	ModifiedAir	Kent
+11.5	ModifiedAir	Selva")
+```
+
+## 2.3
+```{r}
+carmpg <- read_list("weight	horsepower	acceleration
+heavy	high	12
+heavy	high	11.5
+heavy	high	11
+heavy	high	12
+heavy	high	10.5
+heavy	high	10
+heavy	high	9
+heavy	high	8.5
+heavy	high	10
+heavy	high	8.5
+heavy	high	10
+heavy	high	8
+heavy	high	9.5
+heavy	high	10
+light	low	15
+heavy	low	15.5
+light	low	15.5
+light	low	16
+light	low	14.5
+light	low	20.5
+light	low	17.5
+light	low	14.5
+light	low	17.5
+light	high	12.5
+light	low	15
+heavy	high	14
+heavy	high	15
+heavy	high	13.5
+heavy	high	18.5
+light	low	14.5
+light	low	15.5
+light	low	14
+light	high	13
+heavy	high	15.5
+heavy	high	15.5
+heavy	low	15.5
+heavy	high	15.5
+heavy	high	12
+heavy	high	11.5
+heavy	high	13.5
+heavy	high	13
+heavy	high	11.5
+heavy	high	12
+heavy	high	12
+heavy	high	13.5
+light	low	19
+heavy	high	15
+heavy	low	14.5
+light	low	14
+light	low	14
+light	low	19.5
+light	low	14.5
+light	low	19
+light	low	18
+light	low	19
+light	low	20.5
+light	low	15.5
+light	low	17
+light	low	23.5
+light	low	19.5
+light	low	16.5
+heavy	high	12
+heavy	high	12
+heavy	high	13.5
+heavy	high	13
+heavy	high	11.5
+heavy	high	11
+heavy	high	13.5
+heavy	high	13.5
+heavy	high	12.5
+light	low	13.5
+heavy	high	12.5
+heavy	high	14
+heavy	high	16
+heavy	high	14
+heavy	high	14.5
+light	low	18
+heavy	low	19.5
+light	low	18
+light	low	16
+light	low	17
+light	low	14.5
+light	low	15
+light	low	16.5
+heavy	high	13
+heavy	high	11.5
+heavy	high	13
+heavy	high	14.5
+heavy	high	12.5
+heavy	high	11.5
+heavy	high	12
+heavy	high	13
+heavy	high	14.5
+heavy	high	11
+heavy	high	11
+heavy	high	11
+heavy	high	16.5
+heavy	high	18
+heavy	high	16
+heavy	low	16.5
+heavy	low	16
+light	low	21
+heavy	high	14
+heavy	high	12.5
+heavy	high	13
+heavy	high	12.5
+light	high	15
+light	low	19
+light	low	19.5
+light	low	16.5
+light	low	13.5
+light	low	18.5
+light	high	14
+light	low	15.5
+heavy	high	13
+heavy	high	9.5
+light	low	19.5
+light	low	15.5
+light	low	14
+heavy	high	15.5
+heavy	high	11
+light	high	14
+heavy	high	13.5
+heavy	high	11
+heavy	low	16.5
+heavy	high	16
+heavy	high	17
+light	low	19
+light	low	16.5
+light	low	21
+light	low	17
+heavy	high	17
+heavy	high	18
+heavy	high	16.5
+heavy	high	14
+heavy	high	14.5
+heavy	high	13.5
+heavy	high	16
+heavy	high	15.5
+light	low	16.5
+light	low	15.5
+light	low	14.5
+light	low	16.5
+light	low	19
+light	low	14.5
+light	low	15.5
+light	low	14
+light	low	15
+light	low	15.5
+light	low	16
+heavy	low	16
+heavy	high	16
+heavy	low	21
+heavy	low	19.5
+heavy	high	11.5
+heavy	high	14
+heavy	high	14.5
+heavy	high	13.5
+heavy	high	21
+heavy	high	18.5
+heavy	high	19
+heavy	low	19
+heavy	high	15
+heavy	high	13.5
+heavy	high	12
+light	low	16
+light	low	17
+heavy	high	16
+light	low	18.5
+light	low	13.5
+light	low	16.5
+light	low	17
+heavy	low	14.5
+light	low	14
+heavy	low	17
+light	low	15
+heavy	low	17
+heavy	low	14.5
+light	high	13.5
+light	low	17.5
+light	low	15.5
+light	low	16.9
+light	low	14.9
+light	low	17.7
+light	low	15.3
+heavy	high	13
+heavy	high	13
+heavy	high	13.9
+heavy	high	12.8
+heavy	high	15.4
+heavy	high	14.5
+heavy	low	17.6
+heavy	low	17.6
+light	low	22.2
+light	low	22.1
+light	low	14.2
+light	low	17.4
+heavy	high	17.7
+heavy	low	21
+heavy	high	16.2
+heavy	low	17.8
+light	low	12.2
+light	low	17
+light	low	16.4
+light	low	13.6
+heavy	high	15.7
+heavy	high	13.2
+heavy	low	21.9
+heavy	high	15.5
+heavy	high	16.7
+heavy	high	12.1
+heavy	high	12
+heavy	high	15
+heavy	high	14
+light	low	18.5
+light	low	14.8
+light	low	18.6
+light	low	15.5
+light	low	16.8
+heavy	high	12.5
+heavy	high	19
+heavy	high	13.7
+heavy	high	14.9
+heavy	high	16.4
+heavy	high	16.9
+heavy	high	17.7
+heavy	low	19
+heavy	high	11.1
+heavy	high	11.4
+heavy	high	12.2
+heavy	high	14.5
+light	low	14.5
+light	low	16
+light	low	18.2
+light	low	15.8
+light	low	17
+light	low	15.9
+light	low	16.4
+light	low	14.1
+heavy	low	14.5
+light	high	12.8
+light	high	13.5
+light	low	21.5
+light	low	14.4
+light	low	19.4
+light	low	18.6
+light	low	16.4
+heavy	high	15.5
+heavy	high	13.2
+heavy	high	12.8
+heavy	high	19.2
+heavy	low	18.2
+heavy	low	15.8
+light	low	15.4
+heavy	high	17.2
+heavy	low	17.2
+heavy	high	15.8
+heavy	low	16.7
+heavy	high	18.7
+heavy	high	15.1
+heavy	high	13.2
+heavy	high	13.4
+heavy	high	11.2
+heavy	high	13.7
+light	low	16.5
+light	low	14.2
+light	low	14.7
+light	low	14.5
+light	low	14.8
+light	high	16.7
+heavy	low	17.6
+light	low	14.9
+heavy	high	15.9
+heavy	high	13.6
+light	high	15.7
+heavy	high	15.8
+light	low	14.9
+light	low	16.6
+heavy	high	15.4
+heavy	low	18.2
+heavy	low	17.3
+heavy	low	18.2
+heavy	high	16.6
+heavy	high	15.4
+heavy	high	13.4
+heavy	high	13.2
+heavy	high	15.2
+heavy	high	14.9
+heavy	high	14.3
+heavy	high	15
+heavy	high	13
+light	low	14
+light	low	15.2
+light	low	14.4
+light	low	15
+heavy	low	20.1
+heavy	high	17.4
+heavy	low	24.8
+heavy	low	22.2
+light	low	13.2
+light	low	14.9
+light	low	19.2
+light	low	14.7
+light	low	16
+light	high	11.3
+light	high	12.9
+light	low	13.2
+light	low	14.7
+light	low	18.8
+light	low	15.5
+light	low	16.4
+light	low	16.5
+heavy	low	18.1
+heavy	low	20.1
+heavy	low	18.7
+light	low	15.8
+light	low	15.5
+light	low	17.5
+light	low	15
+light	low	15.2
+light	low	17.9
+light	high	14.4
+light	low	19.2
+light	low	21.7
+light	low	23.7
+heavy	low	19.9
+heavy	low	21.8
+light	low	13.8
+light	low	18
+light	low	15.3
+heavy	high	11.4
+light	high	12.5
+light	low	15.1
+light	low	17
+light	low	15.7
+light	low	16.4
+light	low	14.4
+light	high	12.6
+light	low	12.9
+light	low	16.9
+light	low	16.4
+light	low	16.1
+light	low	17.8
+light	low	19.4
+light	low	17.3
+light	low	16
+light	low	14.9
+light	low	16.2
+light	low	20.7
+light	low	14.2
+light	low	14.4
+light	low	16.8
+light	high	14.8
+light	low	18.3
+heavy	low	20.4
+heavy	low	19.6
+heavy	high	12.6
+heavy	high	13.8
+heavy	high	15.8
+heavy	high	19
+heavy	low	17.1
+heavy	low	16.6
+light	low	19.6
+light	low	18.6
+light	low	18
+light	low	16.2
+light	low	16
+light	low	18
+heavy	low	16.4
+light	low	15.3
+light	low	18.2
+light	low	17.6
+light	low	14.7
+light	low	17.3
+light	low	14.5
+light	low	14.5
+light	low	16.9
+light	low	15
+light	low	15.7
+light	low	16.2
+heavy	high	16.4
+heavy	low	17
+light	low	14.5
+heavy	high	14.7
+light	low	13.9
+light	low	13
+heavy	low	17.3
+light	low	15.6
+light	low	24.6
+light	low	11.6
+light	low	18.6
+light	low	19.4")
+```
+
+
+## Section 3.1,
+```{r}
+piggrowth <- read_list("Antibiotic	VitaminB12	Growth	Treatment
+Yes	Yes	1.52	Yes_Yes
+Yes	Yes	1.7	Yes_Yes
+Yes	Yes	1.54	Yes_Yes
+Yes	No	1.25	Yes_No
+Yes	No	1.1	Yes_No
+Yes	No	1.24	Yes_No
+No	Yes	1.4	No_Yes
+No	Yes	1.5	No_Yes
+No	Yes	1.3	No_Yes
+No	No	1.1	No_No
+No	No	0.89	No_No
+No	No	0.88	No_No")
+```
+
+
+## Section 3.2:
+```{r}
+ad_data <- read_list("rating	claim	imagery
+0	Concrete	Visual
+5	Concrete	Visual
+4	Concrete	Visual
+3	Concrete	Visual
+6	Concrete	Visual
+8	Concrete	Visual
+5	Concrete	Visual
+6	Concrete	Visual
+5	Concrete	Visual
+8	Concrete	Visual
+5	Concrete	Visual
+4	Concrete	Visual
+5	Concrete	Visual
+8	Concrete	Visual
+5	Concrete	Visual
+6	Concrete	Visual
+6	Concrete	Visual
+7	Concrete	Visual
+6	Concrete	Visual
+6	Concrete	Visual
+10	Concrete	Visual
+4	Concrete	Visual
+1	Concrete	Verbal
+5	Concrete	Verbal
+4	Concrete	Verbal
+2	Concrete	Verbal
+4	Concrete	Verbal
+3	Concrete	Verbal
+4	Concrete	Verbal
+1	Concrete	Verbal
+3	Concrete	Verbal
+3	Concrete	Verbal
+1	Concrete	Verbal
+4	Concrete	Verbal
+3	Concrete	Verbal
+2	Concrete	Verbal
+3	Concrete	Verbal
+2	Concrete	Verbal
+3	Concrete	Verbal
+2	Concrete	Verbal
+4	Concrete	Verbal
+6	Concrete	Verbal
+4	Concrete	Verbal
+1	Concrete	Verbal
+-1	Abstract	Visual
+2	Abstract	Visual
+3	Abstract	Visual
+1	Abstract	Visual
+4	Abstract	Visual
+6	Abstract	Visual
+1	Abstract	Visual
+3	Abstract	Visual
+4	Abstract	Visual
+5	Abstract	Visual
+4	Abstract	Visual
+4	Abstract	Visual
+2	Abstract	Visual
+3	Abstract	Visual
+2	Abstract	Visual
+4	Abstract	Visual
+2	Abstract	Visual
+2	Abstract	Visual
+4	Abstract	Visual
+1	Abstract	Visual
+5	Abstract	Visual
+3	Abstract	Visual
+3	Abstract	Verbal
+4	Abstract	Verbal
+4	Abstract	Verbal
+4	Abstract	Verbal
+2	Abstract	Verbal
+0	Abstract	Verbal
+3	Abstract	Verbal
+-1	Abstract	Verbal
+2	Abstract	Verbal
+1	Abstract	Verbal
+2	Abstract	Verbal
+6	Abstract	Verbal
+2	Abstract	Verbal
+2	Abstract	Verbal
+4	Abstract	Verbal
+1	Abstract	Verbal
+5	Abstract	Verbal
+-2	Abstract	Verbal
+5	Abstract	Verbal
+2	Abstract	Verbal
+6	Abstract	Verbal
+3	Abstract	Verbal")
+```
+
+
+## 3.3
+```{r}
+hurricanesA <- read_list("Rating	HurrGender	Participant
+3.5	male	1
+4	female	1
+4	male	1
+4.5	female	1
+7	female	1
+4	male	1
+1	male	1
+6	female	1
+6	female	1
+3	male	1
+6	male	346
+2	female	346
+5.5	male	346
+4.5	female	346
+1	female	346
+6	male	346
+6	male	346
+4.5	female	346
+4	female	346
+5	male	346")
+```
+
+## 3.4
+```{r}
+Hopelessness <- read_list("hopelessness8	Exercise	BaselineGroup
+1.666666667	exerciser	mod_severeHopeless
+1	non-exerciser	mod_severeHopeless
+1.166666667	exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+1.166666667	exerciser	mod_severeHopeless
+2.5	non-exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+3.333333333	non-exerciser	mod_severeHopeless
+1.166666667	exerciser	mod_severeHopeless
+1.166666667	exerciser	mod_severeHopeless
+2.166666667	exerciser	mod_severeHopeless
+1.333333333	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+1	exerciser	mod_severeHopeless
+2.166666667	non-exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+3	non-exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+1.5	exerciser	mod_severeHopeless
+1.166666667	exerciser	mod_severeHopeless
+2.833333333	non-exerciser	mod_severeHopeless
+2.833333333	non-exerciser	mod_severeHopeless
+2.166666667	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+1.833333333	exerciser	mod_severeHopeless
+2.333333333	non-exerciser	mod_severeHopeless
+1.833333333	non-exerciser	mod_severeHopeless
+1.833333333	exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+1.5	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+1.833333333	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+1.5	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+2.166666667	non-exerciser	mod_severeHopeless
+3	non-exerciser	mod_severeHopeless
+1.5	non-exerciser	mod_severeHopeless
+2.333333333	non-exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+2.333333333	non-exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+1.812356315	exerciser	mod_severeHopeless
+2.333333333	non-exerciser	mod_severeHopeless
+2.666666667	non-exerciser	mod_severeHopeless
+2.5	non-exerciser	mod_severeHopeless
+1	non-exerciser	mod_severeHopeless
+1	exerciser	mod_severeHopeless
+1.5	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+1.666666667	non-exerciser	mod_severeHopeless
+2.833333333	exerciser	mod_severeHopeless
+1	non-exerciser	mod_severeHopeless
+1	exerciser	mod_severeHopeless
+2.166666667	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+2.761537445	non-exerciser	mod_severeHopeless
+1	exerciser	mod_severeHopeless
+2.5	non-exerciser	mod_severeHopeless
+1.666666667	exerciser	mod_severeHopeless
+1.666666667	non-exerciser	mod_severeHopeless
+1.333333333	non-exerciser	mod_severeHopeless
+1.833333333	non-exerciser	mod_severeHopeless
+1	exerciser	mod_severeHopeless
+2	exerciser	mod_severeHopeless
+1.166666667	non-exerciser	mod_severeHopeless
+1.333333333	exerciser	mod_severeHopeless
+1.666666667	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+1.666666667	non-exerciser	mod_severeHopeless
+3	non-exerciser	mod_severeHopeless
+1	exerciser	mod_severeHopeless
+2	non-exerciser	mod_severeHopeless
+3.166666667	non-exerciser	mod_severeHopeless
+1.833333333	exerciser	mod_severeHopeless
+1.666666667	exerciser	mod_severeHopeless
+1	exerciser	mod_severeHopeless
+1.5	exerciser	mod_severeHopeless
+2.166666667	exerciser	mod_severeHopeless
+2.166666667	exerciser	mod_severeHopeless
+1.5	non-exerciser	mod_severeHopeless
+1	exerciser	mod_severeHopeless
+1.666666667	exerciser	notHopeless
+2.833333333	non-exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1	non-exerciser	notHopeless
+1	non-exerciser	notHopeless
+1.666666667	exerciser	notHopeless
+1	non-exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+1	exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1	exerciser	notHopeless
+1.833333333	exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+1.833333333	non-exerciser	notHopeless
+1	non-exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1.27570154	non-exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1	non-exerciser	notHopeless
+2	exerciser	notHopeless
+2	non-exerciser	notHopeless
+2	non-exerciser	notHopeless
+1	exerciser	notHopeless
+1	exerciser	notHopeless
+1	exerciser	notHopeless
+1	exerciser	notHopeless
+2.166666667	exerciser	notHopeless
+2.166666667	non-exerciser	notHopeless
+2	exerciser	notHopeless
+1	non-exerciser	notHopeless
+2	exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+2	non-exerciser	notHopeless
+2.5	exerciser	notHopeless
+1.333333333	non-exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1	non-exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+1.833333333	exerciser	notHopeless
+1.333333333	non-exerciser	notHopeless
+1.5	exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+1.5	exerciser	notHopeless
+1.333333333	non-exerciser	notHopeless
+2	exerciser	notHopeless
+1.5	non-exerciser	notHopeless
+1	non-exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+2	exerciser	notHopeless
+1.5	exerciser	notHopeless
+1.833333333	non-exerciser	notHopeless
+2	exerciser	notHopeless
+1.5	exerciser	notHopeless
+1	non-exerciser	notHopeless
+1.333333333	non-exerciser	notHopeless
+1	exerciser	notHopeless
+1	exerciser	notHopeless
+1.5	non-exerciser	notHopeless
+1.5	non-exerciser	notHopeless
+1.5	exerciser	notHopeless
+1.833333333	non-exerciser	notHopeless
+2.833333333	exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1	non-exerciser	notHopeless
+2	exerciser	notHopeless
+1	non-exerciser	notHopeless
+2.166666667	non-exerciser	notHopeless
+1.333333333	exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+2	non-exerciser	notHopeless
+1.166666667	non-exerciser	notHopeless
+1.333333333	exerciser	notHopeless
+2	exerciser	notHopeless
+1.833333333	non-exerciser	notHopeless
+1	exerciser	notHopeless
+1.5	non-exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+1.166666667	exerciser	notHopeless
+2	exerciser	notHopeless")
+```
+
+
+## 4.1
+```{r}
+fattyAcid <- read_list("FattyAcidRatio	Cytosine	Copies
+10.75919654	either	1
+15.97419128	neither	0
+11.175953	either	1
+10.2532389	neither	0
+12.29088385	either	1
+5.265123786	either	1
+9.233416108	both	2
+13.00437895	neither	0
+9.02702827	neither	0
+9.358257372	either	1
+12.0604211	neither	0
+8.488722774	either	1
+8.126462568	either	1
+5.766289324	both	2
+15.90074796	neither	0
+7.840390866	either	1
+7.71344127	either	1
+10.53060028	either	1
+11.07278177	either	1
+13.30643616	neither	0
+11.78432999	neither	0
+14.16344177	neither	0
+9.294555736	either	1
+13.09172592	neither	0
+7.706104743	either	1
+9.766175846	neither	0
+12.25329894	neither	0
+13.47276492	neither	0
+7.218988372	either	1
+19.79057745	neither	0
+12.61144476	neither	0
+12.05603753	either	1
+14.18547853	either	1
+8.968137361	either	1
+12.29875512	neither	0
+12.79100828	neither	0
+11.87184122	neither	0
+14.3998139	neither	0
+11.3150633	neither	0
+8.231775182	either	1
+14.31514668	neither	0
+10.37543927	neither	0
+10.87582212	either	1
+13.44986052	either	1
+10.02426941	neither	0
+9.693696187	neither	0
+8.954352286	either	1
+10.6839719	either	1
+10.59623561	neither	0
+11.13654963	either	1
+11.78941682	either	1
+8.649189445	either	1
+11.91186254	neither	0
+12.38023172	either	1
+12.34954076	neither	0
+5.897773181	both	2
+8.709200453	either	1
+14.42495459	either	1
+8.9766749	both	2
+14.1160315	neither	0
+10.14684468	either	1
+12.47311311	either	1
+12.49818671	neither	0
+8.07527099	either	1
+9.045321417	either	1
+14.67696402	neither	0
+6.901747531	either	1
+9.499539441	either	1
+16.39602339	neither	0
+11.24745883	neither	0
+10.25087884	neither	0
+7.290096446	both	2
+5.290372164	both	2
+12.4874775	either	1
+11.82880619	neither	0
+8.485864953	either	1
+7.446406013	either	1
+12.45457132	either	1
+8.428213607	either	1
+9.008370254	either	1
+7.536918719	neither	0
+9.879060889	either	1
+12.25039675	neither	0
+11.83176635	neither	0
+11.50569075	either	1
+9.711576414	either	1
+14.57464729	neither	0
+14.95187515	either	1
+9.433178348	either	1
+10.33469707	neither	0
+15.16807374	neither	0
+8.967551803	both	2
+12.04225967	either	1
+10.75067276	either	1
+16.69418857	neither	0
+7.885710181	either	1
+7.537642992	both	2
+7.543410672	either	1
+13.28935514	neither	0
+10.9910622	either	1")
+```
+
+## 4.2
+```{r}
+fattyAcid2 <- read_list("FattyAcidRatio  Copies
+10.75919654 1
+15.97419128 0
+11.175953 1
+10.2532389 0
+12.29088385 1
+5.265123786 1
+9.233416108 2
+13.00437895 0
+9.02702827 0
+9.358257372 1
+12.0604211 0
+8.488722774 1
+8.126462568 1
+5.766289324 2
+15.90074796 0
+7.840390866 1
+7.71344127 1
+10.53060028 1
+11.07278177 1
+13.30643616 0
+11.78432999 0
+14.16344177 0
+9.294555736 1
+13.09172592 0
+7.706104743 1
+9.766175846 0
+12.25329894 0
+13.47276492 0
+7.218988372 1
+19.79057745 0
+12.61144476 0
+12.05603753 1
+14.18547853 1
+8.968137361 1
+12.29875512 0
+12.79100828 0
+11.87184122 0
+14.3998139 0
+11.3150633 0
+8.231775182 1
+14.31514668 0
+10.37543927 0
+10.87582212 1
+13.44986052 1
+10.02426941 0
+9.693696187 0
+8.954352286 1
+10.6839719 1
+10.59623561 0
+11.13654963 1
+11.78941682 1
+8.649189445 1
+11.91186254 0
+12.38023172 1
+12.34954076 0
+5.897773181 2
+8.709200453 1
+14.42495459 1
+8.9766749 2
+14.1160315 0
+10.14684468 1
+12.47311311 1
+12.49818671 0
+8.07527099 1
+9.045321417 1
+14.67696402 0
+6.901747531 1
+9.499539441 1
+16.39602339 0
+11.24745883 0
+10.25087884 0
+7.290096446 2
+5.290372164 2
+12.4874775 1
+11.82880619 0
+8.485864953 1
+7.446406013 1
+12.45457132 1
+8.428213607 1
+9.008370254 1
+7.536918719 0
+9.879060889 1
+12.25039675 0
+11.83176635 0
+11.50569075 1
+9.711576414 1
+14.57464729 0
+14.95187515 1
+9.433178348 1
+10.33469707 0
+15.16807374 0
+8.967551803 2
+12.04225967 1
+10.75067276 1
+16.69418857 0
+7.885710181 1
+7.537642992 2
+7.543410672 1
+13.28935514 0
+10.9910622 1")
+
+```
+
+## 4.3
+```{r}
+height <- read_list("height	footsize	handspan	sex
+75	28.75	25.5	M
+68	25	22	M
+73	28	21.5	M
+73	26	21	M
+76	27.9	25	M
+64	24.7	20.4	F
+65	26	18	F
+72	28	19.5	M
+65	23.5	18	F
+64	23	19	F
+68	26	22.7	M
+70	24.5	21.5	F
+70	27	22	M
+71	26.5	22.5	M
+69	27	21.5	M
+71	30	21	M
+64	22.5	20.5	F
+72	26	22.5	M
+66	24.5	19	F
+65	23.2	19.5	F
+61.81	23	18.5	F
+73	28	21	M
+71	29	20	M
+74	29	24.13	M
+73	28	22.86	M
+66	22	19	F
+72.5	25.5	19	M
+60	27.5	23	M
+74.5	28	23	M")
+```
+
+## 4.4
+```{r}
+FEV <- read_list("Age	FEV	Height	Gender	Smoker
+15	4.506	71	Male	yes
+11	2.884	69	Male	no
+10	2.328	64	Male	no
+9	1.708	57	Female	no
+14	3.381	63	Male	no
+11	2.17	58	Female	no
+11	3.47	66.5	Male	no
+15	4.284	70	Male	no
+8	1.724	67.5	Female	no
+7	1.72	54.5	Female	no
+12	3.058	60.5	Female	no
+10	1.811	57	Male	no
+11	2.524	64	Male	no
+9	1.558	53	Male	no
+9	1.895	57	Male	no
+8	2.336	61	Female	no
+10	2.642	61	Female	no
+6	1.919	58	Female	no
+6	1.415	56	Female	no
+8	1.987	58.5	Female	no
+9	1.942	60	Female	no
+6	1.602	53	Female	no
+8	1.735	54	Male	no
+14	3.741	68.5	Male	no
+13	4.336	69.5	Male	no
+8	2.193	58.5	Female	no
+14	4.842	72	Male	no
+12	4.55	71	Male	no
+8	2.118	60.5	Male	no
+12	2.841	63	Female	no
+10	3.166	61.5	Female	no
+13	3.816	63.5	Female	no
+8	2.258	58	Male	no
+10	2.561	62	Male	no
+7	1.932	53	Male	no
+11	3.654	65	Female	no
+5	1.472	50	Male	no
+6	1.878	53	Female	no
+10	2.481	61	Male	no
+11	2.665	63	Female	no
+18	2.906	66	Female	no
+9	2.352	59	Male	no
+9	2.604	61.5	Male	no
+10	3.203	66	Male	no
+5	1.4	49	Female	no
+13	3.549	68	Male	no
+14	2.236	66	Female	yes
+11	3.222	72	Male	no
+10	3.111	66	Male	no
+5	1.256	52.5	Female	no
+4	0.839	48	Female	no
+7	2.578	62.5	Male	no
+11	3.49	67	Female	no
+13	3.147	64	Female	no
+10	2.52	60.5	Female	no
+9	2.988	65	Female	no
+10	2.292	63	Male	no
+3	1.404	51.5	Male	no
+12	2.889	64	Female	no
+9	2.348	60	Male	no
+10	2.246	60.5	Male	no
+10	1.937	62	Male	no
+5	1.755	52	Male	no
+8	2.98	60	Female	no
+19	5.102	72	Male	no
+10	2.646	60	Male	no
+11	2.957	64.5	Male	no
+19	3.519	66	Female	yes
+11	4.007	67	Male	no
+16	3.688	68	Male	yes
+9	2.1	60	Female	no
+5	1.282	49	Female	no
+11	2.386	61.5	Female	no
+17	4.429	70	Male	no
+9	3	65.5	Male	no
+10	3.251	66	Male	no
+8	2.673	60	Female	no
+7	2.093	57.5	Female	no
+5	1.612	52	Female	no
+11	2.762	60	Female	no
+11	3.011	64	Female	no
+8	2.175	59	Female	no
+13	4.305	68.5	Male	no
+13	3.906	67	Male	no
+9	2.725	59	Male	no
+15	4.279	67.5	Male	no
+11	3.583	67	Male	no
+11	3.236	66	Female	no
+8	2.071	55	Male	no
+14	3.436	62.5	Male	no
+11	3.058	61	Male	no
+8	1.547	57	Male	no
+8	2.004	57	Male	no
+9	3.135	60	Female	no
+10	3.007	62	Male	no
+8	2.42	59	Male	no
+10	3.489	66.5	Male	no
+10	2.864	60	Female	no
+5	1.776	51	Male	no
+14	3.428	64	Female	yes
+13	2.819	62	Female	no
+8	1.931	57	Female	no
+5	1.343	50	Female	no
+10	2.25	58	Female	no
+9	2.076	57	Female	no
+14	4.683	68.5	Male	no
+7	1.624	54	Male	no
+8	1.344	52.5	Female	no
+10	2.352	61.5	Male	no
+6	1.65	55	Male	no
+11	3.108	64.5	Male	no
+15	4.5	70	Male	no
+13	3.994	67	Male	no
+12	4.393	68.5	Male	no
+13	3.208	61	Female	yes
+8	2.732	60.5	Male	no
+5	2.017	54.5	Male	no
+10	2.592	65	Male	no
+13	3.193	70	Male	no
+9	2.797	61.5	Female	no
+11	1.694	60	Male	yes
+14	3.957	72	Male	yes
+11	2.346	59	Female	no
+13	4.789	69	Male	yes
+9	3.556	62	Male	no
+8	1.703	54.5	Male	no
+6	1.634	54	Male	no
+9	2.57	57	Male	no
+11	3.515	67.5	Male	no
+11	2.754	65.5	Female	no
+9	3.016	62.5	Female	no
+7	2.419	60	Female	no
+4	1.569	50	Female	no
+10	2.72	65.5	Male	no
+8	1.698	57.5	Female	no
+8	2.123	60	Male	no
+11	2.463	64.5	Male	no
+8	2.481	60	Female	no
+6	1.481	51	Female	no
+4	1.577	49	Female	no
+11	2.633	62	Female	no
+8	1.94	59	Male	no
+6	1.747	57.5	Male	no
+9	2.069	58	Male	no
+7	1.631	55.5	Female	no
+10	3.048	65.5	Female	no
+11	3.111	67.5	Male	no
+13	3.745	68	Female	no
+5	1.536	52	Female	no
+9	2.56	60.5	Female	no
+8	1.962	57	Male	no
+8	2.531	58	Female	no
+12	2.384	63.5	Female	yes
+10	2.094	58.5	Male	no
+15	2.635	64	Female	no
+9	2.715	60	Male	no
+9	2.457	59	Male	no
+10	3.183	65.5	Female	no
+9	2.09	59.5	Male	no
+7	1.789	56	Male	no
+5	1.858	53	Male	no
+14	3.074	65	Female	yes
+15	2.679	66	Female	yes
+11	3.977	70.5	Male	no
+10	3.354	63	Male	no
+5	1.452	51	Male	no
+9	3.842	69	Male	no
+6	1.719	53	Female	no
+11	3.411	63.5	Female	no
+7	2.111	57	Female	no
+6	1.695	53	Female	no
+8	2.211	63	Male	no
+10	2.387	66	Female	yes
+8	1.794	54.5	Male	no
+7	1.917	58	Female	no
+11	3.171	63	Female	no
+13	3.887	67.5	Male	no
+13	2.646	61.5	Female	no
+10	2.504	60	Female	no
+11	3.587	64.5	Male	no
+11	3.845	68.5	Male	no
+12	2.971	64.5	Male	no
+10	2.891	61	Female	no
+8	2.144	63	Female	no
+7	1.253	52	Male	no
+10	1.823	57	Female	no
+11	2.417	62.5	Male	no
+10	2.175	58	Female	no
+11	2.735	62.5	Female	no
+14	4.273	72.5	Male	no
+13	2.976	65.5	Male	no
+9	2.659	61.5	Male	no
+5	1.58	52.5	Male	no
+9	2.126	62	Male	no
+12	3.835	69.5	Female	yes
+11	4.065	66.5	Male	no
+11	2.318	59	Female	no
+15	2.198	62	Female	yes
+9	3.029	61.5	Female	no
+9	2.964	64.5	Male	no
+7	1.611	57.5	Male	no
+11	3.596	68	Male	no
+19	3.345	65.5	Female	yes
+14	3.395	67	Female	no
+12	2.751	63	Female	no
+10	2.673	64.5	Female	no
+8	2.215	60	Female	no
+8	2.388	60	Female	no
+18	3.082	64.5	Female	no
+16	3.387	66.5	Female	no
+12	2.556	62	Female	no
+9	2.196	61	Male	no
+9	1.751	58	Male	no
+11	2.542	62	Female	no
+10	2.608	66	Male	no
+9	2.165	61.5	Male	no
+7	1.682	55	Male	no
+11	2.354	62	Female	no
+8	1.523	55	Male	no
+13	2.599	62.5	Female	yes
+10	1.458	57	Female	no
+8	1.292	52	Female	no
+7	1.649	54	Male	no
+9	2.588	63	Male	no
+4	0.796	47	Male	no
+10	3.795	68.5	Male	no
+9	2.574	60.5	Female	no
+6	1.979	56	Male	no
+11	2.491	59	Female	no
+13	3.06	61.5	Female	no
+8	2.354	58.5	Male	no
+10	2.545	65	Male	no
+17	3.082	67	Male	yes
+11	2.993	66.5	Male	no
+16	2.903	63	Female	yes
+15	3.004	64	Female	yes
+10	3.305	65	Female	no
+13	4.756	68	Male	yes
+11	3.774	67	Female	no
+10	2.855	64.5	Male	no
+11	2.988	70	Male	no
+6	1.718	55	Male	no
+7	1.742	58.5	Female	no
+7	1.603	51	Female	no
+11	2.498	60	Male	no
+14	3.169	64	Female	no
+8	2.639	59.5	Female	no
+7	1.829	54	Female	no
+11	2.887	62.5	Male	no
+13	2.704	61	Female	no
+11	3.515	64	Female	no
+15	5.793	69	Male	no
+7	2.084	58	Male	no
+7	2.22	58	Male	no
+11	3.425	65.5	Male	no
+10	2.287	61	Female	no
+13	2.434	65.4	Female	no
+10	2.365	63.5	Female	no
+13	3.086	67.5	Female	yes
+7	1.473	52.5	Female	no
+10	2.696	66	Male	no
+8	2.341	60.5	Female	no
+7	1.698	54.5	Female	no
+5	1.196	46.5	Female	no
+8	1.872	56.5	Female	no
+7	2.219	55	Male	no
+9	2.42	57	Male	no
+7	1.827	54.5	Female	no
+7	1.461	54	Female	no
+6	1.338	53	Male	no
+8	2.09	57	Male	no
+8	1.697	59	Female	no
+8	1.562	55	Male	no
+9	2.04	55.5	Female	no
+12	2.868	62	Female	no
+10	2.813	61.5	Female	no
+7	1.609	51.5	Female	no
+8	2.458	61	Female	no
+15	3.985	71	Male	no
+14	4.309	69	Male	yes
+9	2.65	63.5	Male	no
+12	3.255	66	Female	no
+10	3.413	66	Female	yes
+11	4.593	69	Male	no
+18	4.22	68	Male	no
+17	4.724	70.5	Male	no
+8	1.429	57.5	Male	no
+14	4.111	71	Male	no
+12	1.916	60.5	Male	no
+10	1.858	58	Male	no
+8	1.675	53	Male	no
+10	2.975	63	Female	yes
+9	1.947	56.5	Female	no
+10	3.35	69	Male	no
+8	2.069	54	Male	no
+10	2.901	59.5	Male	no
+6	1.572	52	Male	no
+12	2.241	64	Male	no
+13	4.225	74	Male	no
+6	1.348	53	Male	no
+8	2.288	61.5	Female	no
+11	3.223	64.5	Female	no
+12	5.224	70	Male	no
+9	1.773	58.5	Male	no
+5	0.791	52	Female	no
+7	1.905	58	Male	no
+11	4.073	67	Male	no
+12	4.08	64.5	Male	no
+9	2.463	61	Female	no
+6	1.431	51	Male	no
+11	2.606	65	Female	no
+15	3.731	67	Male	no
+9	2.631	62	Female	no
+9	3.114	64.5	Male	no
+11	3.169	62.5	Female	yes
+17	3.406	69	Male	yes
+12	4.411	68	Male	no
+9	2.135	58.5	Male	no
+6	1.527	52.5	Male	no
+12	3.791	68.5	Male	no
+8	2.293	58	Female	no
+9	3.042	66	Female	no
+8	2.927	63.5	Male	no
+13	3.089	67.5	Male	no
+11	2.465	60	Male	no
+12	3.343	68	Male	yes
+10	3.2	65	Male	no
+12	2.913	64	Male	no
+8	2.665	64	Female	no
+13	4.877	73	Male	no
+17	3.5	62	Female	no
+16	3.674	67.5	Female	no
+9	2.301	58.5	Male	no
+10	2.358	59	Female	no
+12	3.279	70.5	Male	no
+17	5.633	73	Male	no
+15	3.122	64	Female	yes
+10	2.581	66	Male	no
+12	2.347	61.5	Female	no
+9	2.46	64	Male	no
+10	2.691	67	Female	no
+11	2.827	62.5	Female	no
+9	2.592	60.5	Female	no
+7	1.75	55	Female	no
+10	1.873	52.5	Male	no
+8	1.759	53	Male	no
+6	1.536	48	Male	no
+9	2.259	58.5	Female	no
+9	2.048	64.5	Female	no
+12	3.751	72	Male	yes
+15	3.33	68.5	Female	yes
+14	2.538	71	Female	no
+9	2.571	60.5	Male	no
+7	2.046	56	Male	no
+8	1.78	58.5	Female	no
+5	1.552	54	Female	no
+8	1.953	58	Female	no
+9	2.893	64.5	Male	no
+10	2.758	65.5	Male	no
+10	3.05	60	Female	no
+6	1.713	50.5	Male	no
+9	2.851	60	Female	no
+6	1.624	51.5	Male	no
+8	2.631	59	Male	no
+5	1.819	53	Male	no
+7	1.658	53	Male	no
+12	3.079	60	Female	no
+10	2.201	60.5	Male	no
+16	2.608	62	Female	yes
+7	2.158	53.5	Male	no
+4	1.789	52	Male	no
+10	1.858	59	Male	no
+9	3.004	64	Female	no
+13	2.216	68	Female	yes
+8	2.503	63	Male	no
+12	3.403	62	Female	no
+12	3.501	64.5	Female	no
+9	1.933	58	Female	no
+11	2.578	63	Female	no
+13	3.078	66	Female	yes
+9	2.091	58.5	Female	no
+9	2.316	59.5	Female	no
+5	1.704	51	Female	no
+12	3.186	67	Female	yes
+9	1.606	57.5	Female	no
+10	1.665	57	Male	no
+7	1.165	47	Male	no
+11	2.081	63	Female	no
+11	2.974	62	Female	no
+13	3.297	65	Female	yes
+12	4.073	68.5	Male	no
+13	4.448	69	Male	no
+6	2.102	55.5	Female	no
+9	2.32	57	Female	no
+9	2.23	61	Male	no
+16	3.645	73.5	Male	no
+13	3.984	71	Male	no
+9	1.716	55.5	Male	no
+10	2.25	58	Female	no
+12	2.752	63.5	Female	no
+7	1.79	53.5	Male	no
+5	1.146	50	Female	no
+12	2.304	66.5	Male	yes
+8	2.187	61.5	Female	no
+14	3.68	67	Male	no
+9	2.717	61.5	Male	no
+7	1.796	55	Male	no
+11	3.102	64	Female	yes
+9	1.953	58	Male	yes
+8	1.335	56.5	Female	no
+9	2.119	57	Male	no
+10	2.862	61	Female	no
+6	1.666	52	Male	no
+6	1.826	52.5	Male	no
+13	2.677	67	Female	yes
+11	3.023	67.5	Female	no
+8	2.709	62.5	Female	no
+9	2.871	65	Male	no
+5	1.092	50	Female	no
+11	3.681	68	Female	no
+13	3.255	66.5	Female	no
+12	3.692	67	Male	no
+6	2.262	57.5	Male	no
+6	2.104	56.5	Male	no
+10	2.356	60.5	Female	no
+10	4.591	70	Male	no
+12	3.082	63.5	Female	no
+9	2.166	57.5	Female	no
+13	3.297	65	Female	yes
+11	3.258	63	Female	no
+7	1.69	54	Female	no
+15	3.799	66.5	Male	yes
+9	2.973	59.5	Male	no
+8	2.145	59.5	Female	no
+5	1.971	58	Male	no
+7	2.095	57	Female	no
+10	2.216	61	Male	no
+11	3.247	65.5	Male	no
+11	4.324	67.5	Male	no
+6	1.697	55	Female	no
+9	2.455	60	Female	no
+18	4.086	67	Male	yes
+11	2.362	61	Female	no
+15	2.887	63	Female	no
+7	1.92	56.5	Male	no
+9	2.164	60	Male	no
+16	4.07	69.5	Male	yes
+9	2.13	59	Female	no
+11	2.563	63	Female	no
+11	3.206	63.5	Male	no
+8	2.993	63	Female	no
+14	3.585	70	Male	no
+12	4.72	71.5	Male	no
+9	2.529	59	Female	no
+13	3.331	65.5	Female	no
+7	1.726	53	Female	no
+13	5.083	74	Male	no
+9	2.442	61.5	Female	no
+4	1.102	48	Female	no
+9	2.056	63	Female	no
+5	1.808	55.5	Male	no
+8	2.305	64.5	Female	no
+10	3.498	68	Male	yes
+9	1.969	59	Female	no
+12	2.417	61	Female	no
+8	1.556	58.5	Female	no
+10	2.364	61	Male	no
+10	2.341	61	Male	no
+3	1.072	46	Female	no
+12	2.759	61.5	Female	yes
+11	2.953	67	Female	yes
+9	2.042	62	Male	no
+8	1.512	53	Female	no
+12	3.231	63	Male	no
+6	1.423	49.5	Male	no
+9	3.681	68	Male	no
+11	3.078	67.5	Male	no
+8	1.991	59.5	Male	no
+11	3.369	70.5	Male	no
+12	3.529	70.5	Male	no
+8	1.897	55.5	Male	no
+12	2.866	62	Female	no
+14	2.891	62	Female	no
+11	3.022	61.5	Female	no
+17	3.96	70	Male	no
+16	4.299	66	Male	no
+10	3.127	62	Male	no
+11	2.866	60.5	Female	no
+12	2.605	62.5	Female	no
+7	1.37	55	Female	no
+6	1.338	51.5	Female	no
+8	2.016	56	Male	no
+13	3.056	63	Female	no
+9	2.639	63	Female	no
+4	1.389	48	Female	no
+12	2.569	63	Female	no
+7	1.612	56.5	Male	no
+11	2.501	62	Female	no
+8	2.135	59	Female	no
+11	3.32	65.5	Male	no
+8	2.681	60.5	Male	no
+9	3.223	65	Female	no
+11	2.123	65	Male	no
+14	3.78	70	Male	no
+16	2.981	66	Female	no
+11	3.847	66	Male	no
+13	3.785	63	Female	yes
+12	3.924	68	Male	no
+10	2.132	59	Male	no
+12	2.752	68.5	Male	no
+15	2.264	63	Female	yes
+13	2.449	63	Female	no
+10	3.456	63	Male	no
+6	1.796	55	Female	no
+8	2.01	55	Male	no
+10	3.073	66	Female	no
+6	1.523	51	Female	no
+8	1.744	52.5	Male	no
+9	2.485	64	Female	no
+10	2.688	62	Female	no
+10	3.329	68	Male	no
+14	4.271	72.5	Male	no
+18	4.404	70.5	Male	yes
+12	3.53	64	Male	no
+8	2.335	59	Female	no
+11	2.928	65.5	Male	no
+7	1.415	53.5	Female	no
+9	2.076	60.5	Male	no
+11	2.689	61.5	Female	no
+8	2.435	59.5	Male	no
+12	2.332	57	Male	no
+14	2.934	64	Female	no
+7	1.728	56.5	Female	no
+9	2.85	63	Female	no
+8	1.844	56.5	Female	no
+14	2.276	66	Male	yes
+15	2.278	60	Female	yes
+9	1.754	61.5	Female	no
+6	1.343	52	Female	no
+10	3.11	64.5	Male	no
+8	2.303	57	Male	no
+11	2.894	67	Male	no
+9	2.246	63.5	Male	no
+11	4.637	72	Male	yes
+10	2.435	65	Female	no
+10	2.838	63	Female	no
+8	2.476	63	Female	no
+9	3.239	65	Male	no
+16	4.504	72	Male	no
+12	3.035	62	Female	no
+12	4.831	71	Male	no
+9	2.457	61.5	Male	no
+8	2.382	62	Female	no
+7	1.64	55	Female	no
+5	1.589	51	Female	no
+7	2.056	54	Male	no
+11	2.812	61	Male	no
+8	2.226	57	Male	no
+12	2.714	65.5	Female	no
+10	3.086	62	Female	no
+12	3.519	65.5	Female	no
+9	1.886	56	Female	no
+13	4.232	70.5	Male	no
+10	2.77	62	Male	no
+9	2.833	61.5	Male	no
+17	5.638	70	Male	no
+16	4.872	72	Male	yes
+12	3.341	65.5	Female	no
+10	3.09	65	Male	no
+6	1.715	53	Male	no
+8	2.631	59	Male	no
+13	2.531	61	Male	no
+7	2.55	56	Male	no
+12	2.822	69.5	Male	no
+9	1.912	59	Female	no
+7	1.877	52.5	Female	no
+7	1.935	52.5	Female	no
+5	1.539	50	Female	no
+9	2.803	59.5	Male	no
+10	3.038	65	Female	yes
+12	2.935	65.5	Male	no
+9	2.923	64	Male	no
+16	4.27	67	Male	yes
+15	3.727	68	Male	yes
+10	2.568	63.5	Female	no
+8	2.358	61	Female	no
+11	2.387	60.5	Male	no
+12	2.499	65	Male	no
+8	2.094	57.5	Male	no
+11	4.13	67	Male	no
+18	2.853	60	Female	no
+9	1.855	60	Male	no
+6	1.535	55	Female	no
+7	2.135	56	Male	no
+5	1.93	51	Male	no
+9	2.182	59.5	Female	no
+5	1.359	50.5	Male	no
+12	3.001	63.5	Female	no
+7	2.002	57.5	Female	no
+10	3.132	59.5	Female	no
+13	3.577	63.5	Female	no
+12	3.222	61	Female	no
+11	3.28	66	Male	no
+6	1.699	54	Male	no
+8	2.5	57	Male	no
+7	2.366	58	Female	no
+11	2.659	64	Male	no
+16	2.795	63	Female	yes
+8	2.069	60	Female	no
+4	1.418	49	Female	no
+8	2.333	57	Female	no
+5	1.514	52	Male	no
+11	2.822	62	Female	no
+11	2.14	60.5	Female	no
+8	1.758	52	Female	no
+12	4.203	71	Male	no
+7	2.535	59.5	Male	no
+15	3.211	66.5	Female	no
+14	2.997	64.5	Female	no
+11	3.12	61	Female	yes
+11	2.562	62.5	Female	no
+7	2.564	58	Female	no
+9	2.487	64	Female	no
+9	1.591	57	Female	no
+8	1.624	53	Male	no
+12	3.082	64.5	Female	no
+9	2.798	62	Male	no
+6	1.691	53	Male	no
+8	1.999	56.5	Female	no
+14	3.806	68	Male	no
+11	3.339	68.5	Male	yes
+13	3.152	62	Female	yes
+9	1.869	57	Male	no
+4	1.004	48	Male	no
+11	2.458	60	Female	no
+6	1.427	49.5	Male	no
+7	1.826	51	Male	no
+9	2.688	59.5	Female	no
+8	1.657	56	Male	no
+10	2.391	59.5	Male	no
+13	3.141	61	Female	no
+12	2.579	63	Female	no
+11	3.104	67.5	Female	yes
+13	4.045	69	Male	yes
+6	1.672	54	Female	no
+8	2.015	57.5	Female	no
+14	4.763	68	Male	yes
+10	2.1	58	Male	no
+7	2.371	55.5	Female	no
+5	2.115	50	Male	no
+8	2.328	60	Female	no
+11	3.069	65	Female	yes
+7	1.495	57	Female	no
+11	2.785	69	Male	no")
+```
+
+## 4.5 
+```{r}
+patient_satisfaction <- read_list("satisfaction	age	severity	anxiety	AgeGroup
+89	28	43	1.8	20-34
+77	29	50	2.1	20-34
+89	29	48	2.4	20-34
+51	34	51	2.3	20-34
+79	33	56	2.5	20-34
+88	29	46	1.9	20-34
+60	33	49	2.1	20-34
+77	29	52	2.3	20-34
+86	23	41	1.8	20-34
+63	25	49	2	20-34
+72	32	46	2.6	20-34
+57	32	52	2.4	20-34
+59	33	42	2	20-34
+76	31	47	2	20-34
+80	34	49	2.2	20-34
+82	29	48	2.5	20-34
+64	30	51	2.4	20-34
+83	22	51	2	20-34
+92	28	46	1.8	20-34
+57	36	46	2.3	35-49
+66	40	48	2.2	35-49
+70	41	44	1.8	35-49
+36	49	54	2.9	35-49
+46	42	50	2.2	35-49
+54	45	48	2.4	35-49
+67	43	53	2.4	35-49
+47	38	55	2.2	35-49
+66	36	49	2	35-49
+52	44	58	2.9	35-49
+60	43	50	2.3	35-49
+43	47	53	2.5	35-49
+55	42	51	2.7	35-49
+83	36	49	1.8	35-49
+47	40	48	2.2	35-49
+37	47	60	2.4	35-49
+42	47	50	2.6	35-49
+66	43	53	2.3	35-49
+37	44	51	2.6	35-49
+68	45	51	2.2	35-49
+59	37	53	2.1	35-49
+26	52	62	2.9	50-64
+57	53	54	2.2	50-64
+49	55	51	2.4	50-64
+34	55	54	2.5	50-64
+36	53	57	2.8	50-64
+48	50	51	2.3	50-64")
+```
+
+## 5.1
+
+```{r}
+Biodiesel <- read_list("yield	Temperature	Concentration
+86	25	0.5
+98.1	65	0.5
+99.7	25	1.5
+100	65	1.5
+97.7	45	1
+97.8	45	1
+97.6	45	1
+98	45	1
+100	45	1.71
+99.7	73.3	1
+96.6	16.7	1
+89	45	0.29")
+```
+
+## 5.2
+```{r}
+SLO2017 <- read_list("price	Bedrooms	Sqft	Sqft/1000	YrBuilt	SqftxAge	std.sqft	std.age	std.sqftxstd.age	garage	Bathrooms	View	Pool	SubType	LSqft	Ac
+2.88	2	892	0.892	1987	26.76	-1.198635551	-0.354259107	0.42462756	A	1	Y	NA	CONDO	893	0.02
+3.75	2	984	0.984	1981	35.424	-1.045865011	-0.122064255	0.127662733	D	2	N	N	CONDO	871	0.02
+6.25	3	1547	1.547	1994	35.581	-0.110975733	-0.625153103	0.069376824	A	2	Y	NA	SFR	3427	0.08
+6.49	3	1223	1.223	1925	112.516	-0.648993719	2.045087706	-1.327249076	D	2	N	N	SFR	9601	0.22
+4.33	2	1240	1.24	2016	1.24	-0.62076438	-1.47653423	0.916579856	A	2	Y	NA	SFR	4090	0.09
+7.25	3	2076	2.076	2014	6.228	0.767454868	-1.399135946	-1.073773692	D	2	N	N	SFR	NA	NA
+7.43	3	2035	2.035	1974	87.505	0.699372345	0.148829741	0.104087405	D	2	Y	N	SFR	3999	0.09
+9.65	4	3253	3.253	1961	182.168	2.721921442	0.651918589	1.774471185	D	2	N	N	SFR	4781	0.11
+4.65	3	1414	1.414	2016	1.414	-0.331828795	-1.47653423	0.489956574	A	2	N	N	SFR	11182	0.26
+4.99	3	1490	1.49	2016	1.49	-0.205627045	-1.47653423	0.303615371	A	2	Y	N	SFR	NA	NA
+8.9	4	2266	2.266	1959	131.428	1.082959243	0.729316873	0.789820448	D	2	N	N	SFR	3407	0.08
+8.75	4	2460	2.46	1983	83.64	1.405105815	-0.199462539	-0.280265973	D	2	Y	N	SFR	10001	0.23
+3.63	2	1047	1.047	1987	31.41	-0.941250403	-0.354259107	0.333446528	A	2	NA	NA	CONDO	11879	0.27
+5.45	2	1591	1.591	1986	49.321	-0.037911562	-0.315559965	0.011963371	A	2	Y	N	SFR	8263	0.19
+7.5	3	1800	1.8	1961	100.8	0.30914325	0.651918589	0.201536231	D	2	Y	N	SFR	3533	0.08
+8.6	4	2875	2.875	1950	192.625	2.094233791	1.077609152	2.2567655	D	1	Y	Y	SFR	5898	0.14
+7.75	3	1793	1.793	2016	1.793	0.297519405	-1.47653423	-0.439297586	D	1	Y	N	SFR	32234	0.74
+4.7	3	1414	1.414	2016	1.414	-0.331828795	-1.47653423	0.489956574	A	2	Y	NA	SFR	4739	0.11
+5.71	2	1363	1.363	1989	38.164	-0.416516811	-0.431657392	0.17979256	D	2	N	N	CONDO	NA	NA
+5.8	3	1458	1.458	1961	81.648	-0.258764624	0.651918589	-0.168693468	D	1	Y	N	SFR	1363	0.03
+9.2	4	2600	2.6	1989	72.8	1.637582722	-0.431657392	-0.706874687	D	3	Y	NA	SFR	6098	0.14
+4.16	3	1042	1.042	1963	56.268	-0.94955315	0.574520304	-0.545537565	D	1	Y	N	SFR	11566	0.27
+4.68	2	1389	1.389	1987	41.67	-0.373342529	-0.354259107	0.132259991	A	1	Y	N	SFR	7200	0.17
+3.36	2	966	0.966	1987	28.98	-1.0757549	-0.354259107	0.381095971	A	2	N	N	CONDO	3945	0.09
+6.51	3	1700	1.7	1968	83.3	0.143088316	0.381024593	0.054520167	D	1	N	NA	SFR	3380	0.08
+3.93	2	924	0.924	1947	64.68	-1.145497972	1.193706579	-1.367388465	D	1	Y	NA	SFR	4739	0.11
+11.5	4	2500	2.5	2008	22.5	1.471527788	-1.166941093	-1.717186245	D	1	Y	N	SFR	2701	0.06
+12.64	4	3100	3.1	1985	99.2	2.467857393	-0.276860823	-0.683253029	D	3	Y	NA	SFR	7405	0.17
+4.33	2	1256	1.256	1980	46.472	-0.594195591	-0.083365112	0.049535182	A	1	Y	N	CONDO	12001	0.28
+8.16	3	2176	2.176	1976	89.216	0.933509802	0.071431456	0.066681965	D	2	Y	N	SFR	1255	0.03
+4.8	3	1494	1.494	2014	4.482	-0.198984848	-1.399135946	0.278406853	A	2	N	N	SFR	6251	0.14
+6.65	2	910	0.91	1949	61.88	-1.168745663	1.116308294	-1.304680478	D	1	NA	NA	SFR	1738	0.04
+8.2	3	1617	1.617	1966	82.467	0.005262721	0.458422878	0.002412552	D	3	Y	NA	SFR	5998	0.14
+4.72	2	1452	1.452	1988	42.108	-0.26872792	-0.39295825	0.105598853	A	1	Y	NA	CONDO	10202	0.23
+4.93	2	900	0.9	1985	28.8	-1.185351156	-0.276860823	0.328177297	A	1	Y	NA	CONDO	1451	0.03
+6.07	3	1156	1.156	1948	79.764	-0.760250525	1.155007436	-0.87809501	D	2	N	N	SFR	902	0.02
+6.4	4	2100	2.1	1976	86.1	0.807308052	0.071431456	0.05766719	D	2	Y	NA	SFR	6199	0.14
+6.47	2	1170	1.17	1927	105.3	-0.737002834	1.967689422	-1.45019268	D	2	Y	NA	SFR	9121	0.21
+8.1	4	2342	2.342	1996	49.182	1.209160993	-0.702551387	-0.849497733	D	3	N	N	SFR	4069	0.09
+18.3	4	3046	3.046	1938	240.634	2.378187728	1.541998858	3.667162761	D	2	Y	NA	SFR	6408	0.15
+7	3	1631	1.631	2003	22.834	0.028510412	-0.973445382	-0.027753329	A	2	Y	N	SFR	7000	0.16
+4.43	2	1012	1.012	1988	29.348	-0.99936963	-0.39295825	0.392710541	A	1	N	N	CONDO	4500	0.1
+7.57	3	1776	1.776	1953	113.664	0.269290066	0.961511726	0.258925556	D	2	Y	NA	SFR	1011	0.02
+4.15	2	1256	1.256	1980	46.472	-0.594195591	-0.083365112	0.049535182	A	1	Y	N	CONDO	6299	0.14
+5.88	3	1517	1.517	1960	86.469	-0.160792213	0.690617731	-0.111045953	A	2	Y	N	SFR	1255	0.03
+6.19	4	1484	1.484	1982	51.94	-0.215590341	-0.160763397	0.034659036	D	3	Y	NA	SFR	11500	0.26
+3.12	2	900	0.9	1963	48.6	-1.185351156	0.574520304	-0.681008307	A	1	Y	N	CONDO	6499	0.15
+6.39	3	1250	1.25	1953	80	-0.604158887	0.961511726	-0.580905854	D	2	Y	N	SFR	902	0.02
+5.05	3	1243	1.243	1980	45.991	-0.615782732	-0.083365112	0.051334797	A	1	Y	N	SFR	7501	0.17
+6.34	3	1307	1.307	1978	50.973	-0.509507575	-0.005966828	0.003040144	D	2	Y	N	SFR	2818	0.06
+6.35	2	1250	1.25	1963	67.5	-0.604158887	0.574520304	-0.347101548	D	1	N	N	SFR	8124	0.19
+11.35	4	3500	3.5	1999	63	3.132077129	-0.818648813	-2.564071225	D	2	Y	NA	SFR	4465	0.1
+5.44	2	1783	1.783	2008	16.047	0.280913911	-1.166941093	-0.327809986	D	2	Y	N	CONDO	NA	NA
+7.4	3	1711	1.711	2002	25.665	0.161354359	-0.93474624	-0.15082538	D	2	NA	NA	SFR	6787	0.16
+14.6	4	2466	2.466	1969	118.368	1.415069111	0.342325451	0.484414172	D	1	Y	NA	SFR	12998	0.3
+6.5	4	2004	2.004	2005	24.048	0.647895316	-1.050843666	-0.680836689	A	3	N	N	SFR	3515	0.08
+7.03	4	1649	1.649	1959	95.642	0.0584003	0.729316873	0.042592324	D	2	Y	N	SFR	7619	0.17
+7.75	2	1093	1.093	1980	40.441	-0.864865133	-0.083365112	0.072099579	D	1	Y	N	SFR	7349	0.17
+5.3	3	1659	1.659	2007	16.59	0.075005793	-1.128241951	-0.084624682	A	2	NA	NA	CONDO	1660	0.04
+5.19	3	1772	1.772	1963	95.688	0.262647869	0.574520304	0.150896534	D	2	Y	N	SFR	6800	0.16
+4.89	3	1490	1.49	2016	1.49	-0.205627045	-1.47653423	0.303615371	A	2	Y	N	SFR	NA	NA
+5.93	3	1615	1.615	1945	116.28	0.001941622	1.271104863	0.002468005	D	2	Y	N	SFR	10428	0.24
+6.54	3	1173	1.173	1960	66.861	-0.732021186	0.690617731	-0.50554681	D	1	N	N	SFR	6639	0.15
+3.34	2	850	0.85	1973	37.4	-1.268378623	0.187528883	-0.237857626	A	1	Y	N	CONDO	849	0.02
+3.6	2	1001	1.001	1973	44.044	-1.017635673	0.187528883	-0.190836081	A	1	Y	Y	CONDO	1002	0.02
+7.23	4	1471	1.471	1959	85.318	-0.237177483	0.729316873	-0.17297754	D	2	Y	NA	SFR	5998	0.14
+9.1	4	3312	3.312	1966	168.912	2.819893853	0.458422878	1.292703855	D	3	N	NA	SFR	9348	0.21
+6.2	3	1003	1.003	1953	64.192	-1.014314574	0.961511726	-0.975275356	D	1	Y	NA	SFR	7902	0.18
+7	4	1400	1.4	1959	81.2	-0.355076486	0.729316873	-0.258963272	D	2	Y	N	SFR	8398	0.19
+8.47	3	1941	1.941	1951	128.106	0.543280707	1.03891001	0.564419765	D	2	Y	N	SFR	8581	0.2
+6.35	2	1051	1.051	1934	87.233	-0.934608206	1.696795427	-1.58583893	D	2	Y	NA	SFR	3250	0.07
+12.5	5	2746	2.746	1949	186.728	1.880022926	1.116308294	2.098685186	D	2	N	N	SFR	14847	0.34
+5.19	4	1380	1.38	1961	77.28	-0.388287473	0.651918589	-0.253131821	D	2	N	N	SFR	6098	0.14
+5.71	2	830	0.83	1939	64.74	-1.30158961	1.503299716	-1.956679291	D	1	Y	N	SFR	4365	0.1
+6	3	1412	1.412	1972	63.54	-0.335149894	0.226228025	-0.075820299	D	2	Y	NA	SFR	5998	0.14
+7.65	3	1258	1.258	1959	72.964	-0.590874492	0.729316873	-0.430934737	D	1	Y	N	SFR	8398	0.19
+9.34	4	2922	2.922	1985	93.504	2.17227961	-0.276860823	-0.601419121	D	2	N	N	SFR	10999	0.25
+8.85	4	2391	2.391	2013	9.564	1.29052791	-1.360436803	-1.755681665	D	2	Y	N	SFR	5998	0.14
+5.4	2	1536	1.536	1995	33.792	-0.129241776	-0.663852245	0.085797443	A	2	N	N	SFR	1847	0.04
+7.64	4	1089	1.089	1953	69.696	-0.871507331	0.961511726	-0.837964518	A	2	Y	NA	SFR	5998	0.14
+5.35	3	1497	1.497	1994	34.431	-0.1940032	-0.625153103	0.121281702	A	2	Y	N	SFR	1498	0.03
+6	3	1791	1.791	1990	48.357	0.294198306	-0.470356534	-0.138378095	A	2	Y	N	CONDO	1699	0.04
+6.45	3	1469	1.469	1978	57.291	-0.240498581	-0.005966828	0.001435014	A	2	NA	NA	SFR	9500	0.22
+6.85	3	1663	1.663	1960	94.791	0.081647991	0.690617731	0.05638755	D	2	N	NA	SFR	5998	0.14
+7.73	3	1830	1.83	1930	159.21	0.35895973	1.851591995	0.664646963	A	1	Y	N	SFR	6050	0.14
+8.39	3	1700	1.7	1953	108.8	0.143088316	0.961511726	0.137581094	D	2	Y	N	SFR	6817	0.16
+4.25	2	1265	1.265	1985	40.48	-0.579250647	-0.276860823	0.160371811	A	1	N	NA	CONDO	1263	0.03
+5.25	2	1098	1.098	1988	31.842	-0.856562387	-0.39295825	0.336593256	A	1	N	N	CONDO	1098	0.03
+6.6	3	1515	1.515	1972	68.175	-0.164113312	0.226228025	-0.03712703	D	2	N	N	SFR	7501	0.17
+8.2	3	1674	1.674	1970	78.678	0.099914033	0.303626309	0.030336529	D	2	Y	N	SFR	6525	0.15
+7.5	3	1406	1.406	1963	75.924	-0.34511319	0.574520304	-0.198274535	A	1	Y	N	SFR	7405	0.17
+4.65	3	1471	1.471	1974	63.253	-0.237177483	0.148829741	-0.035299063	D	2	Y	NA	SFR	1472	0.03
+3.42	2	850	0.85	1973	37.4	-1.268378623	0.187528883	-0.237857626	A	1	Y	NA	CONDO	850	0.02
+4.5	2	1025	1.025	1985	32.8	-0.977782488	-0.276860823	0.270709664	A	2	Y	N	CONDO	1024	0.02
+6.25	3	1848	1.848	1961	103.488	0.388849619	0.651918589	0.253498295	D	2	Y	NA	SFR	7000	0.16
+8.99	3	2277	2.277	1990	61.479	1.101225286	-0.470356534	-0.517968509	D	2	Y	N	SFR	8925	0.2
+9.3	3	1748	1.748	1989	48.944	0.222794685	-0.431657392	-0.096170973	D	1	Y	N	SFR	5462	0.13
+9.7	3	1447	1.447	1950	96.949	-0.277030667	1.077609152	-0.298530782	D	1	Y	NA	SFR	7501	0.17
+12.44	4	2929	2.929	2016	2.929	2.183903455	-1.47653423	-3.224608206	A	3	Y	N	SFR	6901	0.16
+9.05	3	2000	2	1955	124	0.641253118	0.884113441	0.566940501	D	2	NA	NA	SFR	6700	0.15
+5.88	3	1879	1.879	2016	1.879	0.440326648	-1.47653423	-0.650157368	A	3	N	N	CONDO	2228	0.05
+5.35	3	1542	1.542	2007	15.42	-0.11927848	-1.128241951	0.134574985	A	2	N	NA	CONDO	1542	0.04
+6.1	4	1736	1.736	1961	97.216	0.202868092	0.651918589	0.13225348	D	2	Y	NA	SFR	6399	0.15
+7.99	4	1881	1.881	1949	127.908	0.443647747	1.116308294	0.49524766	A	3	Y	N	SFR	6826	0.16
+5.25	2	1223	1.223	2012	6.115	-0.648993719	-1.321737661	0.85779944	A	2	Y	NA	SFR	2875	0.07
+6.65	4	1420	1.42	1968	69.58	-0.321865499	0.381024593	-0.122638671	D	2	Y	NA	SFR	8442	0.19
+3.45	2	850	0.85	1973	37.4	-1.268378623	0.187528883	-0.237857626	A	1	Y	NA	CONDO	850	0.02
+5.45	3	1497	1.497	1999	26.946	-0.1940032	-0.818648813	0.158820489	A	2	Y	N	SFR	1350	0.03
+6.55	2	1242	1.242	1927	111.78	-0.617443282	1.967689422	-1.214936614	D	1	Y	N	SFR	5001	0.11
+7.07	4	1384	1.384	1964	73.352	-0.381645275	0.535821162	-0.204493615	D	2	Y	N	SFR	7613	0.17
+7.95	3	2197	2.197	2003	30.758	0.968381338	-0.973445382	-0.942666341	D	2	N	N	SFR	6050	0.14
+9.61	4	3322	3.322	1961	186.032	2.836499346	0.651918589	1.84916665	A	2	Y	NA	SFR	10402	0.24
+4.91	2	1218	1.218	1986	37.758	-0.657296466	-0.315559965	0.20741645	A	2	Y	NA	CONDO	1220	0.03
+6.56	2	1196	1.196	1941	90.896	-0.693828551	1.425901432	-0.989331124	D	1	Y	N	SFR	8481	0.19
+5.45	4	1742	1.742	1976	71.422	0.212831388	0.071431456	0.015202856	D	2	Y	N	CONDO	4097	0.09
+6.12	3	1440	1.44	1951	95.04	-0.288654512	1.03891001	-0.299886062	D	2	Y	NA	SFR	6599	0.15
+9.99	4	1844	1.844	1959	106.952	0.382207421	0.729316873	0.278750321	D	3	Y	NA	SFR	6752	0.16
+3.93	2	1436	1.436	1982	50.26	-0.29529671	-0.160763397	0.047472902	A	0	Y	N	CONDO	1437	0.03
+8.35	3	2766	2.766	1987	82.98	1.913233913	-0.354259107	-0.677780538	A	2	Y	N	SFR	5998	0.14
+3.2	1	774	0.774	1985	24.768	-1.394580373	-0.276860823	0.38610467	A	1	Y	N	CONDO	480	0.01
+8.8	4	2218	2.218	1891	279.468	1.003252874	3.360858539	3.371790989	D	2	N	N	SFR	5201	0.12
+5.43	3	1659	1.659	2006	18.249	0.075005793	-1.089542808	-0.081722022	A	2	Y	N	CONDO	1660	0.04
+5.59	3	1003	1.003	1953	64.192	-1.014314574	0.961511726	-0.975275356	D	1	Y	N	SFR	6351	0.15
+4.75	2	1369	1.369	1982	47.915	-0.406553515	-0.160763397	0.065358924	A	2	Y	NA	CONDO	1368	0.03
+4.84	2	1369	1.369	1981	49.284	-0.406553515	-0.122064255	0.049625652	A	2	NA	NA	CONDO	1369	0.03
+5.62	3	1040	1.04	1953	66.56	-0.952874248	0.961511726	-0.916199763	D	1	Y	N	SFR	6399	0.15
+6.15	3	1150	1.15	1961	64.4	-0.770213821	0.651918589	-0.502116707	D	2	Y	NA	SFR	6090	0.14
+6.55	4	1700	1.7	1950	113.9	0.143088316	1.077609152	0.154193279	D	2	Y	N	SFR	6459	0.15
+7.8	3	1112	1.112	1890	141.224	-0.833314696	3.399557681	-2.832901376	D	1	N	N	SFR	7858	0.18
+6.27	3	1156	1.156	1988	33.524	-0.760250525	-0.39295825	0.298746716	A	2	Y	NA	SFR	6011	0.14
+5.58	2	1536	1.536	1995	33.792	-0.129241776	-0.663852245	0.085797443	A	2	Y	N	CONDO	1664	0.04
+5.96	3	1218	1.218	1961	68.208	-0.657296466	0.651918589	-0.428503784	D	2	N	N	SFR	6100	0.14
+8.2	4	2160	2.16	1989	60.48	0.906941013	-0.431657392	-0.391487792	D	3	N	N	SFR	6240	0.14
+8.69	3	1925	1.925	1952	125.125	0.516711918	1.000210868	0.516820876	D	2	Y	NA	SFR	6100	0.14
+4.4	2	1047	1.047	1980	38.739	-0.941250403	-0.083365112	0.078467446	A	2	Y	N	SFR	2175	0.05
+5.26	3	1040	1.04	1963	56.16	-0.952874248	0.574520304	-0.547445603	D	1	Y	N	SFR	5400	0.12
+2.59	1	835	0.835	2007	8.35	-1.293286863	-1.128241951	1.459140493	A	1	Y	N	CONDO	495	0.01
+7.95	4	2031	2.031	2003	28.434	0.692730148	-0.973445382	-0.674334963	D	2	Y	N	SFR	4500	0.1
+4.87	3	1293	1.293	1976	53.013	-0.532755265	0.071431456	-0.038055484	D	2	N	N	SFR	3120	0.07
+5.3	2	900	0.9	1960	51.3	-1.185351156	0.690617731	-0.818624525	D	1	Y	N	SFR	5776	0.13
+6.3	2	1215	1.215	1951	80.19	-0.662278114	1.03891001	-0.688047362	A	1	N	N	SFR	10127	0.23
+7.5	3	1766	1.766	1993	42.384	0.252684573	-0.58645396	-0.148187869	D	2	Y	N	SFR	6595	0.15
+8	4	1534	1.534	1951	101.244	-0.132562874	1.03891001	-0.137720897	A	2	N	N	SFR	5998	0.14
+8.35	4	2125	2.125	1958	125.375	0.848821786	0.768016015	0.651908726	D	1	Y	N	SFR	7110	0.16
+3.25	2	966	0.966	1987	28.98	-1.0757549	-0.354259107	0.381095971	A	2	Y	N	CONDO	967	0.02
+3.9	2	1436	1.436	1982	50.26	-0.29529671	-0.160763397	0.047472902	A	1	Y	N	CONDO	1437	0.03
+4.5	2	1050	1.05	1985	33.6	-0.936268755	-0.276860823	0.259216138	A	2	Y	N	CONDO	1050	0.02
+5.15	2	1058	1.058	1986	32.798	-0.92298436	-0.315559965	0.291256913	A	2	Y	N	CONDO	1058	0.02
+6.55	1	840	0.84	2014	2.52	-1.284984116	-1.399135946	1.797867466	A	1	Y	N	CONDO	1407	0.03
+9.91	4	1704	1.704	1949	115.872	0.149730514	1.116308294	0.167145415	D	2	N	N	SFR	7475	0.17
+4	2	1029	1.029	1991	26.754	-0.971140291	-0.509055676	0.494364477	A	1	Y	N	CONDO	1424	0.03
+7.27	3	2076	2.076	2014	6.228	0.767454868	-1.399135946	-1.073773692	D	2	Y	NA	SFR	3999	0.09
+9.3	4	2709	2.709	1989	75.852	1.8185826	-0.431657392	-0.785004622	D	2	Y	N	SFR	15500	0.36
+3.88	2	984	0.984	1981	35.424	-1.045865011	-0.122064255	0.127662733	D	2	Y	N	CONDO	1000	0.02
+4.17	2	1200	1.2	2007	12	-0.687186354	-1.128241951	0.775312472	A	2	Y	NA	CONDO	1200	0.03
+4.85	3	1552	1.552	1979	58.976	-0.102672986	-0.04466597	0.004585989	A	2	Y	N	CONDO	1742	0.04
+7.2	3	1408	1.408	1938	111.232	-0.341792091	1.541998858	-0.527043014	D	2	N	N	SFR	4500	0.1
+7.3	4	1782	1.782	1959	103.356	0.279253362	0.729316873	0.203664189	D	3	Y	N	SFR	7500	0.17
+12.65	4	2100	2.1	1959	121.8	0.807308052	0.729316873	0.588783384	D	1	Y	N	SFR	10019	0.23
+4.9	3	1316	1.316	1960	75.012	-0.49456263	0.690617731	-0.341553721	D	1	N	N	SFR	6974	0.16
+5.44	3	1497	1.497	2000	25.449	-0.1940032	-0.857347955	0.166328247	A	2	Y	NA	SFR	1416	0.03
+8.5	5	2342	2.342	1996	49.182	1.209160993	-0.702551387	-0.849497733	D	3	Y	N	SFR	6151	0.14
+5.52	3	1675	1.675	2013	6.7	0.101574583	-1.360436803	-0.138185801	A	2	Y	NA	CONDO	2150	0.05
+6.7	3	1176	1.176	1964	62.328	-0.727039538	0.535821162	-0.38956317	D	1	Y	NA	SFR	6499	0.15
+9.37	4	2489	2.489	1993	59.736	1.453261746	-0.58645396	-0.852271106	A	2	Y	NA	SFR	9500	0.22
+3.25	2	860	0.86	1973	37.84	-1.25177313	0.187528883	-0.234743616	A	1	Y	N	CONDO	858	0.02
+5.4	3	1675	1.675	2014	5.025	0.101574583	-1.399135946	-0.14211665	A	2	Y	NA	CONDO	2027	0.05
+5.65	4	1600	1.6	1955	99.2	-0.022966618	0.884113441	-0.020305096	D	1	Y	NA	SFR	8825	0.2
+6.3	3	1340	1.34	2001	21.44	-0.454709446	-0.896047098	0.407441079	D	2	Y	N	SFR	6027	0.14
+7.61	3	1620	1.62	1951	106.92	0.010244369	1.03891001	0.010642978	D	1	Y	NA	SFR	7300	0.17
+8.05	3	2035	2.035	2001	32.56	0.699372345	-0.896047098	-0.62667056	D	2	Y	N	SFR	6227	0.14
+10	5	2914	2.914	2001	46.624	2.158995215	-0.896047098	-1.934561396	D	3	Y	N	SFR	10920	0.25
+4.95	3	1550	1.55	1982	54.25	-0.105994085	-0.160763397	0.017039969	A	1	Y	N	TWNHS	0	NA
+8.3	4	2270	2.27	1992	56.75	1.08960144	-0.547754818	-0.596834439	D	2	Y	NA	SFR	6249	0.14
+5.55	2	684	0.684	1941	51.984	-1.544029813	1.425901432	-2.201634321	D	1	Y	NA	SFR	2500	0.06
+5.28	4	1587	1.587	1974	68.241	-0.044553759	0.148829741	-0.006630924	D	2	Y	N	SFR	4550	0.1
+7.99	4	1950	1.95	1950	130.65	0.558225651	1.077609152	0.601549071	D	2	Y	N	SFR	6300	0.14
+10.89	3	1964	1.964	1961	109.984	0.581473342	0.651918589	0.37907328	D	3	Y	NA	SFR	9582	0.22
+18.75	5	3726	3.726	1977	149.04	3.507361279	0.032732314	0.114804051	D	5	Y	N	SFR	217800	5
+3.25	2	966	0.966	1987	28.98	-1.0757549	-0.354259107	0.381095971	A	2	Y	N	CONDO	966	0.02
+3.44	2	966	0.966	1987	28.98	-1.0757549	-0.354259107	0.381095971	A	2	Y	N	CONDO	967	0.02
+4.4	3	1614	1.614	2006	17.754	0.000281073	-1.089542808	-0.000306241	A	2	Y	NA	SFR	NA	NA
+3.8	2	1125	1.125	1980	41.625	-0.811727554	-0.083365112	0.067669759	A	1	Y	NA	CONDO	1125	0.03
+5.03	2	1238	1.238	1986	38.378	-0.624085479	-0.315559965	0.196936392	A	2	Y	N	CONDO	1238	0.03
+7.19	3	2076	2.076	2015	4.152	0.767454868	-1.437835088	-1.103473537	D	2	Y	N	SFR	5440	0.12
+7.5	4	1959	1.959	2003	27.426	0.573170595	-0.973445382	-0.557950269	A	2	Y	N	SFR	4500	0.1
+5.01	3	1565	1.565	1988	45.385	-0.081085845	-0.39295825	0.031863352	NA	2	Y	NA	TWNHS	2133	0.04
+4.31	2	1410	1.41	2009	11.28	-0.338470992	-1.205640235	0.408074246	A	2	Y	NA	CONDO	1410	0.03
+4.85	3	860	0.86	1915	87.72	-1.25177313	2.432079128	-3.044411302	D	1	NA	NA	SFR	5600	0.13
+5	2	1332	1.332	1990	35.964	-0.467993841	-0.470356534	0.220123961	A	2	Y	N	SFR	1332	0.03
+6.3	3	1279	1.279	1953	81.856	-0.556002956	0.961511726	-0.534603362	D	1	Y	N	SFR	6300	0.14
+6.92	3	1264	1.264	1900	147.888	-0.580911196	3.01256626	-1.750033469	D	2	Y	N	SFR	5000	0.11
+7.29	3	1778	1.778	1990	48.006	0.272611165	-0.470356534	-0.128224443	D	2	Y	N	SFR	4186	0.1
+8.4	3	1944	1.944	1974	83.592	0.548262355	0.148829741	0.081597744	D	2	Y	NA	SFR	10000	0.23
+3.22	2	900	0.9	1963	48.6	-1.185351156	0.574520304	-0.681008307	A	1	Y	N	CONDO	900	0.02
+5.6	2	1537	1.537	1997	30.74	-0.127581226	-0.741250529	0.094569651	A	2	N	N	CONDO	1482	0.03
+6.51	2	1301	1.301	1966	66.351	-0.519470871	0.458422878	-0.238137332	D	1	Y	N	SFR	9044	0.21
+7.1	3	1174	1.174	1961	65.744	-0.730360637	0.651918589	-0.476135676	D	1	Y	N	SFR	6875	0.16
+8.3	4	2200	2.2	2003	30.8	0.973362986	-0.973445382	-0.947515704	D	3	Y	N	SFR	6523	0.15
+10.81	3	1794	1.794	1951	118.404	0.299179954	1.03891001	0.310821049	D	2	Y	NA	SFR	8250	0.19
+5.49	2	1416	1.416	1990	38.232	-0.328507696	-0.470356534	0.154515741	D	1	Y	N	SFR	5000	0.11
+7.39	3	1953	1.953	1976	80.073	0.563207299	0.071431456	0.040230718	D	2	Y	NA	SFR	7650	0.18
+6.86	2	1490	1.49	1953	95.36	-0.205627045	0.961511726	-0.197712815	D	1	Y	N	SFR	10100	0.23
+7	3	1219	1.219	1957	73.14	-0.655635916	0.806715157	-0.528911431	D	1	Y	NA	SFR	10584	0.24
+7.8	4	2290	2.29	1997	45.8	1.122812427	-0.741250529	-0.832285305	D	3	Y	N	SFR	6469	0.15
+12.6	4	3407	3.407	2005	40.884	2.97764604	-1.050843666	-3.129040481	D	4	Y	N	SFR	11957	0.27
+4.79	2	1473	1.473	1988	42.717	-0.233856384	-0.39295825	0.091895795	A	2	Y	N	TWNHS	1987	0.05
+3.17	2	900	0.9	1963	48.6	-1.185351156	0.574520304	-0.681008307	A	1	Y	N	CONDO	900	0.02
+4.93	3	1550	1.55	1982	54.25	-0.105994085	-0.160763397	0.017039969	A	2	Y	N	CONDO	1550	0.04
+5.55	3	1536	1.536	1995	33.792	-0.129241776	-0.663852245	0.085797443	A	2	N	N	TWNHS	1695	0.04
+5.98	3	1759	1.759	1990	47.493	0.241060727	-0.470356534	-0.113384488	A	3	Y	NA	CONDO	1760	0.04
+6.1	4	1535	1.535	1953	98.24	-0.130902325	0.961511726	-0.12586412	D	2	Y	NA	SFR	11000	0.25
+6.42	3	1330	1.33	1960	75.81	-0.47131494	0.690617731	-0.325498454	D	1	Y	NA	SFR	6221	0.14
+10.8	3	2587	2.587	1986	80.197	1.615995581	-0.315559965	-0.509943509	D	2	Y	N	SFR	6600	0.15
+11.9	3	2338	2.338	2003	32.732	1.202518795	-0.973445382	-1.170586368	D	2	Y	NA	SFR	11477	0.26
+6.5	3	2324	2.324	1978	90.636	1.179271104	-0.005966828	-0.007036508	A	3	Y	N	SFR	10000	0.23
+11.49	5	2578	2.578	1941	195.928	1.601050637	1.425901432	2.282940395	D	3	Y	N	SFR	7500	0.17
+5.9	5	1749	1.749	1963	94.446	0.224455234	0.574520304	0.128954089	D	2	Y	N	SFR	7500	0.17
+2.7	1	600	0.6	1985	19.2	-1.683515958	-0.276860823	0.466099614	A	1	Y	N	CONDO	549	0.01
+4.19	2	1256	1.256	1980	46.472	-0.594195591	-0.083365112	0.049535182	A	1	NA	NA	CONDO	1255	0.03
+4.9	2	1218	1.218	1986	37.758	-0.657296466	-0.315559965	0.20741645	A	2	Y	N	CONDO	1218	0.03
+5.48	3	1462	1.462	2015	2.924	-0.252122427	-1.437835088	0.362510472	A	2	Y	NA	TWNHS	1391	0.03
+5.63	4	1814	1.814	1963	97.956	0.332390941	0.574520304	0.190965345	D	2	Y	NA	SFR	7590	0.17
+6.32	3	1313	1.313	1950	87.971	-0.499544278	1.077609152	-0.538313486	D	1	Y	N	SFR	6350	0.15
+8.3	4	2185	2.185	1999	39.33	0.948454746	-0.818648813	-0.776451352	D	2	Y	N	SFR	7000	0.16
+4.32	2	1038	1.038	1985	33.216	-0.956195347	-0.276860823	0.264733031	A	1	Y	NA	CONDO	1038	0.02
+7.6	3	1733	1.733	1998	32.927	0.197886444	-0.779949671	-0.154341467	D	2	Y	NA	SFR	5688	0.13
+10.79	4	2681	2.681	1999	48.258	1.772087219	-0.818648813	-1.450717099	D	2	Y	N	SFR	10178	0.23
+3.17	2	900	0.9	1963	48.6	-1.185351156	0.574520304	-0.681008307	A	1	N	N	CONDO	900	0.02
+5.35	3	1659	1.659	2007	16.59	0.075005793	-1.128241951	-0.084624682	A	2	Y	N	CONDO	3485	0.08
+9.9	2	1549	1.549	1940	119.273	-0.107654634	1.464600574	-0.157671039	D	1	Y	NA	SFR	5000	0.11
+3.35	2	966	0.966	1987	28.98	-1.0757549	-0.354259107	0.381095971	A	2	Y	N	CONDO	966	0.02
+3.5	2	1190	1.19	1982	41.65	-0.703791847	-0.160763397	0.113143968	A	1	Y	N	CONDO	1190	0.03
+3.85	2	1138	1.138	1966	58.038	-0.790140413	0.458422878	-0.362218442	D	2	Y	N	SFR	1126	0.03
+4.38	2	1073	1.073	1984	35.409	-0.89807612	-0.238161681	0.213887318	A	2	Y	N	CONDO	1073	0.02
+4.57	2	1126	1.126	1985	36.032	-0.810067005	-0.276860823	0.224275818	A	1	Y	N	CONDO	1126	0.03
+4.65	2	1050	1.05	1985	33.6	-0.936268755	-0.276860823	0.259216138	A	1	Y	NA	CONDO	1050	0.02
+6.1	3	1050	1.05	1959	60.9	-0.936268755	0.729316873	-0.682836601	D	1	N	N	SFR	6100	0.14
+8.45	3	1574	1.574	1957	94.44	-0.066140901	0.806715157	-0.053356867	D	2	Y	N	SFR	7000	0.16
+9	3	1742	1.742	1990	47.034	0.212831388	-0.470356534	-0.100106634	D	2	N	N	SFR	6834	0.16
+10.4	4	2710	2.71	1998	51.49	1.82024315	-0.779949671	-1.419698046	D	3	Y	NA	SFR	9360	0.21
+6.1	2	832	0.832	1922	79.04	-1.298268511	2.161185132	-2.805798604	D	0	Y	N	SFR	5000	0.11
+7	3	1250	1.25	1905	140	-0.604158887	2.819070549	-1.703166525	A	1	Y	N	SFR	5375	0.12
+7.25	3	1872	1.872	1960	106.704	0.428702803	0.690617731	0.296069757	D	2	Y	N	SFR	5000	0.11
+6.9	3	1204	1.204	1900	140.868	-0.680544157	3.01256626	-2.050184366	D	2	Y	N	SFR	3798	0.09
+4.45	3	1614	1.614	2006	17.754	0.000281073	-1.089542808	-0.000306241	A	2	Y	N	SFR	1372	0.03
+5.62	3	980	0.98	1953	62.72	-1.052507209	0.961511726	-1.011998023	D	1	Y	NA	SFR	7930	0.18
+6.35	4	1400	1.4	1953	89.6	-0.355076486	0.961511726	-0.341410205	D	1	Y	NA	SFR	6078	0.14
+6.39	2	795	0.795	1952	51.675	-1.359708837	1.000210868	-1.359995556	D	1	Y	NA	SFR	6000	0.14
+6.54	3	1785	1.785	1961	99.96	0.28423501	0.651918589	0.185298087	D	3	Y	NA	SFR	6000	0.14
+6.69	4	1573	1.573	1961	88.088	-0.06780145	0.651918589	-0.044201026	D	2	Y	NA	SFR	7333	0.17
+11.47	4	2316	2.316	1958	136.644	1.16598671	0.768016015	0.895496467	D	2	Y	N	SFR	11250	0.26
+5.54	3	1583	1.583	2005	18.996	-0.051195957	-1.050843666	0.053798947	D	3	Y	N	CONDO	1597	0.04
+7.8	4	2101	2.101	2000	35.717	0.808968602	-0.857347955	-0.693567577	D	2	Y	N	SFR	4839	0.11
+6.35	3	1536	1.536	1956	93.696	-0.129241776	0.845414299	-0.109262845	D	2	Y	NA	SFR	6884	0.16
+9.95	4	2561	2.561	1976	105.001	1.572821298	0.071431456	0.112348916	D	2	Y	N	SFR	10732	0.25
+7.95	4	2060	2.06	1996	43.26	0.740886079	-0.702551387	-0.520510542	D	3	Y	NA	SFR	6422	0.15
+3.17	2	892	0.892	1987	26.76	-1.198635551	-0.354259107	0.42462756	A	1	Y	N	CONDO	892	0.02
+5.4	2	1311	1.311	1996	27.531	-0.502865377	-0.702551387	0.353288768	A	2	Y	NA	CONDO	1616	0.04
+5.48	3	966	0.966	1961	54.096	-1.0757549	0.651918589	-0.701304616	D	1	Y	NA	SFR	4539	0.1
+5.9	3	1201	1.201	1953	76.864	-0.685525805	0.961511726	-0.6591411	D	1	Y	N	SFR	6564	0.15
+9	3	1778	1.778	1953	113.792	0.272611165	0.961511726	0.262118832	D	1	Y	N	SFR	6805	0.16
+12.5	5	4465	4.465	2002	66.975	4.734507242	-0.93474624	-4.425562842	A	3	N	N	SFR	17585	0.4
+4.29	2	1200	1.2	2007	12	-0.687186354	-1.128241951	0.775312472	A	2	Y	N	CONDO	1200	0.03
+6	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	NA	CONDO	752	0.02
+6.26	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	N	N	CONDO	752	0.02
+6.27	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	N	CONDO	752	0.02
+6.29	3	1865	1.865	2017	0	0.417078957	-1.515233372	-0.631971954	A	3	Y	NA	CONDO	752	0.02
+6.43	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	N	CONDO	752	0.02
+8.1	3	1946	1.946	1993	46.704	0.551583454	-0.58645396	-0.323478301	D	2	Y	N	SFR	7161	0.16
+8.5	3	1603	1.603	1943	118.622	-0.01798497	1.348503147	-0.024252789	D	2	Y	N	SFR	7500	0.17
+3.63	3	1456	1.456	2003	20.384	-0.262085723	-0.973445382	0.255126137	A	2	Y	N	TWNHS	3500	0.08
+5.3	2	784	0.784	1969	37.632	-1.377974879	0.342325451	-0.471715872	A	1	Y	N	SFR	4840	0.11
+7.1	3	1140	1.14	1958	67.26	-0.786819314	0.768016015	-0.604289834	D	2	Y	N	SFR	7623	0.18
+6.2	3	1834	1.834	2016	1.834	0.365601928	-1.47653423	-0.539823761	A	3	Y	N	CONDO	0.02	NA
+6.33	2	800	0.8	1940	61.6	-1.35140609	1.464600574	-1.979270135	D	1	N	N	SFR	5300	0.12
+6.39	3	1550	1.55	1956	94.55	-0.105994085	0.845414299	-0.089608915	D	1	Y	N	SFR	6900	0.16
+7.25	3	1834	1.834	2003	25.676	0.365601928	-0.973445382	-0.355893508	D	2	Y	NA	SFR	6076	0.14
+8.45	4	2374	2.374	1953	151.936	1.262298572	0.961511726	1.213714878	D	2	Y	N	SFR	9000	0.21
+3.51	2	1001	1.001	1973	44.044	-1.017635673	0.187528883	-0.190836081	A	1	Y	N	CONDO	1001	0.02
+5	2	1017	1.017	1880	139.329	-0.991066883	3.786549103	-3.752723417	D	1	NA	NA	SFR	6708	0.15
+5.5	2	1102	1.102	1900	128.934	-0.849920189	3.01256626	-2.560440885	D	2	Y	N	SFR	3200	0.07
+6.41	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	NA	CONDO	752	0.02
+6.25	3	2000	2	1975	84	0.641253118	0.110130598	0.07062159	D	1	Y	N	SFR	7485	0.17
+6.8	3	1754	1.754	1963	94.716	0.232757981	0.574520304	0.133724186	D	3	Y	NA	SFR	6000	0.14
+6.38	3	1865	1.865	2017	0	0.417078957	-1.515233372	-0.631971954	A	3	Y	N	CONDO	752	0.02
+8.35	3	1956	1.956	1990	52.812	0.568188947	-0.470356534	-0.267251384	D	2	Y	N	SFR	7173	0.16
+9.1	4	2710	2.71	1998	51.49	1.82024315	-0.779949671	-1.419698046	D	3	Y	NA	SFR	7549	0.17
+6.1	2	1467	1.467	2010	10.269	-0.24381968	-1.244339377	0.303394429	A	3	Y	N	CONDO	1467	0.03
+7.13	3	1361	1.361	1958	80.299	-0.41983791	0.768016015	-0.322442239	D	2	Y	N	SFR	6660	0.15
+8	2	1685	1.685	1989	47.18	0.118180076	-0.431657392	-0.051013303	D	2	Y	N	SFR	6941	0.16
+10.99	4	2230	2.23	1959	129.34	1.023179467	0.729316873	0.746222049	D	3	Y	N	SFR	6000	0.14
+12.1	5	2536	2.536	1977	101.44	1.531307565	0.032732314	0.05012324	D	3	Y	N	SFR	48787	1.12
+6.35	3	1247	1.247	1971	57.362	-0.609140535	0.264927167	-0.161377876	D	2	Y	NA	SFR	6000	0.14
+6.6	4	1686	1.686	1961	94.416	0.119840625	0.651918589	0.078126331	D	1	N	N	SFR	6100	0.14
+12.12	3	1690	1.69	2017	0	0.126482823	-1.515233372	-0.191650994	A	2	Y	N	CONDO	1690	0.04
+13.49	3	2871	2.871	1988	83.259	2.087591594	-0.39295825	-0.820336339	D	2	N	N	SFR	11000	0.25
+4.93	2	1238	1.238	1986	38.378	-0.624085479	-0.315559965	0.196936392	A	2	N	N	CONDO	1238	0.03
+8.35	2	2294	2.294	1990	61.938	1.129454624	-0.470356534	-0.531246362	D	0	Y	NA	SFR	7250	0.17
+4.95	2	1491	1.491	1999	26.838	-0.203966496	-0.818648813	0.16697693	D	3	Y	N	CONDO	1491	0.03
+6.8	4	1657	1.657	1959	96.106	0.071684695	0.729316873	0.052280858	D	1	Y	NA	SFR	8181	0.19
+5.39	2	1305	1.305	2017	0	-0.512828673	-1.515233372	0.777055119	A	2	Y	N	CONDO	536	0.01
+5.42	2	1305	1.305	2017	0	-0.512828673	-1.515233372	0.777055119	A	2	NA	NA	CONDO	536	0.01
+5.45	3	1040	1.04	1963	56.16	-0.952874248	0.574520304	-0.547445603	D	1	N	N	SFR	7100	0.16
+5.09	2	1396	1.396	1994	32.108	-0.361718683	-0.625153103	0.226129557	A	2	Y	N	CONDO	1394	0.03
+4.59	2	1025	1.025	1985	32.8	-0.977782488	-0.276860823	0.270709664	A	2	Y	NA	SFR	1025	0.02
+5.03	2	960	0.96	1934	79.68	-1.085718196	1.696795427	-1.84224167	D	1	Y	N	SFR	7499	0.17
+5.65	2	1537	1.537	1995	33.814	-0.127581226	-0.663852245	0.084695083	A	2	Y	NA	CONDO	1730	0.04
+6.05	3	1756	1.756	1989	49.168	0.236079079	-0.431657392	-0.101905279	A	3	Y	NA	CONDO	1756	0.04
+6.62	3	1350	1.35	1958	79.65	-0.438103953	0.768016015	-0.336470852	D	2	Y	N	SFR	7425	0.17
+5.62	2	1247	1.247	1986	38.657	-0.609140535	-0.315559965	0.192220366	D	2	Y	N	CONDO	1247	0.03
+8.99	5	2382	2.382	2001	38.112	1.275582966	-0.896047098	-1.142982414	D	3	Y	NA	SFR	7221	0.17
+4.99	2	1305	1.305	2016	1.305	-0.512828673	-1.47653423	0.75720909	A	2	Y	N	CONDO	522.72	0.01
+5.06	3	1293	1.293	1976	53.013	-0.532755265	0.071431456	-0.038055484	D	2	Y	N	SFR	3600	0.08
+5.79	3	1227	1.227	1961	68.712	-0.642351522	0.651918589	-0.418760898	D	2	Y	NA	SFR	9900	0.23
+6.15	2	1028	1.028	1935	84.296	-0.97280084	1.658096284	-1.612997458	A	1	Y	N	SFR	5250	0.12
+7.4	3	1510	1.51	1955	93.62	-0.172416058	0.884113441	-0.152435354	D	2	Y	N	SFR	5428	0.12
+3.22	2	900	0.9	1963	48.6	-1.185351156	0.574520304	-0.681008307	A	1	N	NA	CONDO	900	0.02
+4.2	1	734	0.734	1931	63.124	-1.461002346	1.812892853	-2.648640711	D	1	Y	N	SFR	6999	0.16
+4.31	3	1293	1.293	1900	151.281	-0.532755265	3.01256626	-1.604960536	D	2	Y	NA	SFR	6000	0.14
+6.5	4	1684	1.684	1997	33.68	0.116519527	-0.741250529	-0.086370161	D	2	Y	NA	SFR	4645	0.11
+15.2	4	3586	3.586	1995	78.892	3.274884372	-0.663852245	-2.174039341	D	2	Y	N	SFR	11200	0.26
+4.2	2	918	0.918	1975	38.556	-1.155461268	0.110130598	-0.127251641	A	2	Y	NA	CONDO	919	0.02
+6.75	3	1204	1.204	1961	67.424	-0.680544157	0.651918589	-0.443659386	D	2	Y	N	SFR	9300	0.21
+3.47	2	860	0.86	1973	37.84	-1.25177313	0.187528883	-0.234743616	A	1	Y	N	CONDO	860	0.02
+7	4	1500	1.5	1960	85.5	-0.189021552	0.690617731	-0.130541635	D	2	Y	NA	SFR	7325	0.17
+4.11	2	1038	1.038	1985	33.216	-0.956195347	-0.276860823	0.264733031	A	1	Y	NA	CONDO	1038	0.02
+7.55	3	1741	1.741	1974	74.863	0.211170839	0.148829741	0.031428501	D	2	Y	N	SFR	9165	0.21
+5.51	3	1064	1.064	1935	87.248	-0.913021064	1.658096284	-1.513876834	D	2	Y	N	SFR	4750	0.11
+5.57	3	1213	1.213	1963	65.502	-0.665599212	0.574520304	-0.382400262	D	1	Y	NA	SFR	12200	0.28
+6.55	4	2150	2.15	2017	0	0.890335519	-1.515233372	-1.349066091	A	3	Y	NA	CONDO	840	0.02
+3.34	2	850	0.85	1973	37.4	-1.268378623	0.187528883	-0.237857626	A	1	Y	NA	CONDO	850	0.02
+4.72	2	1369	1.369	1982	47.915	-0.406553515	-0.160763397	0.065358924	A	2	Y	NA	CONDO	1369	0.03
+5.36	4	1380	1.38	1961	77.28	-0.388287473	0.651918589	-0.253131821	D	2	Y	N	SFR	6000	0.14
+6.15	4	1048	1.048	1951	69.168	-0.939589854	1.03891001	-0.976149305	D	1	NA	N	SFR	5000	0.11
+6.65	4	2150	2.15	2017	0	0.890335519	-1.515233372	-1.349066091	A	3	Y	N	CONDO	840	0.02
+6.89	3	1003	1.003	1950	67.201	-1.014314574	1.077609152	-1.093034668	D	1	Y	N	SFR	7653	0.18
+6.8	3	1650	1.65	1956	100.65	0.060060849	0.845414299	0.050776301	D	2	Y	NA	SFR	8177	0.19
+8.2	4	2478	2.478	1976	101.598	1.434995703	0.071431456	0.102503833	D	2	Y	N	SFR	13500	0.31
+8.36	4	1962	1.962	1968	96.138	0.578152243	0.381024593	0.220290223	D	2	Y	N	SFR	9991	0.23
+4.2	2	1025	1.025	1985	32.8	-0.977782488	-0.276860823	0.270709664	A	1	NA	NA	CONDO	1026	0.02
+6.43	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	N	CONDO	752	0.02
+15.15	4	2948	2.948	1957	176.88	2.215453893	0.806715157	1.787240235	D	2	Y	N	SFR	67518	1.55
+20.65	3	3236	3.236	2017	0	2.693692103	-1.515233372	-4.081572168	D	3	Y	N	SFR	2200	0.05
+3.3	2	892	0.892	1987	26.76	-1.198635551	-0.354259107	0.42462756	A	1	NA	NA	CONDO	892	0.02
+6.39	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	N	CONDO	752	0.02
+7.5	3	1746	1.746	2015	3.492	0.219473586	-1.437835088	-0.315566823	D	2	Y	N	SFR	5638	0.13
+9.49	5	2382	2.382	2002	35.73	1.275582966	-0.93474624	-1.192346381	D	3	Y	N	SFR	6804	0.16
+8.2	5	2590	2.59	2003	36.26	1.620977229	-0.973445382	-1.577932798	D	3	Y	NA	SFR	5976	0.14
+6.05	3	1551	1.551	1985	49.632	-0.104333535	-0.276860823	0.028885868	D	2	Y	NA	SFR	6944	0.16
+6.24	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	NA	CONDO	752	0.02
+7.72	4	2287	2.287	1986	70.897	1.117830779	-0.315559965	-0.352742642	D	2	Y	N	SFR	7000	0.16
+21.85	4	4438	4.438	2001	71.008	4.68967241	-0.896047098	-4.202167352	D	4	Y	NA	SFR	168142	3.86
+6.68	3	1116	1.116	1950	74.772	-0.826672498	1.077609152	-0.89082985	D	1	Y	N	SFR	8100	0.19
+12.25	4	2984	2.984	1988	86.536	2.275233669	-0.39295825	-0.89407184	D	3	Y	N	SFR	6900	0.16
+5.5	2	1305	1.305	2017	0	-0.512828673	-1.515233372	0.777055119	A	2	Y	N	CONDO	536	0.01
+6.25	2	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	N	CONDO	752	0.02
+6.42	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	N	CONDO	752	0.02
+6.71	4	2150	2.15	2017	0	0.890335519	-1.515233372	-1.349066091	A	3	Y	NA	CONDO	840	0.02
+7.1	3	1762	1.762	1985	56.384	0.246042375	-0.276860823	-0.068119494	D	2	N	N	SFR	6000	0.14
+4.5	2	1025	1.025	1985	32.8	-0.977782488	-0.276860823	0.270709664	A	2	Y	N	CONDO	1025	0.02
+4.95	3	1768	1.768	1982	61.88	0.256005671	-0.160763397	-0.041156341	A	2	Y	NA	CONDO	1768	0.04
+5.97	4	1742	1.742	1976	71.422	0.212831388	0.071431456	0.015202856	D	2	Y	N	SFR	4050	0.09
+6.59	4	1444	1.444	1972	64.98	-0.282012315	0.226228025	-0.063799089	D	2	Y	N	SFR	5700	0.13
+7.95	4	1773	1.773	1955	109.926	0.264308418	0.884113441	0.233678625	D	1	Y	N	SFR	7912	0.18
+8.6	3	2310	2.31	1982	80.85	1.156023414	-0.160763397	-0.185846251	D	3	Y	NA	SFR	9502	0.22
+4.89	3	1516	1.516	1979	57.608	-0.162452762	-0.04466597	0.00725611	A	1	Y	N	CONDO	1516	0.03
+6.39	3	1138	1.138	1960	64.866	-0.790140413	0.690617731	-0.545684979	D	2	Y	N	SFR	6300	0.14
+5.99	3	1463	1.463	1963	79.002	-0.250461877	0.574520304	-0.143895434	D	2	Y	N	SFR	5500	0.13
+6.24	3	1116	1.116	1963	60.264	-0.826672498	0.574520304	-0.474940135	D	1	Y	N	SFR	6000	0.14
+6.28	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	NA	CONDO	752	0.02
+21.09	3	3276	3.276	2017	0	2.760114076	-1.515233372	-4.182216959	D	3	Y	N	SFR	2200	0.05
+3.38	2	966	0.966	1987	28.98	-1.0757549	-0.354259107	0.381095971	A	2	Y	N	CONDO	966	0.02
+3.6	2	1047	1.047	1987	31.41	-0.941250403	-0.354259107	0.333446528	A	2	N	N	CONDO	1047	0.02
+5.4	2	1311	1.311	1997	26.22	-0.502865377	-0.741250529	0.372749227	A	2	Y	N	CONDO	1513	0.03
+7.2	3	1698	1.698	1965	88.296	0.139767218	0.49712202	0.069481362	D	2	Y	N	SFR	7584	0.17
+2.73	1	751	0.751	1987	22.53	-1.432773008	-0.354259107	0.507572887	A	1	Y	N	CONDO	751	0.02
+5.85	2	1152	1.152	1980	42.624	-0.766892722	-0.083365112	0.063932098	D	2	Y	NA	SFR	5200	0.12
+5.49	3	1040	1.04	1963	56.16	-0.952874248	0.574520304	-0.547445603	D	1	N	N	SFR	7800	0.18
+13.8	4	3356	3.356	2012	16.78	2.892958024	-1.321737661	-3.823731573	D	3	Y	N	SFR	16756	0.38
+5.37	2	1256	1.256	2017	0	-0.594195591	-1.515233372	0.900344989	A	2	Y	NA	CONDO	1044	0.02
+6.38	3	1865	1.865	2017	0	0.417078957	-1.515233372	-0.631971954	A	3	Y	NA	CONDO	752	0.02
+6.6	2	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	NA	CONDO	752	0.02
+6.66	2	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	NA	CONDO	752	0.02
+11.53	4	2778	2.778	1961	155.568	1.933160505	0.651918589	1.260263268	D	2	Y	NA	SFR	15928	0.37
+5.99	3	1226	1.226	1935	100.532	-0.644012071	1.658096284	-1.067834022	D	1	Y	N	SFR	5436	0.12
+12.25	3	2529	2.529	1979	96.102	1.519683719	-0.04466597	-0.067878148	D	2	Y	N	SFR	15011	0.34
+8.5	3	1403	1.403	1941	106.628	-0.350094838	1.425901432	-0.499200731	D	2	Y	N	SFR	16488	0.38
+7.49	2	1122	1.122	1900	131.274	-0.816709202	3.01256626	-2.460390586	D	2	Y	NA	SFR	4500	0.1
+5.49	2	1311	1.311	1996	27.531	-0.502865377	-0.702551387	0.353288768	A	2	Y	NA	CONDO	1573	0.04
+5.64	2	1256	1.256	2017	0	-0.594195591	-1.515233372	0.900344989	A	2	Y	NA	CONDO	1044	0.02
+7.49	4	2137	2.137	1966	108.987	0.868748378	0.458422878	0.398254131	D	3	Y	N	SFR	7650	0.18
+3.15	2	1374	1.374	2005	16.488	-0.398250769	-1.050843666	0.418499298	A	2	Y	N	CONDO	1436	0.03
+10.4	3	2011	2.011	1943	148.814	0.659519161	1.348503147	0.889363664	D	2	Y	N	SFR	7250	0.17
+4.42	2	1126	1.126	1985	36.032	-0.810067005	-0.276860823	0.224275818	D	1	Y	NA	CONDO	1126	0.03
+4.78	2	1525	1.525	1987	45.75	-0.147507818	-0.354259107	0.052255988	A	2	Y	N	CONDO	2237	0.05
+5.2	3	1497	1.497	2000	25.449	-0.1940032	-0.857347955	0.166328247	A	2	Y	N	CONDO	1352	0.03
+6.17	3	1834	1.834	2017	0	0.365601928	-1.515233372	-0.553972242	A	3	Y	NA	CONDO	752	0.02
+9.55	4	1543	1.543	1955	95.666	-0.11761793	0.884113441	-0.103987593	A	2	Y	NA	SFR	5990	0.14
+6.8	4	2012	2.012	1963	108.648	0.66117971	0.574520304	0.379861168	D	2	Y	N	SFR	6000	0.14
+11	4	1780	1.78	1951	117.48	0.275932263	1.03891001	0.28666879	D	2	Y	N	SFR	18747	0.43
+6.21	2	1537	1.537	1979	58.406	-0.127581226	-0.04466597	0.005698539	D	2	Y	N	SFR	1377	0.03
+3.21	1	736	0.736	2007	7.36	-1.457681248	-1.128241951	1.644617134	A	1	Y	N	CONDO	736	0.02
+6.15	2	1019	1.019	1948	70.311	-0.987745784	1.155007436	-1.140853726	D	1	Y	NA	SFR	5805	0.13
+7.4	3	1834	1.834	2003	25.676	0.365601928	-0.973445382	-0.355893508	D	2	Y	NA	SFR	6076	0.14
+12.25	4	2390	2.39	1961	133.84	1.288867361	0.651918589	0.840236591	D	2	Y	NA	SFR	14885	0.34
+9.85	4	1788	1.788	1942	134.1	0.289216658	1.387202289	0.40120201	D	2	Y	N	SFR	6000	0.14
+10.7	3	2276	2.276	1983	77.384	1.099564736	-0.199462539	-0.219321974	D	2	N	N	SFR	9500	0.22
+2.85	2	892	0.892	1987	26.76	-1.198635551	-0.354259107	0.42462756	A	1	Y	N	CONDO	892	0.02
+6.19	2	1684	1.684	2017	0	0.116519527	-1.515233372	-0.176554276	D	2	Y	N	SFR	6054	0.14
+6.19	2	1684	1.684	2017	0	0.116519527	-1.515233372	-0.176554276	A	2	Y	NA	SFR	6054	0.14
+9.1	3	1616	1.616	1959	93.728	0.003602172	0.729316873	0.002627125	D	2	N	N	SFR	8500	0.2
+6.4	3	1400	1.4	1953	89.6	-0.355076486	0.961511726	-0.341410205	D	1	Y	N	SFR	5953	0.14
+6.2	3	1003	1.003	1953	64.192	-1.014314574	0.961511726	-0.975275356	D	1	Y	N	SFR	6300	0.14
+9.3	3	1743	1.743	1953	111.552	0.214491938	0.961511726	0.206236513	D	2	Y	N	SFR	12000	0.28
+3.19	2	900	0.9	1963	48.6	-1.185351156	0.574520304	-0.681008307	A	1	Y	N	TWNHS	900	0.02
+8.52	4	2185	2.185	1999	39.33	0.948454746	-0.818648813	-0.776451352	D	2	Y	N	SFR	7000	0.16
+4.71	2	1389	1.389	1987	41.67	-0.373342529	-0.354259107	0.132259991	A	2	Y	N	TWNHS	2000	0.05
+4.75	2	1330	1.33	1982	46.55	-0.47131494	-0.160763397	0.075770191	A	1	Y	N	CONDO	1330	0.03
+5.45	2	1256	1.256	2017	0	-0.594195591	-1.515233372	0.900344989	A	2	Y	N	CONDO	1044	0.02
+9.16	3	1737	1.737	1990	46.899	0.204528642	-0.470356534	-0.096201383	A	2	Y	N	SFR	5605	0.13
+9.35	3	1500	1.5	1959	87	-0.189021552	0.729316873	-0.137856607	D	2	Y	Y	SFR	7370	0.17
+10.4	4	2115	2.115	2007	21.15	0.832216292	-1.128241951	-0.938941333	D	2	Y	NA	SFR	6650	0.15
+5.29	3	1618	1.618	1980	59.866	0.00692327	-0.083365112	-0.000577159	A	2	Y	N	SFR	3644	0.08
+8.1	4	2165	2.165	1988	62.785	0.915243759	-0.39295825	-0.359652586	D	2	Y	N	SFR	7700	0.18
+6.1	3	1865	1.865	2016	1.865	0.417078957	-1.47653423	-0.615831357	A	3	Y	NA	CONDO	753.59	0.02
+7.65	2	1048	1.048	1962	57.64	-0.939589854	0.613219446	-0.57617477	D	1	Y	N	SFR	5574	0.13
+4.24	2	1028	1.028	1984	33.924	-0.97280084	-0.238161681	0.231683883	A	1	Y	N	CONDO	1028	0.02
+6.35	4	1800	1.8	1950	120.6	0.30914325	1.077609152	0.333135596	D	1	Y	N	SFR	7377	0.17
+5.44	4	1380	1.38	1961	77.28	-0.388287473	0.651918589	-0.253131821	D	2	Y	NA	SFR	6000	0.14
+8.35	4	2535	2.535	1994	58.305	1.529647015	-0.625153103	-0.956263577	D	3	Y	N	SFR	6012	0.14
+8.59	4	2595	2.595	1993	62.28	1.629279976	-0.58645396	-0.955497694	D	3	Y	N	SFR	6538	0.15
+3.59	2	850	0.85	1973	37.4	-1.268378623	0.187528883	-0.237857626	A	1	Y	N	CONDO	850	0.02
+4.55	2	1030	1.03	1986	31.93	-0.969479742	-0.315559965	0.305928994	A	1	Y	NA	CONDO	1030	0.02
+4.55	2	1332	1.332	1993	31.968	-0.467993841	-0.58645396	0.274456841	A	2	Y	NA	SFR	1332	0.03
+5.7	3	1042	1.042	1963	56.268	-0.94955315	0.574520304	-0.545537565	D	1	Y	NA	SFR	7200	0.17
+8.4	2	1774	1.774	1984	58.542	0.265968967	-0.238161681	-0.063343616	D	0	Y	N	SFR	9583	0.22
+9	2	1285	1.285	2017	0	-0.54603966	-1.515233372	0.827377515	A	1	Y	N	CONDO	1285	0.03
+6.75	3	1558	1.558	1946	110.618	-0.09270969	1.232405721	-0.114255952	D	1	Y	NA	SFR	7500	0.17
+5.4	2	1256	1.256	2017	0	-0.594195591	-1.515233372	0.900344989	A	2	Y	N	CONDO	1044	0.02
+5.98	2	1141	1.141	1940	87.857	-0.785158765	1.464600574	-1.149943978	D	2	Y	N	SFR	4210	0.1
+7.75	3	1800	1.8	1965	93.6	0.30914325	0.49712202	0.153681917	D	1	Y	N	SFR	7465	0.17
+7.05	2	1040	1.04	1950	69.68	-0.952874248	1.077609152	-1.026826011	D	1	Y	NA	SFR	7135	0.16
+12.55	4	3144	3.144	1989	88.032	2.540921563	-0.431657392	-1.096807575	D	3	Y	N	SFR	11713	0.27
+5.35	2	1193	1.193	1987	35.79	-0.698810199	-0.354259107	0.247559877	A	2	Y	N	CONDO	NA	NA
+3.2	1	853	0.853	1983	29.002	-1.263396975	-0.199462539	0.252000368	D	1	Y	NA	CONDO	853	0.02
+8.65	4	1914	1.914	1965	99.528	0.498445875	0.49712202	0.24778842	D	2	Y	N	SFR	8200	0.19
+3.07	2	966	0.966	1987	28.98	-1.0757549	-0.354259107	0.381095971	A	2	Y	NA	CONDO	966	0.02
+4.23	3	1298	1.298	2006	14.278	-0.524452519	-1.089542808	0.57141347	A	2	Y	N	CONDO	NA	NA
+5.45	2	1537	1.537	1995	33.814	-0.127581226	-0.663852245	0.084695083	A	2	Y	N	SFR	1632	0.04
+5.55	2	1305	1.305	2017	0	-0.512828673	-1.515233372	0.777055119	A	2	Y	N	CONDO	536	0.01
+10.4	2	1577	1.577	2017	0	-0.061159253	-1.515233372	0.092670541	A	1	Y	N	CONDO	1577	0.04
+21.5	3	4301	4.301	2009	34.408	4.46217715	-1.205640235	-5.379780307	D	3	NA	Y	SFR	16553	0.38
+4.3	2	918	0.918	1975	38.556	-1.155461268	0.110130598	-0.127251641	A	2	NA	NA	CONDO	918	0.02")
+```
+
+## 5.3
+```{r}
+KYDerby18 <- read_list("Year	winner	Surface	condition	Starters	PolePosition	Time	speed
+1875	Aristides	dirt	fast	15	1	157.75	34.23137876
+1876	Vagrant	dirt	fast	11	4	158.35	34.10167351
+1877	Baden-Baden	dirt	fast	11	5	158	34.17721519
+1878	DayStar	dirt	dusty	9	1	157.25	34.34022258
+1879	LordMurphy	dirt	fast	9	4	157	34.39490446
+1880	Fonso	dirt	dusty	5	1	157.5	34.28571429
+1881	Hindoo	dirt	fast	6	2	160	33.75
+1882	Apollo	dirt	good	14	8	160.25	33.69734789
+1883	Leonatus	dirt	heavy	7	2	163	33.12883436
+1884	Buchanan	dirt	good	9	8	160.25	33.69734789
+1885	JoeCotton	dirt	good	10	8	157.25	34.34022258
+1886	BenAli	dirt	fast	10	4	156.5	34.50479233
+1887	Montrose	dirt	fast	7	3	159.25	33.90894819
+1888	MacbethII	dirt	fast	7	6	158.25	34.12322275
+1889	Spokane	dirt	fast	8	3	154.5	34.95145631
+1890	Riley	dirt	muddy	6	5	165	32.72727273
+1891	Kingman	dirt	slow	4	4	172.25	31.34978229
+1892	Azra	dirt	heavy	3	2	161.5	33.43653251
+1893	Lookout	dirt	fast	6	2	159.25	33.90894819
+1894	Chant	dirt	fast	5	2	161	33.54037267
+1895	Halma	dirt	fast	4	1	157.5	34.28571429
+1896	BenBrush	dirt	dusty	8	4	127.75	35.22504892
+1897	typoonII	dirt	heavy	6	1	132.5	33.96226415
+1898	Plaudit	dirt	good	4	3	129	34.88372093
+1899	Manuel	dirt	fast	5	1	132	34.09090909
+1900	Lieut.Gibson	dirt	fast	7	3	126.25	35.64356436
+1901	HisEminence	dirt	fast	5	3	127.75	35.22504892
+1902	Alan-a-Dale	dirt	fast	4	4	128.75	34.95145631
+1903	JudgeHimes	dirt	fast	6	4	129	34.88372093
+1904	Elwood	dirt	fast	5	3	128.5	35.01945525
+1905	Agile	dirt	heavy	3	1	130.75	34.416826
+1906	SirHuon	dirt	fast	6	4	128.8	34.9378882
+1907	PinkStar	dirt	heavy	6	6	132.6	33.93665158
+1908	StoneStreet	dirt	heavy	8	4	135.2	33.28402367
+1909	Wintergreen	dirt	slow	10	6	128.2	35.10140406
+1910	Donau	dirt	fast	7	7	126.4	35.60126582
+1911	Meridian	dirt	fast	7	5	125	36
+1912	Worth	dirt	muddy	7	5	129.4	34.77588872
+1913	Donerail	dirt	fast	8	5	124.8	36.05769231
+1914	OldRosebud	dirt	fast	7	6	123.4	36.46677472
+1915	Regret	dirt	fast	16	2	125.4	35.88516746
+1916	GeorgeSmith	dirt	fast	9	8	124	36.29032258
+1917	*OmarKhayyam	dirt	fast	15	8	124.6	36.11556982
+1918	Exterminator	dirt	muddy	8	5	130.8	34.40366972
+1919	SirBarton	dirt	heavy	12	1	129.8	34.66872111
+1920	PaulJones	dirt	slow	17	2	129	34.88372093
+1921	BehaveYourself	dirt	fast	12	1	124.2	36.23188406
+1922	Morvich	dirt	fast	10	4	124.6	36.11556982
+1923	Zev	dirt	fast	21	10	125.4	35.88516746
+1924	BlackGold	dirt	fast	19	1	125.2	35.94249201
+1925	FlyingEbony	dirt	sloppy	20	6	127.6	35.26645768
+1926	BubblingOver	dirt	fast	13	11	123.8	36.34894992
+1927	Whiskery	dirt	slow	15	7	126	35.71428571
+1928	ReighCount	dirt	heavy	22	4	130.4	34.50920245
+1929	ClydeVanDusen	dirt	muddy	21	20	130.8	34.40366972
+1930	GallantFox	dirt	good	15	7	127.6	35.26645768
+1931	TwentyGrand	dirt	fast	12	5	121.8	36.94581281
+1932	BurgooKing	dirt	fast	20	13	125.2	35.94249201
+1933	BrokersTip	dirt	good	13	11	126.8	35.48895899
+1934	Cavalcade	dirt	fast	13	8	124	36.29032258
+1935	Omaha	dirt	good	18	10	125	36
+1936	BoldVenture	dirt	fast	14	5	123.6	36.40776699
+1937	WarAdmiral	dirt	fast	20	1	123.2	36.52597403
+1938	Lawrin	dirt	fast	10	1	124.8	36.05769231
+1939	Johnstown	dirt	fast	8	5	123.4	36.46677472
+1940	Gallahadion	dirt	fast	8	1	125	36
+1941	Whirlaway	dirt	fast	11	4	121.4	37.0675453
+1942	ShutOut	dirt	fast	15	3	124.4	36.17363344
+1943	CountFleet	dirt	fast	10	5	124	36.29032258
+1944	Pensive	dirt	good	16	4	124.2	36.23188406
+1945	HoopJr.	dirt	muddy	16	12	127	35.43307087
+1946	Assault	dirt	slow	17	2	126.6	35.5450237
+1947	JetPilot	dirt	slow	13	13	126.8	35.48895899
+1948	Citation	dirt	sloppy	6	1	125.4	35.88516746
+1949	Ponder	dirt	fast	14	2	124.2	36.23188406
+1950	Middleground	dirt	fast	14	14	121.6	37.00657895
+1951	CountTurf	dirt	fast	20	9	122.6	36.70473083
+1952	HillGail	dirt	fast	16	1	121.6	37.00657895
+1953	DarkStar	dirt	fast	11	10	122	36.8852459
+1954	Determine	dirt	fast	17	7	123	36.58536585
+1955	Swaps	dirt	fast	10	8	121.8	36.94581281
+1956	Needles	dirt	fast	17	1	123.4	36.46677472
+1957	IronLiege	dirt	fast	9	6	124.2	36.23188406
+1958	TimTam	dirt	muddy	14	2	125	36
+1959	TomyLee	dirt	fast	17	9	122.2	36.82487725
+1960	VenetianWay	dirt	good	13	9	122.4	36.76470588
+1961	CarryBack	dirt	good	15	14	124	36.29032258
+1962	Decidedly	dirt	fast	15	4	120.4	37.37541528
+1963	Chateaugay	dirt	fast	9	1	121.8	36.94581281
+1964	NorthernDancer	dirt	fast	12	7	120	37.5
+1965	LuckyDebonair	dirt	fast	11	8	121.2	37.12871287
+1966	KauaiKing	dirt	fast	15	12	122	36.8852459
+1967	ProudClarion	dirt	fast	14	7	120.6	37.31343284
+1968	ForwardPass**	dirt	fast	14	12	122.2	36.82487725
+1969	MajesticPrince	dirt	fast	8	8	121.8	36.94581281
+1970	DustCommander	dirt	good	17	2	123.4	36.46677472
+1971	CanoneroII	dirt	fast	20	12	123.2	36.52597403
+1972	RivaRidge	dirt	fast	16	9	121.8	36.94581281
+1973	Secretariat	dirt	fast	13	10	119.4	37.68844221
+1974	Cannonade	dirt	fast	23	2	124	36.29032258
+1975	FoolishPleasure	dirt	fast	15	3	122	36.8852459
+1976	BoldForbes	dirt	fast	9	2	121.6	37.00657895
+1977	SeattleSlew	dirt	fast	15	4	122.2	36.82487725
+1978	Affirmed	dirt	fast	11	2	121.2	37.12871287
+1979	SpectacularBid	dirt	fast	10	3	122.4	36.76470588
+1980	GenuineRisk	dirt	fast	13	10	122	36.8852459
+1981	PleasantColony	dirt	fast	21	7	122	36.8852459
+1982	GatoDelSol	dirt	fast	19	18	122.4	36.76470588
+1983	Sunny?Halo	dirt	fast	20	10	122.2	36.82487725
+1984	Swale	dirt	fast	20	15	122.4	36.76470588
+1985	SpendaBuck	dirt	fast	13	10	120.2	37.43760399
+1986	Ferdinand	dirt	fast	16	1	122.8	36.64495114
+1987	Alysheba	dirt	fast	17	3	123.4	36.46677472
+1988	WinningColors	dirt	fast	17	11	122.2	36.82487725
+1989	SundaySilence	dirt	muddy	15	10	125	36
+1990	Unbridled	dirt	good	15	8	122	36.8852459
+1991	StriketheGold	dirt	fast	16	5	123	36.58536585
+1992	LilE.Tee	dirt	fast	18	10	123	36.58536585
+1993	SeaHero	dirt	fast	19	6	122.4	36.76470588
+1994	GoforGin	dirt	sloppy	14	8	123.6	36.40776699
+1995	ThunderGulch	dirt	fast	19	16	121.2	37.12871287
+1996	Grindstone	dirt	fast	19	15	121	37.19008264
+1997	SilverCharm	dirt	fast	13	5	122.2	36.82487725
+1998	RealQuiet	dirt	fast	15	3	123.2	36.52597403
+1999	Charismatic	dirt	fast	19	16	123.2	36.52597403
+2000	FusaichiPegasus	dirt	fast	19	15	121	37.19008264
+2001	Monarchos	dirt	fast	17	16	119.97	37.50937734
+2002	WarEmblem	dirt	fast	18	5	121.03	37.18086425
+2003	FunnyCide	dirt	fast	16	5	121.32	37.09198813
+2004	SmartyJones	dirt	sloppy	18	13	124.1	36.26107977
+2005	Giacomo	dirt	fast	20	10	122.45	36.74969375
+2006	Barbado	dirt	fast	20	8	121.36	37.07976269
+2007	StreetSense	dirt	fast	20	7	122.17	36.83391995
+2008	BigBrown	dirt	fast	20	20	121.82	36.93974717
+2009	MindThatBird	dirt	sloppy	19	8	122.66	36.68677646
+2010	SuperSaver	dirt	sloppy	20	4	124.45	36.15910004
+2011	AnimalKingdom	dirt	fast	20	16	122.04	36.87315634
+2012	I'llHaveAnother	dirt	fast	20	19	121.83	36.93671509
+2013	Orb	dirt	sloppy	19	16	122.89	36.61811376
+2014	CaliforniaChrome	dirt	fast	19	5	123.66	36.39010189
+2015	AmericanPharoh	dirt	fast	18	18	123.02	36.57941798
+2016	Nyquist	dirt	fast	20	13	121.31	37.09504575
+2017	AlwaysDreaming	dirt	wetfast	20	5	123.98	36.2961768
+2018	Justify	dirt	sloppy	20	7	124.2	36.2318841")
+```
+
+## 5.4
+```{r}
+Stopping <- read_list("speed	stoppingdistance
+4	4
+5	2
+5	8
+5	8
+5	4
+7	6
+7	7
+8	9
+8	8
+8	13
+8	11
+9	5
+9	5
+9	13
+10	8
+10	17
+10	14
+12	11
+12	21
+12	19
+13	18
+13	27
+13	15
+14	14
+14	16
+15	16
+16	19
+16	14
+16	34
+17	29
+17	22
+18	47
+18	29
+18	34
+19	30
+20	48
+21	55
+21	39
+21	42
+22	35
+24	56
+25	33
+25	59
+25	48
+25	56
+26	39
+26	41
+27	78
+27	57
+28	64
+28	84
+29	68
+29	54
+30	60
+30	101
+30	67
+31	77
+35	85
+35	107
+36	79
+39	138
+40	110
+40	134
+45	")
+```
+
+## 6.1 
+```{r}
+Infant <- data.frame(
+  Attatchment = rep(c("Secure Attatchment", "Secure Attatchment", 
+                      "Insecure Attatchment", "Insecure Attatchment"),
+                    times = c(19,10,4,16)),
+  Device = rep(c("Soft Baby Carriers", "Plastic Infant Seats",
+                 "Soft Baby Carriers", "Plastic Infant Seats"), 
+               times = c(19,10,4,16))
+)
+```
+
+## 6.2
+```{r}
+CherData <- read_list("live.chernobyl	age	sex	alc.post
+Yes	20	Male	no
+No	61	Female	no
+No	23	Male	no
+No	21	Female	no
+No	72	Male	no
+No	75	Female	no
+No	45	Male	no
+No	40	Female	no
+No	65	Female	no
+No	21	Female	yes
+No	69	Male	no
+No	71	Female	no
+No	77	Female	no
+No	55	Male	before
+No	22	Male	yes
+No	47	Female	no
+No	51	Female	before
+No	61	Female	no
+No	63	Male	before
+No	45	Female	no
+No	54	Female	no
+No	51	Male	no
+No	26	Female	no
+No	24	Male	no
+No	75	Male	no
+No	75	Female	no
+No	67	Female	no
+No	78	Female	no
+Yes	67	Male	no
+No	53	Female	no
+No	26	Male	no
+Yes	60	Male	no
+Yes	36	Male	yes
+No	47	Male	before
+No	59	Female	no
+No	84	Female	no
+No	41	Female	no
+No	21	Male	no
+No	73	Female	no
+Yes	47	Male	before
+No	43	Male	no
+No	18	Male	no
+No	50	Male	no
+No	43	Male	no
+Yes	77	Female	no
+No	36	Female	no
+No	73	Male	no
+No	51	Female	no
+No	63	Male	no
+No	70	Male	no
+Yes	44	Female	no
+No	78	Female	no
+No	56	Female	no
+No	52	Male	no
+No	19	Female	no
+No	22	Female	no
+No	25	Male	no
+No	75	Female	no
+No	80	Male	before
+No	38	Female	no
+No	42	Male	before
+No	36	Female	no
+No	74	Female	no
+No	76	Female	no
+No	74	Female	no
+No	45	Male	yes
+Yes	70	Male	no
+No	74	Female	no
+No	57	Female	no
+No	36	Female	no
+No	73	Male	no
+No	77	Female	no
+No	61	Male	yes
+No	64	Female	no
+Yes	19	Female	no
+No	89	Female	no
+No	45	Female	no
+No	42	Female	no
+No	46	Female	no
+No	60	Male	before
+No	47	Male	no
+No	65	Male	before
+No	26	Female	no
+Yes	71	Female	no
+No	53	Female	no
+No	43	Female	no
+No	60	Male	no
+No	58	Female	no
+No	83	Male	no
+Yes	28	Male	yes
+No	76	Male	no
+No	65	Female	no
+No	33	Female	no
+No	90	Female	no
+No	82	Female	no
+No	76	Female	no
+No	73	Female	no
+No	68	Female	no
+No	38	Male	no
+No	51	Female	no
+No	32	Female	yes
+No	58	Female	no
+No	58	Male	before
+No	63	Male	before
+Yes	42	Male	no
+No	62	Female	no
+Yes	29	Female	no
+No	28	Female	no
+Yes	46	Female	no
+Yes	35	Female	no
+No	36	Male	no
+Yes	65	Male	before
+No	53	Female	no
+No	28	Male	yes
+Yes	53	Male	no
+No	62	Male	no
+No	40	Male	no
+No	90	Female	no
+Yes	76	Male	before
+No	37	Female	no
+No	37	Female	no
+No	19	Female	no
+No	60	Female	no
+No	39	Female	no
+Yes	50	Male	no
+Yes	48	Male	no
+No	64	Female	no
+Yes	42	Female	no
+No	59	Male	no
+Yes	39	Female	no
+No	76	Female	no
+No	48	Female	no
+No	50	Male	no
+No	41	Female	no
+No	41	Female	no
+No	26	Male	no
+No	73	Male	no
+No	40	Female	no
+No	30	Female	no
+No	76	Female	no
+No	76	Male	no
+No	70	Female	no
+No	73	Female	no
+No	49	Female	no
+No	36	Female	no
+No	54	Female	before
+No	27	Male	no
+No	30	Female	no
+No	71	Female	no
+No	47	Female	no
+No	67	Male	before
+No	29	Female	no
+No	74	Female	no
+No	26	Male	no
+No	18	Female	no
+No	84	Female	no
+No	81	Female	no
+No	60	Male	no
+No	75	Female	no
+No	41	Female	no
+No	64	Female	no
+No	38	Female	no
+No	54	Female	no
+No	43	Female	no
+No	50	Male	no
+No	48	Male	before
+No	26	Male	yes
+No	68	Female	no
+No	87	Female	no
+No	64	Female	no
+No	53	Female	no
+No	74	Female	no
+No	65	Male	no
+No	45	Female	no
+No	61	Female	no
+No	80	Female	no
+No	52	Female	no
+No	71	Male	no
+No	43	Female	no
+No	40	Male	yes
+No	80	Female	no
+No	81	Female	no
+No	18	Female	no
+No	32	Male	no
+No	42	Female	no
+No	67	Female	no
+No	76	Female	no
+No	21	Female	no
+No	82	Female	no
+No	80	Male	no
+No	27	Female	no
+No	77	Female	no
+No	29	Male	no
+No	82	Female	no
+No	28	Female	no
+No	42	Female	no
+No	48	Male	no
+No	77	Female	no
+No	20	Male	no
+No	59	Female	no
+No	50	Female	no
+No	57	Female	no
+No	29	Female	no
+No	32	Male	yes
+Yes	43	Female	no
+No	65	Male	no
+No	33	Male	no
+No	45	Male	no
+No	39	Female	no
+No	49	Female	no
+No	43	Male	no
+No	48	Female	no
+No	38	Male	no
+No	64	Female	no
+No	45	Female	no
+No	64	Female	no
+No	39	Female	no
+No	48	Male	no
+No	61	Male	no
+No	45	Female	no
+No	73	Female	no
+Yes	58	Male	no
+No	78	Female	no
+No	51	Male	no
+No	60	Female	no
+No	26	Female	yes
+No	58	Female	no
+No	31	Male	no
+No	22	Male	no
+No	46	Female	no
+No	75	Female	no
+No	35	Male	yes
+No	55	Male	no
+No	47	Male	no
+No	48	Female	no
+No	67	Female	no
+No	41	Female	no
+No	71	Female	no
+No	71	Female	no
+No	73	Male	no
+No	32	Male	no
+Yes	32	Male	no
+Yes	88	Female	no
+No	59	Male	before
+No	55	Female	no
+No	88	Female	no
+No	21	Male	yes
+No	65	Female	no
+No	30	Female	no
+No	51	Female	no
+No	38	Female	no
+No	22	Female	no
+No	51	Female	no
+No	37	Female	no
+No	40	Female	no
+No	50	Female	no
+No	45	Female	no
+No	32	Male	no
+No	25	Female	no
+No	68	Female	no
+No	78	Male	no
+No	31	Male	no
+No	59	Female	no
+No	80	Male	no
+Yes	72	Female	no
+No	58	Female	no
+No	69	Female	no
+No	72	Male	before
+No	73	Female	no
+No	35	Female	no
+No	33	Female	no
+No	77	Female	no
+No	41	Male	no
+No	64	Female	no
+No	78	Male	no
+No	60	Female	no
+No	59	Female	no
+No	61	Female	no
+No	59	Female	no
+No	19	Male	no
+No	52	Female	no
+No	25	Female	no
+No	66	Female	no
+No	18	Female	no
+No	31	Female	no
+No	53	Female	no
+No	64	Female	no
+No	86	Male	no
+No	45	Female	no
+No	63	Female	no
+No	45	Male	no
+No	32	Male	no
+No	63	Female	no
+No	80	Female	no
+Yes	61	Female	no
+No	43	Male	no
+No	75	Female	no
+Yes	74	Male	no
+Yes	60	Male	no
+No	65	Female	no
+No	76	Female	no
+No	38	Female	no
+No	38	Female	no
+No	67	Male	no
+Yes	36	Female	no
+No	22	Male	yes
+No	18	Male	no
+No	71	Female	no
+No	52	Male	no
+No	49	Male	no
+No	62	Female	no
+No	18	Female	no
+No	20	Female	no
+No	43	Male	yes
+No	48	Female	no
+No	26	Female	no
+No	50	Female	no
+No	29	Female	no
+No	25	Female	yes
+No	18	Female	no
+No	56	Female	no
+No	77	Female	no
+No	42	Female	no
+No	63	Female	no
+No	60	Female	no
+No	64	Male	no
+No	31	Male	yes
+No	47	Female	no
+No	68	Female	no
+No	37	Female	no
+Yes	40	Female	yes
+No	38	Male	yes
+No	30	Male	no
+Yes	64	Female	no
+Yes	58	Female	no
+No	47	Female	no
+Yes	46	Female	no
+No	48	Male	no
+Yes	51	Male	before
+Yes	60	Female	no
+No	80	Male	no
+No	42	Male	before
+No	49	Female	no
+No	37	Male	yes
+No	43	Male	no
+No	75	Male	no
+Yes	45	Female	no
+Yes	66	Female	no
+Yes	52	Female	no
+Yes	33	Male	yes
+No	28	Male	no
+No	23	Male	no
+No	64	Female	no
+Yes	71	Female	no
+Yes	18	Female	no
+Yes	47	Female	no
+Yes	65	Female	no
+No	52	Female	no
+No	71	Male	before
+Yes	71	Female	no
+No	89	Male	no
+No	18	Female	no
+No	22	Female	no
+No	42	Male	no
+No	62	Female	no
+No	73	Female	no
+No	33	Male	yes
+No	52	Female	no
+No	65	Female	no
+No	48	Female	no
+No	73	Female	no
+No	51	Male	no
+No	43	Female	no
+No	20	Male	yes
+Yes	44	Female	no
+No	42	Male	no
+No	64	Male	no
+No	51	Male	yes
+No	53	Male	no
+Yes	72	Female	no
+No	61	Male	no
+No	66	Male	no
+No	73	Male	before
+Yes	31	Female	no
+No	57	Female	no
+No	72	Female	no
+No	39	Male	yes
+No	23	Male	no
+No	65	Female	no
+No	52	Female	no
+No	69	Male	no
+No	45	Female	no
+No	53	Female	no
+No	33	Female	no
+No	59	Female	no
+No	50	Male	no
+No	55	Male	before
+No	63	Female	no
+No	29	Male	yes
+No	54	Male	no
+No	66	Male	no
+No	71	Female	no
+No	57	Female	no
+No	48	Female	no
+No	75	Female	no
+No	69	Female	no
+Yes	62	Male	no
+No	38	Female	no
+No	24	Female	no
+No	25	Female	no
+No	54	Male	before
+No	53	Male	before
+No	45	Female	no
+No	29	Female	no
+No	49	Female	no
+No	18	Male	no
+No	65	Female	no
+No	44	Male	no
+No	27	Female	no
+No	46	Male	before
+No	28	Male	no
+No	73	Female	no
+Yes	55	Male	no
+No	71	Male	no
+No	53	Female	no
+No	18	Male	no
+No	63	Female	no
+Yes	30	Male	yes
+No	51	Female	no
+No	52	Female	no
+No	69	Female	no
+No	84	Female	no
+No	38	Male	no
+No	76	Male	no
+No	71	Female	no
+No	41	Female	no
+No	39	Male	no
+No	52	Female	no
+No	57	Female	no
+No	49	Female	no
+No	44	Female	no
+No	65	Male	yes
+No	61	Female	no
+No	67	Male	no
+No	74	Female	no
+No	34	Female	no
+No	46	Male	no
+No	74	Male	before
+No	76	Female	no
+No	64	Female	no
+No	44	Male	yes
+No	39	Male	no
+No	22	Female	no
+No	60	Male	before
+No	61	Female	no
+No	30	Female	no
+No	37	Female	no
+No	20	Male	no
+No	39	Male	no
+No	24	Female	no
+No	52	Male	no
+No	77	Male	no
+No	65	Female	no
+No	48	Male	before
+No	35	Female	no
+No	76	Female	no
+No	65	Female	no
+No	23	Male	yes
+No	73	Female	no
+No	35	Female	no
+No	46	Female	no
+No	33	Male	yes
+No	64	Female	no
+No	26	Male	no
+No	78	Female	no
+No	79	Female	no
+No	55	Female	no
+No	80	Female	no
+No	30	Male	yes
+No	69	Male	no
+No	65	Female	no
+No	50	Female	no
+No	63	Female	no
+No	77	Female	no
+No	34	Male	no
+No	71	Male	before
+No	18	Male	no
+No	24	Male	no
+No	29	Male	no
+No	20	Female	yes
+Yes	42	Female	no
+No	34	Female	no
+No	44	Female	no
+No	71	Female	no
+No	62	Female	no
+No	65	Male	no
+No	66	Female	no
+No	69	Male	no
+No	53	Female	no
+No	52	Female	no
+No	38	Male	yes
+No	44	Female	no
+Yes	67	Female	no
+No	27	Female	yes
+No	62	Male	before
+No	72	Male	no
+Yes	64	Female	no
+No	46	Male	no
+No	29	Male	no
+No	41	Male	yes
+No	19	Male	no
+No	65	Female	no
+No	36	Male	no
+No	45	Male	before
+No	19	Female	no
+Yes	50	Female	no
+No	73	Female	no
+No	68	Female	no
+No	64	Female	no
+No	59	Female	no
+No	33	Female	no
+No	27	Female	no
+No	48	Male	no
+No	23	Male	no
+No	53	Male	no
+No	41	Female	no
+No	45	Female	no
+No	22	Male	no
+No	44	Male	yes
+No	86	Male	no
+No	76	Female	no
+No	18	Male	yes
+No	24	Male	no
+No	81	Female	no
+No	69	Female	no
+No	42	Female	no
+No	43	Male	before
+No	47	Male	no
+No	67	Male	no
+No	29	Male	no
+No	43	Female	no
+No	62	Female	no
+No	51	Female	no
+No	39	Male	no
+No	52	Female	before
+No	39	Female	no
+No	23	Female	yes
+No	31	Female	no
+No	70	Male	before
+No	67	Male	before
+No	52	Male	no
+No	29	Female	no
+No	61	Male	before
+No	54	Female	no
+No	26	Female	no
+No	32	Male	no
+No	46	Male	no
+No	60	Female	no
+No	64	Female	no
+No	37	Male	yes
+No	38	Female	no
+No	19	Female	no
+No	48	Female	no
+No	51	Male	before
+No	65	Female	no
+No	46	Female	no
+No	26	Female	no
+No	44	Male	yes
+No	46	Male	no
+No	20	Female	no
+No	62	Female	no
+No	29	Male	no
+No	79	Female	no
+No	50	Male	no
+No	39	Female	no
+No	76	Female	no
+No	52	Female	no
+No	70	Female	no
+No	52	Female	no
+No	71	Female	no
+No	70	Female	no
+No	55	Male	no
+No	54	Female	no
+No	39	Female	no
+No	39	Female	no
+No	56	Male	no
+No	51	Male	no
+No	63	Male	before
+No	62	Female	no
+No	22	Male	yes
+Yes	36	Male	yes
+No	18	Male	yes
+No	20	Female	yes
+No	19	Male	yes
+No	27	Female	no
+No	60	Female	no
+No	23	Female	yes
+Yes	51	Male	yes
+Yes	69	Female	no
+No	43	Female	no
+No	87	Female	no
+No	80	Female	no
+No	37	Female	no
+No	42	Male	before
+No	55	Male	no
+No	63	Female	no
+No	21	Female	no
+No	58	Female	no
+No	21	Female	yes
+No	69	Female	no
+No	48	Female	no
+No	48	Female	no
+No	26	Female	no
+No	52	Female	no
+No	48	Female	no
+No	37	Female	no
+No	37	Female	no
+No	53	Female	no
+No	58	Male	before
+No	62	Male	no
+No	42	Male	no
+Yes	18	Female	no
+No	41	Female	no
+No	77	Male	no
+No	76	Male	no
+No	21	Male	no
+No	54	Female	no
+No	23	Male	no
+No	44	Male	before
+No	52	Female	before
+Yes	40	Female	no
+No	28	Male	no
+No	18	Female	no
+No	44	Male	before
+No	81	Female	no
+No	45	Male	before
+No	38	Female	no
+No	55	Female	no
+No	83	Female	no
+No	29	Male	no
+No	67	Female	no
+No	56	Female	no
+No	31	Female	no
+No	34	Female	no
+No	36	Male	no
+No	77	Female	no
+No	26	Female	yes
+No	30	Female	no
+No	64	Male	no
+No	44	Female	no
+No	18	Male	no
+No	49	Male	yes
+No	45	Female	yes
+No	28	Female	no
+No	24	Female	no
+No	42	Female	yes
+No	52	Female	no
+No	50	Female	no
+No	24	Male	no
+No	74	Male	no
+No	52	Female	no
+No	40	Female	no
+No	22	Female	no
+No	78	Female	no
+No	32	Female	no
+No	29	Female	no
+No	71	Male	before
+No	66	Male	no
+No	50	Female	no
+No	70	Female	no
+No	30	Female	no
+Yes	18	Female	no
+No	34	Female	no
+No	72	Female	no
+No	75	Female	no
+No	33	Female	no
+No	65	Male	no
+No	48	Female	no
+No	53	Female	yes
+No	41	Male	no
+No	32	Female	no
+No	22	Male	no
+No	38	Male	no
+No	69	Male	before
+No	37	Male	before
+No	55	Female	no
+No	60	Female	no
+No	49	Male	before
+No	29	Female	yes
+No	54	Male	no
+No	52	Female	yes
+No	57	Male	no
+No	26	Male	no
+No	39	Male	yes
+No	31	Female	no
+No	20	Female	no
+No	51	Female	no
+No	68	Male	before
+No	66	Female	no
+No	44	Male	yes
+No	61	Male	no
+No	41	Female	no
+No	64	Male	no
+No	63	Male	no
+No	23	Male	no
+No	26	Female	no
+No	51	Female	no
+No	33	Male	no
+No	23	Male	yes
+No	65	Male	before
+No	20	Male	yes
+No	42	Male	yes
+No	62	Female	no
+No	89	Male	no
+No	71	Male	no
+No	89	Female	no
+No	71	Male	no
+No	34	Female	no
+No	63	Female	no
+No	74	Female	no
+No	70	Female	no
+No	54	Male	no
+No	50	Male	no
+No	65	Female	no
+No	33	Female	no
+No	56	Male	no
+No	33	Male	yes
+No	35	Female	no
+No	71	Female	no
+No	65	Female	no
+No	53	Female	no
+No	37	Male	yes
+No	19	Male	no
+No	80	Male	no
+No	34	Male	no
+No	70	Female	no
+No	18	Male	yes
+No	48	Female	no
+No	25	Male	no
+No	79	Male	before
+No	69	Female	no
+No	79	Female	no
+No	72	Female	no
+No	27	Female	no
+No	36	Female	no
+No	71	Male	no
+No	57	Female	no
+No	21	Female	no
+No	63	Female	no
+No	77	Male	no
+Yes	45	Male	yes
+No	24	Female	no
+No	44	Female	no
+No	75	Male	before
+No	49	Female	no
+No	22	Male	yes
+No	78	Female	no
+No	54	Male	no
+No	66	Female	no
+No	56	Male	before
+No	72	Female	no
+No	45	Male	yes
+No	45	Male	no
+No	44	Male	no
+No	37	Female	no
+No	45	Male	yes
+No	37	Female	no
+No	66	Female	no
+No	23	Female	no
+No	65	Female	no
+No	52	Male	no
+No	58	Female	no
+No	60	Female	no
+No	45	Male	no
+No	72	Male	no
+No	50	Female	no
+No	48	Female	no
+No	25	Male	yes
+No	43	Female	no
+No	27	Female	no
+No	41	Male	no
+No	22	Female	no
+No	24	Male	yes
+No	40	Female	no
+No	60	Male	no
+No	60	Female	no
+No	61	Female	no
+No	35	Female	no
+No	59	Male	no
+No	27	Female	no
+No	79	Female	no
+No	44	Male	no
+No	41	Female	no
+No	57	Female	no
+No	31	Male	no
+No	20	Female	no
+Yes	50	Male	before
+No	61	Male	no
+No	25	Female	no
+No	33	Male	yes
+No	47	Female	no
+No	63	Female	no
+Yes	49	Male	yes
+No	38	Female	no
+No	31	Male	no
+No	24	Female	no
+No	70	Male	no
+No	53	Female	no
+No	50	Male	no
+Yes	35	Male	no
+No	61	Male	no
+No	65	Female	no
+No	54	Male	before
+No	52	Male	before
+No	22	Female	no
+No	65	Female	no
+No	30	Female	no
+Yes	71	Male	no
+Yes	52	Female	no
+Yes	42	Male	no
+No	36	Female	no
+No	55	Female	no
+No	48	Female	no
+Yes	69	Male	no
+No	53	Female	no
+No	21	Female	no
+Yes	61	Female	no
+No	74	Female	no
+No	41	Male	no
+No	56	Female	no
+Yes	67	Male	before
+No	62	Female	no
+Yes	31	Female	no
+Yes	60	Male	no
+Yes	54	Male	no
+Yes	65	Female	no
+No	47	Male	no
+Yes	56	Male	before
+No	71	Female	no
+No	43	Female	no
+No	44	Female	no
+No	27	Male	yes
+No	34	Female	no
+No	68	Female	no
+No	18	Male	yes
+No	23	Male	yes
+No	31	Male	no
+No	38	Male	yes
+No	28	Female	no
+No	48	Male	before
+No	56	Male	no
+No	40	Female	no
+No	73	Male	no
+No	44	Female	no
+Yes	51	Male	before
+No	69	Female	no
+No	35	Male	no
+No	24	Female	no
+No	27	Female	no
+No	54	Male	yes
+No	37	Male	no
+No	52	Male	no
+No	26	Female	no
+No	46	Male	no
+No	34	Female	no
+No	80	Female	no
+No	57	Female	no
+No	49	Female	no
+No	19	Female	no
+No	25	Female	no
+No	64	Male	yes
+Yes	42	Male	no
+No	28	Male	yes
+No	40	Female	no
+No	30	Male	no
+No	67	Female	no
+No	60	Male	no
+No	57	Male	yes
+No	29	Female	no
+No	53	Female	no
+No	65	Male	no
+No	73	Female	no
+No	31	Female	no
+No	19	Male	yes
+No	49	Male	before
+No	80	Male	no
+No	60	Male	no
+No	39	Male	before
+No	45	Male	no
+No	33	Male	no
+No	34	Female	no
+No	68	Male	no
+No	74	Male	no
+No	20	Male	yes
+No	42	Female	no
+Yes	55	Female	no
+No	24	Female	yes
+No	67	Female	no
+No	24	Female	no
+No	29	Female	no
+No	45	Female	no
+No	18	Female	no
+Yes	31	Male	no
+No	57	Female	no
+No	61	Female	no
+No	28	Male	no
+No	65	Female	before
+No	75	Female	no
+No	54	Male	no
+No	20	Male	yes
+No	22	Male	no
+No	23	Male	yes
+No	43	Male	no
+Yes	63	Female	no
+No	52	Male	no
+No	64	Male	before
+Yes	59	Female	no
+No	19	Male	no
+Yes	29	Female	no
+Yes	44	Female	no
+No	23	Female	no
+No	87	Male	no
+No	58	Female	no
+No	27	Male	no
+No	71	Male	no
+No	67	Female	no
+No	51	Male	before
+No	26	Male	no
+No	77	Female	no
+No	39	Female	no
+No	41	Male	no
+No	60	Male	no
+No	79	Female	no
+No	28	Female	no
+No	44	Female	no
+No	64	Female	no
+No	54	Female	no
+No	52	Female	no
+No	57	Female	no
+No	36	Female	no
+No	41	Female	no
+No	78	Male	no
+No	32	Female	no
+No	64	Female	no
+No	24	Female	no
+No	30	Female	no
+No	34	Male	no
+No	65	Male	no
+No	60	Female	no
+No	75	Female	no
+No	64	Male	no
+No	81	Female	no
+No	28	Female	no
+No	30	Female	no
+No	35	Female	no
+No	74	Male	no
+No	41	Female	yes
+No	34	Male	no
+No	49	Female	no
+No	42	Female	no
+No	27	Female	no
+No	37	Female	no
+No	23	Female	no
+No	65	Female	no
+No	24	Female	no
+No	38	Female	no
+No	29	Male	yes
+No	78	Male	no
+No	75	Female	no
+No	63	Female	no
+No	35	Female	no
+No	69	Male	no
+No	72	Female	no
+No	49	Male	no
+No	21	Female	no
+No	19	Male	no
+No	36	Female	no
+No	65	Female	no
+No	44	Male	no
+No	49	Male	no
+No	43	Male	no
+No	40	Female	no
+No	71	Male	before
+No	81	Female	no
+No	63	Female	no
+No	80	Female	no
+No	48	Female	no
+Yes	46	Male	no
+No	63	Female	no
+No	74	Female	no
+No	77	Male	no
+No	53	Male	no
+No	35	Female	no
+No	55	Female	no
+No	74	Female	no
+No	81	Female	no
+No	68	Female	no
+No	75	Female	no
+No	64	Male	before
+No	76	Female	no
+No	40	Male	before
+No	47	Female	no
+No	76	Male	no
+Yes	66	Male	no
+Yes	46	Female	no
+Yes	55	Female	no
+No	63	Female	no
+Yes	28	Male	yes
+Yes	38	Female	no
+Yes	56	Male	no
+Yes	37	Male	no
+No	30	Female	no
+Yes	33	Male	no
+No	45	Female	no
+No	44	Female	no
+No	78	Female	no
+No	62	Female	no
+No	73	Female	no
+No	38	Female	no
+No	31	Female	no
+No	52	Female	no
+No	54	Female	no
+No	60	Male	no
+No	18	Female	no
+No	30	Male	no
+No	47	Male	no
+No	60	Male	no
+No	40	Female	no
+No	72	Female	no
+No	38	Female	no
+No	43	Female	no
+No	45	Female	no
+No	36	Female	no
+No	42	Female	no
+No	62	Female	no
+No	38	Male	no
+No	64	Female	no
+No	42	Female	no
+No	71	Female	no
+No	20	Male	no
+No	75	Female	no
+No	51	Female	no
+No	62	Male	no
+No	23	Female	yes
+No	71	Male	no
+No	65	Female	no
+No	38	Male	yes
+No	28	Female	no
+No	62	Female	no
+No	78	Female	no
+No	32	Female	no
+No	72	Male	no
+No	64	Male	no
+No	80	Male	no
+No	74	Male	no
+No	49	Female	no
+No	71	Female	no
+No	65	Female	no
+No	23	Female	no
+No	24	Female	no
+No	30	Male	yes
+No	69	Female	no
+No	72	Female	no
+No	42	Female	no
+No	53	Female	no
+No	45	Male	yes
+No	25	Female	no
+No	50	Female	no
+No	72	Male	no
+No	72	Female	no
+No	43	Female	no
+No	22	Male	yes
+No	66	Female	no
+No	74	Male	no
+No	32	Male	no
+No	68	Female	no
+No	70	Female	no
+No	66	Female	no
+No	44	Female	no
+No	65	Female	no
+No	75	Male	no
+No	32	Female	no
+No	39	Female	no
+No	62	Female	no
+No	66	Female	no
+No	42	Female	no
+No	67	Female	no
+No	26	Female	yes
+No	47	Female	no
+No	44	Male	no
+No	64	Male	no
+No	29	Female	no
+No	20	Male	yes
+No	69	Female	no
+No	31	Female	no
+No	61	Female	no
+No	66	Female	no
+No	46	Female	no
+No	25	Female	no
+No	34	Female	no
+No	64	Male	no
+No	28	Female	no
+No	72	Female	no
+No	55	Female	no
+No	71	Female	no
+No	42	Female	no
+Yes	36	Female	no
+No	51	Female	no
+No	47	Female	no
+Yes	39	Male	no
+No	44	Female	no
+Yes	35	Male	yes
+Yes	33	Female	no
+Yes	66	Female	no
+No	65	Female	no
+Yes	60	Female	no
+Yes	22	Male	no
+No	72	Male	no
+No	60	Female	no
+Yes	52	Male	before
+No	71	Male	no
+No	70	Female	no
+No	18	Female	no
+No	36	Male	before
+No	76	Female	no
+No	34	Female	no
+No	42	Male	no
+No	73	Female	no
+No	66	Female	no
+No	52	Female	no
+No	26	Male	no
+No	38	Female	no
+No	82	Male	no
+No	44	Female	no
+Yes	47	Male	no
+No	37	Female	no
+Yes	55	Male	before
+No	40	Male	no
+No	34	Female	no
+No	47	Female	no
+No	50	Female	no
+No	21	Female	no
+No	28	Female	yes
+No	81	Male	no
+No	78	Female	no
+No	23	Female	yes
+No	90	Female	no
+No	48	Male	no
+No	63	Female	no
+No	39	Male	no
+No	32	Female	no
+No	30	Female	no
+Yes	76	Male	no
+No	32	Male	yes
+No	59	Male	yes
+No	41	Male	no
+No	31	Female	no
+No	82	Male	no
+No	30	Male	no
+No	31	Female	no
+No	46	Female	no
+No	35	Male	yes
+No	72	Male	no
+No	29	Male	yes
+No	72	Female	no
+No	69	Male	before
+No	82	Female	no
+No	64	Male	no
+No	69	Female	no
+No	53	Female	no
+No	53	Male	no
+No	41	Male	no
+No	46	Female	no
+No	29	Female	no
+No	21	Male	no
+No	39	Female	no
+No	25	Female	no
+No	30	Female	yes
+No	60	Female	no
+No	46	Male	no
+No	48	Male	before
+Yes	60	Male	before
+Yes	30	Female	no
+No	23	Male	no
+No	20	Male	no
+No	18	Male	no
+No	21	Male	yes
+No	49	Female	no
+No	51	Male	no
+No	71	Male	no
+No	66	Male	no
+No	51	Female	no
+No	68	Female	no
+No	32	Male	yes
+No	61	Female	no
+No	22	Female	yes
+No	67	Female	no
+No	25	Female	no
+No	36	Male	no
+No	70	Female	no
+No	60	Male	no
+No	73	Male	no
+No	26	Female	no
+No	57	Female	no
+No	45	Female	no
+No	20	Female	no
+No	48	Female	no
+No	51	Female	no
+No	55	Female	no
+No	34	Male	no
+No	55	Male	no
+No	46	Female	no
+No	51	Female	no
+No	21	Female	no
+No	78	Female	no
+No	56	Female	no
+No	80	Female	no
+No	62	Female	no
+No	27	Female	no
+No	45	Male	yes
+No	52	Female	no
+No	49	Female	no
+No	78	Female	no
+No	75	Male	no
+No	36	Male	no
+No	27	Male	yes
+No	77	Female	no
+No	23	Female	no
+No	65	Female	no
+No	63	Male	no
+No	57	Female	no
+No	78	Female	no
+No	50	Male	no
+No	67	Male	no
+No	54	Male	no
+No	48	Female	no
+No	25	Male	yes
+No	47	Female	no
+No	74	Male	no
+No	66	Female	no
+No	35	Female	no
+No	64	Male	no
+No	84	Female	no
+Yes	63	Male	no
+No	67	Female	no
+No	18	Male	no
+No	25	Male	yes
+No	53	Female	no
+No	30	Female	no
+No	38	Female	no
+No	43	Male	yes
+No	52	Female	no
+No	35	Male	no
+No	34	Female	no
+No	52	Female	no
+No	61	Male	no
+No	72	Male	no
+No	58	Male	no
+No	67	Female	no
+No	66	Female	no
+No	71	Male	no
+No	29	Female	no
+No	47	Female	no
+No	52	Male	no
+No	41	Female	no
+No	25	Female	no
+No	75	Male	before
+No	88	Male	no
+No	32	Female	no
+No	30	Female	no
+No	33	Male	no
+Yes	58	Female	no
+No	38	Female	no
+No	45	Male	no
+No	40	Male	yes
+No	63	Female	no
+No	66	Female	no
+No	24	Female	no
+No	27	Male	yes
+No	73	Female	no
+No	45	Female	no
+No	47	Female	no
+No	30	Female	no
+No	48	Male	no
+Yes	69	Female	no
+No	22	Female	no
+No	25	Male	no
+No	38	Male	yes
+No	49	Male	no
+No	51	Male	no
+No	35	Female	no
+No	24	Female	no
+No	67	Male	no
+No	24	Female	no
+No	36	Female	no
+No	81	Female	no
+No	51	Female	no
+No	65	Male	no
+No	41	Female	no
+No	62	Female	no
+No	36	Female	no
+No	80	Female	no
+No	65	Female	no
+No	74	Male	no
+No	76	Female	no
+No	45	Male	no
+No	27	Female	no
+No	61	Female	no
+No	36	Female	no
+No	70	Female	no
+No	71	Male	no
+No	68	Female	no
+No	25	Male	yes
+No	75	Female	no
+No	18	Male	no
+No	56	Female	no
+No	52	Female	no
+No	23	Male	no
+No	19	Male	no
+No	61	Male	before
+Yes	41	Male	no
+No	25	Female	no
+No	72	Female	no
+No	68	Female	no
+No	56	Male	no
+No	51	Female	no
+No	61	Female	no
+No	71	Female	no
+No	72	Female	no
+No	27	Male	yes
+Yes	47	Female	no
+No	68	Male	before
+No	82	Female	no
+No	65	Female	no
+No	30	Male	no
+No	37	Male	no
+No	43	Female	no
+No	27	Female	no
+No	74	Female	no
+No	60	Female	no
+No	77	Female	no
+No	55	Female	no
+Yes	39	Female	no
+No	33	Female	no
+No	20	Male	no
+No	51	Male	before
+Yes	71	Male	no
+Yes	19	Female	no
+No	22	Female	no
+No	54	Female	no
+No	58	Male	no
+No	66	Male	no
+No	27	Female	no
+No	30	Female	no
+Yes	33	Male	no
+No	77	Female	no
+No	29	Male	no
+No	34	Male	no
+No	40	Female	no
+No	26	Male	no
+No	33	Female	no
+No	26	Female	no
+No	49	Male	no
+No	20	Male	no
+No	52	Female	no
+No	64	Female	no
+No	22	Female	no
+No	41	Female	no
+No	50	Female	no
+No	66	Male	no
+No	47	Male	no
+No	78	Female	no
+No	71	Female	no
+No	76	Female	no
+No	43	Female	no
+No	76	Female	no
+No	84	Female	no
+No	40	Male	no
+No	66	Female	no
+No	46	Female	no
+No	40	Female	no
+No	26	Female	no
+No	65	Female	no
+No	51	Female	no
+No	42	Female	no
+No	65	Male	no
+No	54	Male	no
+No	76	Female	no
+No	46	Male	no
+No	43	Male	no
+No	91	Male	no
+Yes	39	Male	no
+Yes	51	Male	no
+No	43	Female	no
+No	59	Male	no
+Yes	51	Male	no
+No	48	Male	no
+Yes	50	Male	no
+No	28	Female	no
+Yes	64	Male	no
+No	27	Female	no
+Yes	51	Male	no
+Yes	50	Male	no
+No	59	Male	no
+Yes	23	Male	yes
+No	62	Female	no
+Yes	28	Female	no
+No	49	Female	no
+No	70	Female	no
+No	76	Male	no
+No	71	Male	before
+No	24	Female	no
+No	22	Male	no
+No	40	Female	no
+No	25	Female	no
+No	43	Male	no
+No	23	Male	no
+No	28	Male	no
+No	42	Female	no
+No	70	Female	no
+No	51	Male	no
+No	32	Female	no
+No	47	Female	no
+No	39	Male	no
+No	18	Female	no
+No	40	Female	no
+No	76	Female	no
+No	35	Female	no
+No	58	Female	no
+Yes	30	Female	no
+No	65	Female	no
+No	76	Female	no
+Yes	39	Male	yes
+No	38	Male	yes
+No	37	Male	no
+No	61	Female	no
+No	42	Female	no
+No	58	Female	no
+No	69	Male	no
+Yes	28	Male	no
+No	45	Male	no
+No	26	Female	no
+No	81	Female	no
+No	25	Male	no
+No	25	Male	no
+No	80	Male	no
+No	41	Male	yes
+No	43	Female	no
+No	39	Male	yes
+No	58	Female	no
+No	86	Female	no
+No	43	Male	no
+No	73	Female	no
+Yes	70	Male	no
+No	38	Male	yes
+NA	65	Male	no
+No	70	Male	before
+Yes	69	Male	no
+No	81	Female	no
+No	52	Female	no
+Yes	51	Male	before
+No	48	Male	no
+No	62	Male	before
+No	65	Male	no
+No	40	Female	no
+No	57	Female	no
+No	48	Female	no
+No	55	Female	no
+No	66	Female	no
+No	66	Female	no
+No	49	Male	no
+No	77	Male	no
+No	28	Male	no
+No	44	Female	no
+No	62	Male	no
+No	72	Female	no
+No	36	Female	no
+No	52	Female	no
+No	64	Male	no
+No	65	Male	no
+No	51	Female	no
+No	55	Female	no
+No	61	Female	no
+No	83	Female	no
+Yes	42	Male	no
+No	70	Male	no
+No	20	Female	no
+No	75	Female	no
+No	57	Male	no
+No	48	Female	no
+No	65	Male	no
+No	20	Female	no
+Yes	53	Female	no
+Yes	33	Male	no
+No	61	Female	no
+No	63	Female	no
+No	17	Male	no
+No	80	Male	no
+No	54	Female	no
+No	81	Female	no
+No	64	Female	no
+No	85	Male	no
+No	29	Female	no
+No	49	Female	no
+No	43	Female	no
+No	74	Female	no
+No	74	Female	no
+Yes	46	Male	before
+No	49	Male	no
+No	66	Female	no
+No	79	Female	no
+No	48	Male	no
+No	65	Female	no
+Yes	74	Male	no
+No	87	Male	no
+Yes	18	Male	no
+No	19	Male	yes
+No	27	Male	no
+No	24	Female	no
+No	51	Male	no
+No	56	Female	no
+No	46	Male	no
+No	62	Male	no
+No	57	Female	no
+No	49	Male	no
+No	67	Female	no
+No	45	Female	no
+No	48	Female	no
+No	67	Female	no
+No	41	Male	no
+No	53	Female	no
+No	41	Female	no
+No	78	Female	no
+No	31	Female	no
+No	55	Female	before
+No	23	Male	yes
+No	79	Female	no
+Yes	30	Male	yes
+No	19	Female	no
+No	19	Male	yes
+No	22	Male	no
+No	63	Female	no
+No	29	Male	yes
+No	18	Female	no
+No	18	Male	no
+No	75	Female	no
+No	48	Female	no
+No	19	Male	no
+No	53	Female	no
+No	51	Female	no
+No	18	Male	no
+No	25	Female	no
+No	42	Female	yes
+No	70	Female	no
+No	72	Female	no
+No	62	Male	no
+No	36	Male	no
+No	44	Female	no
+No	37	Female	no
+No	74	Male	no
+No	37	Female	no
+No	75	Female	no
+Yes	29	Male	yes
+No	20	Female	no
+No	38	Female	no
+Yes	71	Male	no
+No	73	Female	no
+No	79	Male	no
+No	19	Female	no
+No	39	Female	no
+Yes	28	Female	no
+Yes	55	Female	no
+Yes	26	Female	no
+No	79	Female	no
+Yes	50	Female	no
+Yes	18	Male	yes
+Yes	65	Male	yes
+No	51	Male	no
+No	86	Female	no
+No	64	Female	no
+No	44	Female	no
+No	62	Female	no
+No	87	Female	no
+No	46	Female	no
+No	51	Female	no
+No	66	Female	no
+No	74	Female	no
+Yes	65	Male	before
+No	65	Female	no
+No	25	Female	no
+No	62	Female	no
+No	51	Male	before
+No	73	Female	no
+No	41	Female	no
+No	18	Male	no
+No	23	Female	no
+No	48	Female	no
+No	64	Male	no
+No	42	Female	no
+No	32	Male	no
+No	45	Male	yes
+No	64	Male	no
+No	68	Female	no
+No	33	Female	no
+No	57	Female	no
+No	72	Female	no
+No	40	Female	no
+Yes	20	Female	no
+No	74	Female	no
+No	63	Female	no
+No	62	Female	no
+Yes	38	Male	yes
+No	54	Female	no
+No	26	Female	no
+No	26	Female	no
+Yes	25	Male	yes
+Yes	38	Male	before
+No	47	Female	no
+No	71	Female	no
+No	18	Female	no
+No	66	Female	no
+Yes	48	Female	no
+No	48	Female	no
+No	48	Male	before
+Yes	45	Female	no
+No	24	Male	yes
+No	47	Female	no
+No	18	Female	no
+No	56	Female	no
+No	25	Male	no
+No	42	Male	yes
+No	71	Female	no
+No	67	Female	no
+No	21	Female	no
+No	26	Male	no
+Yes	40	Male	before
+No	22	Male	yes
+No	33	Male	yes
+No	22	Female	no
+No	74	Male	no
+No	44	Female	no
+No	19	Male	no
+No	35	Male	no
+No	48	Male	no
+No	72	Female	no
+No	60	Male	no
+No	60	Female	no
+No	73	Male	no
+No	63	Female	no
+No	63	Male	no
+No	48	Male	no
+No	35	Female	no
+No	62	Male	no
+No	65	Female	no
+No	70	Female	no
+No	18	Male	no
+No	55	Female	no
+No	21	Female	no
+No	58	Male	no
+No	78	Male	no
+No	73	Female	no
+No	26	Male	no
+No	64	Female	no
+No	54	Female	no
+No	76	Female	no
+No	38	Female	no
+No	88	Female	no
+No	71	Male	no
+No	85	Female	no
+No	50	Male	no
+No	45	Male	yes
+No	63	Female	no
+No	69	Female	no
+No	55	Male	no
+No	83	Female	no
+No	48	Female	no
+No	59	Female	no
+No	26	Male	yes
+Yes	51	Male	yes
+No	47	Female	no
+No	28	Female	no
+No	52	Female	no
+No	40	Male	yes
+No	55	Female	no
+No	60	Female	no
+No	71	Female	no
+No	26	Male	no
+No	23	Female	no
+Yes	26	Female	no
+No	54	Female	no
+No	76	Female	no
+No	46	Female	no
+No	30	Male	no
+No	49	Female	no
+No	58	Female	no
+No	23	Male	no
+No	39	Female	no
+No	43	Female	no
+No	51	Female	no
+No	63	Female	no
+No	60	Male	no
+No	48	Male	no
+No	64	Female	no
+No	28	Female	no
+No	53	Female	no
+No	53	Female	no
+No	75	Female	no
+No	79	Female	no
+No	58	Female	no
+No	77	Female	no
+No	54	Female	no
+No	38	Female	no
+No	85	Female	no
+No	65	Female	no
+No	34	Male	no
+No	61	Female	no
+No	59	Male	no
+No	75	Male	no
+No	60	Male	no
+No	62	Male	no
+No	66	Female	no
+No	30	Male	no
+No	37	Male	yes
+No	33	Female	no
+No	26	Female	no
+No	71	Female	no
+No	39	Male	no
+No	20	Female	no
+No	70	Male	no
+No	58	Female	no
+No	44	Male	no
+No	54	Female	no
+No	58	Female	no
+No	60	Male	no
+No	36	Female	no
+No	44	Female	no
+No	49	Female	no
+No	47	Female	no
+Yes	52	Male	before
+No	63	Male	no
+No	23	Female	no
+Yes	70	Male	no
+Yes	77	Female	no
+Yes	77	Female	no
+Yes	40	Female	no
+Yes	57	Male	no
+No	20	Male	no
+No	61	Male	no
+No	30	Female	no
+No	46	Male	no
+No	40	Female	no
+No	37	Female	no
+No	78	Female	no
+No	46	Male	yes
+No	73	Female	no
+No	41	Male	yes
+No	50	Female	yes
+No	54	Female	no
+No	56	Female	no
+No	44	Male	no
+No	62	Female	no
+No	44	Male	before
+No	66	Female	no
+No	72	Male	no
+No	55	Male	no
+No	28	Male	yes
+No	61	Female	no
+No	64	Female	no
+No	44	Female	yes
+No	72	Female	no
+No	20	Male	no
+Yes	24	Male	no
+No	40	Female	no
+No	42	Female	no
+No	69	Female	before
+Yes	27	Male	yes
+No	19	Male	no
+No	31	Male	no
+No	67	Male	no
+No	64	Male	no
+No	30	Female	no
+No	62	Female	no
+No	49	Female	no
+No	70	Female	no
+No	54	Male	before
+No	58	Female	no
+No	82	Female	no
+No	35	Female	no
+No	32	Female	no
+No	28	Male	yes
+No	59	Male	before
+No	35	Female	no
+No	82	Female	no
+Yes	45	Male	before
+No	35	Female	no
+No	78	Female	no
+No	65	Female	no
+No	69	Female	no
+No	19	Female	no
+No	26	Male	no
+No	63	Male	no
+No	69	Male	no
+No	79	Female	no
+No	26	Female	no
+No	32	Male	no
+No	57	Male	no
+No	53	Female	no
+No	32	Female	no
+No	24	Male	no
+No	33	Male	no
+No	41	Female	no
+No	72	Female	no
+No	50	Female	no
+No	34	Female	no
+No	50	Male	no
+No	50	Male	yes
+No	49	Female	no
+No	39	Female	no
+No	52	Female	no
+No	27	Male	yes
+No	53	Male	no
+Yes	51	Female	no
+No	50	Male	no
+No	83	Female	no
+No	63	Female	no
+No	41	Female	no
+Yes	60	Female	no
+No	58	Female	no
+No	36	Female	no
+No	68	Female	no
+No	66	Female	no
+No	59	Female	no
+No	41	Male	no
+No	32	Female	no
+No	24	Female	no
+No	34	Male	no
+No	69	Female	no
+No	47	Male	before
+No	54	Female	no
+No	67	Female	no
+No	27	Female	no
+No	59	Male	no
+No	49	Female	no
+No	29	Male	yes
+No	31	Female	no
+No	80	Male	no
+No	62	Female	no
+No	31	Female	no
+No	53	Male	no
+No	32	Male	no
+No	28	Female	no
+No	26	Female	no
+No	62	Male	before
+No	34	Female	no
+No	33	Male	no
+No	33	Male	no
+No	34	Female	no
+No	38	Female	no
+No	73	Female	no
+No	72	Male	no
+No	57	Female	no
+No	54	Female	no
+No	53	Female	no
+No	31	Male	no
+No	43	Female	no
+No	41	Male	no
+No	42	Female	no
+No	32	Male	no
+No	59	Male	no
+No	30	Male	no
+No	31	Male	no
+No	54	Male	no
+No	63	Female	no
+No	60	Female	no
+No	28	Female	no
+No	36	Female	no
+No	62	Female	no
+No	63	Female	no
+No	42	Female	no
+No	57	Female	no
+No	61	Male	no
+No	24	Male	yes
+No	23	Female	no
+No	29	Female	no
+No	54	Female	no
+No	27	Male	no
+No	45	Male	no
+No	54	Male	no
+No	33	Female	no
+No	56	Male	no
+No	57	Male	no
+No	56	Male	no
+No	70	Male	no
+No	69	Female	no
+No	71	Male	no
+No	20	Male	no
+No	47	Male	no
+No	31	Female	no
+No	35	Male	no
+No	56	Female	no
+No	77	Male	no
+No	43	Male	no
+No	71	Female	no
+No	60	Male	no
+No	73	Female	no
+No	72	Male	no
+No	53	Male	no
+No	22	Male	no
+No	27	Female	no
+No	69	Female	no
+No	64	Male	no
+No	24	Male	yes
+No	63	Female	no
+No	39	Female	no
+No	48	Male	no
+No	32	Female	no
+No	38	Male	no
+No	69	Female	no
+No	71	Female	no
+No	53	Male	no
+No	25	Female	no
+No	34	Female	no
+No	60	Male	no
+No	73	Female	no
+No	68	Female	no
+No	31	Male	no
+No	24	Female	no
+No	61	Female	no
+No	38	Male	no
+No	70	Female	no
+No	66	Male	no
+No	73	Male	no
+No	70	Female	no
+No	40	Male	no
+No	22	Male	no
+No	72	Female	no
+No	47	Female	no
+No	48	Female	no
+No	24	Female	no
+No	64	Male	no
+No	68	Female	no
+No	55	Male	no
+No	56	Female	no
+No	22	Female	no
+No	59	Male	no
+No	74	Female	no
+No	29	Female	no
+No	46	Male	no
+No	33	Female	no
+No	26	Female	no
+No	66	Male	no
+No	79	Female	no
+No	82	Female	no
+No	40	Male	no
+No	32	Male	no
+No	25	Female	no
+Yes	32	Female	no
+No	70	Male	no
+No	36	Female	no
+No	42	Female	no
+No	35	Male	no
+No	68	Male	no
+No	64	Female	no
+No	36	Male	no
+No	52	Female	no
+No	62	Female	no
+No	18	Male	no
+No	83	Female	no
+No	57	Male	no
+No	24	Female	no
+No	74	Female	no
+No	66	Male	no
+No	27	Female	no
+No	61	Male	no
+No	78	Male	no
+No	66	Female	no
+No	40	Female	no
+No	22	Female	no
+No	51	Female	no
+No	46	Male	no
+No	76	Female	no
+No	59	Male	no
+No	59	Female	no
+No	72	Female	no
+No	41	Female	no
+No	47	Female	no
+No	31	Male	yes
+No	20	Female	no
+No	49	Female	no
+No	44	Female	no
+No	47	Male	no
+No	77	Female	no
+No	20	Male	no
+No	43	Female	no
+No	59	Female	no
+No	26	Male	yes
+No	72	Female	no
+No	20	Female	no
+No	41	Female	no
+No	55	Female	no
+No	35	Female	yes
+No	44	Female	no
+No	39	Male	yes
+No	46	Female	no
+No	48	Female	no
+No	45	Female	no
+No	51	Male	yes
+No	71	Female	no
+No	19	Male	no
+No	45	Male	no
+No	44	Female	no
+No	37	Female	no
+No	71	Male	no
+No	59	Male	no
+Yes	71	Female	no
+No	65	Female	no
+No	68	Female	no
+No	74	Female	no
+No	66	Female	no
+No	24	Male	no
+No	20	Female	no
+No	82	Female	no
+No	90	Male	no
+No	71	Female	no
+No	37	Female	no
+No	45	Female	no
+No	80	Female	no
+No	38	Female	no
+No	68	Male	no
+No	85	Female	no
+No	26	Male	no
+No	65	Female	no
+No	19	Female	no
+No	21	Female	no
+No	24	Female	no
+No	64	Male	no
+No	26	Female	no
+No	65	Female	no
+No	24	Female	no
+No	65	Female	no
+No	63	Male	before
+No	25	Male	yes
+No	47	Female	no
+No	78	Female	no
+No	53	Male	before
+No	28	Female	no
+No	63	Male	before
+No	66	Male	no
+No	65	Male	no
+No	73	Female	no
+No	33	Female	no
+No	48	Female	no
+No	23	Female	no
+No	34	Female	no
+No	64	Female	no
+No	29	Female	no
+No	60	Female	no
+No	66	Male	no
+No	70	Female	no
+No	40	Female	no
+No	24	Male	no
+No	45	Female	no
+No	57	Female	no
+No	75	Female	no
+No	24	Male	no
+No	42	Male	no
+No	37	Male	yes
+Yes	33	Male	yes
+Yes	46	Female	no
+Yes	50	Female	no
+No	19	Male	yes
+No	21	Female	no
+No	37	Female	no
+No	40	Female	no
+No	20	Female	no
+No	24	Male	no
+No	39	Female	no
+No	27	Male	no
+No	26	Male	no
+No	80	Female	no
+No	51	Female	no
+No	59	Female	no
+No	33	Female	no
+No	37	Female	no
+No	60	Male	no
+No	67	Female	no
+No	41	Female	no
+No	18	Male	no
+No	33	Male	no
+No	66	Female	no
+No	54	Female	no
+No	61	Female	no
+No	81	Male	no
+No	58	Female	no
+No	49	Female	no
+No	48	Male	no
+No	52	Female	no
+No	55	Female	no
+No	51	Female	no
+No	30	Male	no
+No	20	Female	no
+No	54	Male	before
+No	21	Female	no
+No	58	Female	no
+No	41	Female	no
+No	50	Female	no
+No	18	Male	no
+No	36	Male	before
+No	71	Female	no
+No	42	Male	no
+No	52	Female	no
+No	42	Male	yes
+No	52	Male	before
+No	20	Male	no
+No	80	Female	no
+No	66	Female	no
+No	44	Female	no
+No	37	Female	no
+No	61	Female	no
+No	47	Female	no
+No	50	Female	no
+No	52	Female	no
+No	30	Female	no
+No	43	Female	no
+No	43	Male	before
+No	36	Female	no
+No	21	Female	no
+No	27	Female	yes
+No	58	Male	no
+No	68	Female	no
+No	39	Male	no
+No	65	Male	no
+No	50	Female	no
+No	60	Female	no
+No	56	Male	yes
+No	23	Female	no
+No	53	Female	before
+No	82	Female	no
+No	44	Male	no
+No	51	Male	no
+No	55	Female	no
+No	64	Female	no
+No	53	Female	no
+No	42	Male	no
+No	80	Female	no
+No	72	Male	no
+No	26	Male	no
+No	73	Female	no
+No	24	Male	no
+No	69	Female	no
+No	70	Female	no
+No	31	Male	no
+No	30	Male	yes
+No	68	Female	no
+No	76	Female	no
+No	30	Female	no
+No	35	Female	no
+No	43	Male	no
+No	41	Female	no
+No	56	Female	no
+Yes	53	Male	no
+No	23	Male	yes
+No	62	Female	no
+No	42	Female	no
+No	43	Female	no
+No	25	Female	no
+No	59	Male	no
+No	40	Female	no
+No	30	Female	no
+No	32	Female	no
+No	59	Female	no
+No	37	Female	no
+No	58	Male	no
+No	33	Female	yes
+No	35	Female	no
+Yes	33	Female	yes
+No	28	Male	no
+No	52	Male	no
+No	70	Male	no
+No	21	Male	no
+No	59	Female	no
+No	19	Female	yes
+No	51	Female	before
+No	65	Female	no
+No	42	Female	no
+No	36	Male	no
+No	37	Male	no
+No	28	Female	no
+No	60	Female	no
+No	66	Female	no
+No	37	Female	no
+No	35	Female	no
+No	35	Female	no
+No	42	Female	no
+No	43	Male	no
+No	82	Female	no
+No	31	Male	no
+No	73	Female	no
+No	50	Male	no
+No	23	Female	no
+No	23	Male	no
+No	20	Female	yes
+No	39	Female	no
+No	55	Female	no
+No	46	Female	no
+Yes	24	Female	no
+No	55	Female	no
+No	18	Female	no
+No	22	Female	no
+No	79	Female	no
+No	84	Male	no
+No	53	Female	no
+No	23	Male	no
+No	57	Female	no
+No	67	Female	no
+No	46	Female	no
+No	39	Male	no
+No	69	Female	before
+Yes	50	Male	no
+No	35	Female	no
+No	51	Female	no
+No	50	Male	no
+No	39	Male	no
+No	52	Male	no
+No	67	Female	no
+No	50	Female	no
+No	47	Male	no
+No	53	Male	no
+Yes	47	Female	no
+No	46	Male	before
+No	49	Male	before
+No	66	Male	no
+No	27	Female	no
+No	34	Female	no
+No	46	Male	no
+No	31	Female	no
+No	29	Female	no
+No	18	Female	no
+No	22	Male	no
+Yes	63	Female	no
+Yes	40	Male	yes
+No	39	Female	no
+No	28	Male	no
+No	20	Female	no
+No	55	Male	no
+No	55	Male	no
+No	75	Male	no
+No	18	Female	no
+No	22	Male	no
+No	62	Female	no
+No	28	Male	no
+No	61	Female	no
+Yes	32	Male	yes
+No	20	Female	no
+No	31	Female	no
+No	63	Female	no
+No	32	Male	no
+No	77	Female	no
+Yes	30	Male	no
+Yes	25	Female	no
+No	64	Female	before
+No	56	Male	yes
+No	32	Male	no
+No	45	Female	no
+No	27	Female	no
+No	65	Male	no
+No	67	Female	no
+No	61	Female	before
+No	41	Female	no
+No	50	Female	no
+No	23	Female	no
+No	37	Female	no
+Yes	62	Female	no
+No	69	Female	no
+No	72	Female	no
+No	80	Female	no
+No	53	Female	no
+No	75	Female	no
+No	63	Female	no
+No	69	Female	no
+No	38	Female	no
+No	40	Male	no
+No	64	Female	no
+No	60	Male	no
+No	79	Female	no
+No	23	Male	no
+No	36	Female	no
+No	31	Male	no
+No	30	Female	no
+No	58	Female	no
+No	28	Male	no
+No	58	Male	no
+No	21	Male	no
+No	51	Female	no
+Yes	20	Male	no
+No	50	Male	before
+No	70	Female	no
+No	78	Female	no
+No	29	Female	no
+No	53	Female	no
+No	75	Female	no
+No	63	Male	no
+No	31	Male	no
+No	58	Female	no
+No	50	Female	before
+No	18	Female	no
+No	39	Male	before
+No	52	Male	no
+No	59	Female	no
+No	73	Female	no
+No	30	Female	no
+No	32	Female	yes
+No	45	Male	yes
+No	38	Female	no
+No	50	Female	no
+No	65	Female	no
+No	19	Female	no
+No	44	Female	no
+No	42	Female	no
+No	30	Male	yes
+No	52	Male	no
+No	74	Male	no
+No	46	Female	no
+No	52	Male	no
+No	52	Male	no
+No	24	Male	no
+No	37	Male	yes
+No	40	Female	no
+No	78	Female	no
+No	74	Female	no
+No	27	Male	no
+No	56	Female	no
+No	37	Female	no
+No	32	Female	no
+No	60	Male	before
+No	70	Female	no
+No	39	Male	no
+No	45	Female	no
+No	38	Female	no
+No	61	Female	no
+No	58	Male	before
+No	55	Female	no
+No	67	Male	no
+No	44	Female	no
+No	73	Male	no
+No	30	Female	no
+No	18	Female	no
+No	70	Male	no
+No	47	Male	no
+No	66	Male	no
+No	43	Female	yes
+No	65	Female	no
+No	52	Female	no
+Yes	61	Female	no
+Yes	41	Male	no
+No	77	Female	no
+No	34	Female	no
+No	22	Female	no
+No	54	Female	no
+No	23	Female	no
+No	62	Male	no
+Yes	41	Female	no
+No	41	Female	no
+No	63	Female	no
+No	23	Female	no
+No	58	Male	no
+No	71	Male	no
+No	40	Male	before
+No	64	Female	no
+No	35	Female	no
+No	70	Male	no
+No	65	Female	no
+No	67	Female	no
+No	65	Female	no
+No	63	Female	no
+No	20	Female	no
+No	79	Female	no
+No	26	Female	no
+No	78	Female	no
+No	42	Female	no
+No	19	Male	no
+No	38	Male	no
+No	53	Male	no
+No	74	Female	no
+No	25	Female	no
+No	75	Female	no
+No	18	Female	no
+No	27	Male	yes
+No	40	Male	no
+No	48	Female	no
+No	57	Male	no
+No	50	Female	no
+No	29	Female	no
+No	65	Female	no
+No	36	Male	yes
+Yes	65	Male	no
+No	30	Female	no
+No	50	Female	no
+No	75	Female	no
+No	71	Female	no
+No	56	Male	yes
+No	19	Female	no
+No	36	Female	no
+No	46	Female	no
+No	75	Male	no
+No	33	Female	no
+No	33	Female	no
+No	73	Female	no
+No	36	Female	no
+No	77	Female	no
+No	44	Female	no
+No	31	Male	no
+No	68	Female	no
+No	75	Male	no
+No	60	Female	no
+No	48	Female	no
+No	23	Male	no
+No	28	Female	no
+Yes	41	Male	yes
+No	20	Male	no
+No	66	Female	no
+No	24	Female	no
+No	54	Female	no
+No	75	Female	no
+No	42	Female	no
+No	49	Female	no
+No	21	Male	no
+No	66	Male	before
+No	40	Female	no
+No	63	Male	no
+No	73	Female	no
+No	23	Female	no
+No	79	Female	no
+No	27	Male	no
+No	53	Female	no
+No	62	Female	no
+No	56	Female	no
+No	35	Female	no
+No	29	Male	no
+No	39	Female	no
+No	74	Female	no
+No	47	Female	no
+No	61	Male	no
+No	36	Female	no
+No	23	Female	yes
+No	29	Female	no
+No	53	Female	no
+No	70	Female	no
+No	66	Female	no
+No	49	Female	no
+No	79	Female	no
+No	64	Male	no
+No	60	Female	no
+No	78	Female	no
+No	18	Female	no
+No	48	Male	no
+No	61	Female	no
+No	29	Female	no
+No	75	Female	no
+No	34	Female	no
+No	48	Female	no
+No	82	Male	no
+No	65	Female	no
+No	59	Male	no
+No	56	Female	no
+No	78	Female	no
+No	38	Female	no
+No	78	Male	no
+No	43	Male	no
+No	55	Female	no
+No	66	Male	no
+No	62	Female	no
+No	79	Female	no
+No	64	Female	no
+No	41	Male	no
+No	57	Male	no
+No	27	Female	yes
+No	70	Male	no
+No	71	Female	no
+No	52	Female	no
+No	18	Male	no
+No	78	Female	no
+No	69	Female	no
+No	18	Female	no
+No	31	Male	yes
+No	52	Female	no
+No	48	Male	before
+No	35	Male	no
+No	72	Male	no
+No	36	Male	no
+No	73	Female	no
+No	40	Female	no
+No	55	Male	no
+No	41	Female	no
+Yes	51	Female	no
+Yes	49	Female	no
+No	20	Male	no
+No	47	Female	no
+No	30	Female	no
+No	27	Female	no
+No	23	Female	no
+No	27	Female	no
+No	47	Male	no
+No	59	Female	no
+No	31	Female	no
+No	36	Female	no
+Yes	39	Female	no
+No	44	Female	no
+Yes	19	Male	no
+No	37	Female	no
+Yes	26	Female	no
+No	40	Male	yes
+No	38	Female	no
+No	48	Male	no
+No	51	Male	no
+No	78	Female	no
+No	54	Female	no
+No	66	Female	no
+No	68	Male	no
+No	32	Female	no
+No	22	Female	no
+No	43	Female	no
+No	31	Female	no
+No	20	Male	yes
+Yes	43	Female	no
+No	66	Female	no
+No	63	Male	no
+No	52	Male	no
+No	61	Female	no
+No	42	Male	no
+No	39	Female	no
+No	38	Male	yes
+No	62	Female	no
+No	42	Female	no
+No	65	Female	no
+Yes	72	Female	no
+No	39	Female	no
+No	79	Male	no
+No	31	Male	no
+No	44	Female	no
+No	33	Male	no
+No	41	Male	no
+Yes	35	Male	no
+No	53	Female	no
+No	64	Male	no
+No	49	Female	no
+No	23	Female	no
+No	60	Female	no
+No	51	Male	no
+No	61	Male	no
+Yes	68	Female	no
+No	65	Female	no
+No	74	Female	no
+No	20	Female	no
+No	21	Female	no
+No	49	Male	no
+No	36	Female	no
+No	19	Male	yes
+No	36	Female	no
+No	45	Female	no
+No	49	Female	no
+No	50	Male	yes
+No	61	Female	no
+No	46	Male	no
+No	50	Female	no
+Yes	65	Female	no
+Yes	77	Female	no
+No	71	Female	no
+No	75	Female	no
+No	55	Female	no
+No	32	Female	no
+No	24	Female	yes
+No	53	Female	no
+No	33	Female	no
+No	43	Female	no
+No	52	Female	no
+No	43	Female	no
+No	25	Male	yes
+No	21	Female	no
+No	36	Male	no
+No	69	Female	no
+No	56	Female	no
+No	22	Female	no
+No	44	Male	no
+No	21	Female	no
+No	31	Female	no
+No	82	Female	no
+No	71	Male	no
+No	34	Female	no
+No	64	Male	no
+No	44	Female	no
+No	40	Female	no
+No	45	Female	no
+No	52	Female	no
+No	64	Male	no
+No	72	Female	no
+No	70	Male	no
+No	71	Male	no
+No	32	Male	yes
+No	44	Female	no
+No	34	Male	yes
+No	62	Male	no
+No	69	Female	no
+No	42	Female	no
+No	34	Male	no
+No	62	Female	no
+No	44	Male	no
+No	29	Female	no
+No	23	Male	no
+No	23	Male	no
+No	64	Female	no
+Yes	58	Female	no
+No	25	Female	no
+No	79	Female	no
+No	43	Female	no
+No	27	Male	no
+No	68	Female	no
+No	72	Female	no
+No	28	Female	no
+No	41	Female	no
+No	28	Female	no
+No	30	Male	no
+No	61	Male	no
+No	75	Male	before
+No	22	Female	no
+No	67	Male	no
+No	46	Female	no
+No	33	Male	no
+No	49	Male	before
+No	32	Male	yes
+No	63	Male	no
+No	22	Male	no
+No	61	Female	no
+No	63	Male	before
+No	25	Male	no
+No	77	Female	no
+No	65	Male	no
+No	73	Female	no
+No	32	Female	no
+No	38	Female	no
+No	54	Female	no
+No	36	Male	yes
+No	53	Female	no
+No	55	Female	no
+No	50	Female	no
+No	68	Male	no
+No	67	Female	no
+No	50	Female	no
+No	75	Female	no
+No	65	Male	no
+No	74	Female	no
+No	77	Male	no
+No	31	Male	no
+No	52	Female	no
+No	66	Female	no
+No	73	Male	no
+No	64	Female	no
+No	22	Female	no
+No	58	Female	no
+No	36	Male	yes
+No	49	Male	no
+No	34	Female	no
+No	31	Female	no
+No	70	Female	no
+No	73	Male	before
+No	51	Male	before
+No	24	Female	no
+No	60	Male	before
+No	60	Female	no
+No	50	Male	no
+No	63	Male	no
+No	72	Female	no
+No	81	Female	no
+No	22	Male	no
+No	63	Male	no
+No	46	Female	no
+No	69	Female	no
+No	79	Female	no
+No	42	Female	no
+No	18	Female	no
+Yes	26	Male	yes
+No	46	Female	no
+No	62	Female	no
+No	33	Female	yes
+No	24	Female	no
+No	63	Female	no
+No	72	Male	before
+No	21	Male	no
+No	18	Female	no
+No	74	Male	no
+No	57	Male	no
+No	79	Female	no
+No	19	Female	no
+No	70	Female	no
+No	45	Female	no
+No	44	Female	no
+No	47	Male	yes
+No	63	Male	no
+No	62	Female	no
+No	33	Male	yes
+No	61	Male	no
+No	41	Female	before
+No	45	Male	no
+No	65	Male	before
+No	49	Female	no
+No	35	Female	no
+No	54	Male	yes
+No	72	Male	no
+No	48	Female	no
+No	65	Male	before
+No	45	Female	no
+No	65	Female	no
+No	19	Female	yes
+No	35	Female	no
+No	18	Female	no
+No	33	Female	no
+No	20	Male	no
+No	23	Male	yes
+No	35	Female	no
+No	73	Female	no
+No	41	Male	no
+No	72	Male	no
+No	44	Female	no
+No	40	Female	no
+Yes	57	Male	before
+Yes	57	Female	no
+Yes	34	Female	no
+Yes	59	Female	no
+Yes	46	Male	no
+Yes	23	Female	no
+Yes	44	Female	no
+No	41	Male	yes
+Yes	35	Male	no
+No	19	Female	no
+Yes	32	Male	no
+Yes	54	Male	before
+No	19	Female	no
+Yes	20	Female	no
+No	78	Female	no
+No	20	Male	yes
+No	20	Female	no
+No	90	Male	no
+No	27	Female	no
+No	60	Female	no
+No	78	Female	no
+No	37	Male	no
+No	19	Female	no
+No	80	Female	no
+No	50	Female	no
+No	50	Male	no
+No	64	Male	no
+No	73	Female	no
+No	81	Male	no
+No	26	Female	no
+No	41	Female	no
+No	21	Male	no
+No	70	Female	no
+No	72	Female	no
+No	21	Male	no
+No	71	Male	no
+No	27	Female	no
+No	49	Female	no
+No	71	Female	no
+No	64	Female	no
+No	71	Female	no
+No	71	Female	no
+No	20	Male	no
+No	60	Male	no
+No	31	Female	no
+No	33	Female	no
+No	78	Female	no
+Yes	42	Female	no
+No	58	Female	no
+No	72	Female	no
+No	41	Female	no
+No	18	Female	no
+No	69	Female	no
+No	64	Female	no
+No	31	Female	no
+No	53	Female	no
+No	64	Male	no
+No	60	Female	no
+No	66	Female	no
+No	64	Female	no
+No	49	Female	no
+No	61	Female	no
+No	62	Female	no
+No	45	Male	no
+No	55	Female	no
+No	67	Female	no
+No	67	Male	no
+No	53	Female	no
+No	35	Male	yes
+No	74	Female	no
+No	76	Female	no
+No	18	Male	no
+No	36	Female	no
+No	78	Female	no
+Yes	70	Male	before
+No	66	Female	no
+No	23	Male	no
+Yes	65	Female	no
+Yes	77	Female	no
+Yes	56	Female	no
+No	25	Male	no
+No	65	Female	no
+No	22	Male	no
+No	41	Male	yes
+Yes	63	Female	no
+No	46	Female	no
+No	44	Female	no
+No	70	Female	no
+No	31	Female	no
+No	41	Female	no
+No	67	Male	no
+Yes	19	Female	no
+No	64	Male	no
+No	41	Male	no
+No	76	Female	no
+No	68	Male	no
+No	19	Male	no
+No	42	Female	no
+Yes	32	Female	no
+No	67	Female	no
+No	60	Female	no
+No	19	Female	no
+No	39	Male	no
+No	22	Female	no
+No	66	Female	no
+No	60	Female	no
+No	22	Female	no
+No	78	Female	no
+No	32	Male	no
+No	40	Female	no
+No	27	Female	no
+No	30	Female	no
+No	24	Female	no
+No	30	Female	no
+No	74	Male	no
+No	42	Female	no
+No	64	Male	no
+No	43	Female	no
+No	32	Male	yes
+No	50	Female	no
+No	53	Female	no
+No	69	Male	no
+No	68	Male	no
+No	49	Female	no
+No	36	Female	no
+No	37	Female	no
+No	26	Male	yes
+No	46	Female	no
+No	44	Female	no
+No	61	Male	no
+No	34	Female	no
+No	35	Male	no
+No	29	Female	no
+No	73	Female	no
+No	53	Female	no
+No	64	Female	no
+No	38	Female	no
+No	27	Female	no
+No	80	Female	no
+No	44	Female	no
+No	72	Female	no
+No	54	Female	no
+No	72	Male	no
+No	23	Male	no
+No	58	Male	no
+No	40	Female	no
+No	51	Female	no
+No	48	Male	no
+No	39	Female	no
+No	26	Male	no
+No	39	Female	no
+No	70	Female	no
+No	62	Female	no
+No	28	Female	no
+No	39	Male	no
+No	20	Male	no
+No	49	Female	no
+No	41	Female	no
+No	48	Male	no
+No	32	Male	no
+No	29	Male	no
+No	33	Male	no
+No	61	Male	no
+No	20	Male	no
+No	63	Female	no
+No	19	Male	no
+No	25	Female	no
+Yes	21	Female	no
+No	19	Male	no
+No	44	Female	no
+No	57	Male	no
+No	71	Male	no
+No	37	Male	no
+No	66	Male	no
+No	29	Female	no
+No	51	Female	no
+No	73	Female	no
+No	20	Female	no
+No	32	Female	no
+No	69	Female	no
+No	82	Female	no
+No	62	Male	no
+No	42	Male	yes
+No	67	Female	no
+No	76	Male	no
+No	55	Female	no
+No	57	Male	no
+No	65	Female	no
+No	63	Female	no
+Yes	26	Female	no
+No	35	Female	no
+No	46	Female	no
+No	51	Male	no
+No	64	Female	no
+No	42	Male	no
+No	46	Male	no
+No	49	Male	no
+No	41	Female	no
+No	70	Female	no
+No	23	Male	no
+No	42	Male	no
+No	23	Male	no
+No	42	Female	no
+No	56	Female	no
+No	67	Male	no
+No	73	Female	no
+No	24	Male	no
+No	57	Male	no
+No	21	Female	no
+No	39	Male	no
+No	45	Male	no
+No	84	Male	no
+No	57	Male	no
+No	61	Male	no
+No	70	Male	no
+No	58	Male	no
+No	22	Female	no
+No	64	Male	no
+No	74	Female	no
+No	47	Female	no
+No	47	Female	no
+No	34	Male	yes
+No	26	Male	yes
+Yes	80	Female	no
+No	62	Female	no
+No	47	Female	no
+Yes	52	Female	no
+No	55	Male	no
+No	38	Male	no
+No	39	Female	no
+No	28	Female	no
+No	69	Male	no
+No	21	Male	yes
+No	41	Female	no
+No	38	Female	no
+No	31	Female	no
+No	24	Female	no
+No	38	Male	yes
+No	29	Male	no
+No	53	Male	no
+No	30	Female	yes
+Yes	45	Female	no
+No	50	Female	no
+No	30	Female	no
+No	40	Female	no
+No	54	Male	no
+No	39	Female	no
+No	30	Female	no
+No	40	Male	yes
+No	41	Male	no
+No	36	Female	no
+No	24	Male	no
+Yes	41	Male	no
+No	66	Male	before
+No	38	Male	no
+No	62	Male	no
+No	43	Male	no
+No	42	Male	no
+No	26	Male	yes
+No	20	Female	no
+No	52	Female	no
+No	35	Female	no
+No	46	Female	no
+No	30	Female	no
+No	73	Male	no
+No	55	Female	no
+Yes	34	Female	no
+No	32	Female	no
+No	44	Female	no
+No	74	Male	no
+No	40	Female	no
+No	22	Male	no
+No	21	Female	no
+No	42	Female	no
+No	48	Male	no
+No	24	Female	no
+No	68	Female	no
+No	53	Female	no
+No	39	Female	no
+No	35	Female	no
+No	24	Male	no
+No	38	Female	no
+No	49	Female	before
+No	44	Male	no
+No	34	Female	no
+No	63	Female	no
+No	40	Female	no
+No	76	Female	no
+No	31	Female	no
+No	44	Female	no
+No	19	Female	no
+No	51	Male	no
+No	37	Female	no
+No	31	Female	no
+No	70	Female	no
+No	36	Female	no
+No	53	Female	no
+No	31	Male	no
+No	56	Male	no
+No	52	Female	no
+No	48	Female	no
+No	67	Female	no
+No	38	Female	no
+No	40	Female	no
+No	40	Female	no
+No	28	Female	no
+No	41	Female	no
+No	49	Female	no
+No	41	Female	no
+No	31	Female	no
+No	49	Female	no
+No	65	Male	no
+No	57	Female	no
+No	38	Male	no
+No	61	Male	before
+No	43	Female	no
+No	28	Male	no
+No	34	Male	yes
+No	46	Female	no
+No	73	Male	yes
+No	39	Female	yes
+No	27	Male	yes
+Yes	44	Female	no
+No	71	Male	no
+No	53	Female	no
+No	47	Female	no
+No	39	Male	no
+Yes	23	Female	no
+No	27	Female	no
+No	60	Female	no
+No	71	Male	no
+No	29	Female	no
+No	27	Female	yes
+No	33	Female	no
+No	61	Female	no
+No	33	Female	no
+No	35	Male	yes
+No	22	Female	no
+No	35	Female	no
+No	25	Female	yes
+No	42	Male	yes
+No	38	Female	no
+No	38	Female	no
+No	75	Male	no
+Yes	37	Male	no
+No	27	Female	no
+No	49	Female	no
+No	82	Female	no
+No	70	Male	no
+No	78	Male	no
+No	46	Female	no
+No	57	Male	no
+No	20	Female	no
+No	48	Female	no
+No	78	Female	no
+No	18	Male	no
+No	78	Female	no
+No	18	Male	no
+No	21	Male	no
+No	67	Female	no
+No	48	Female	no
+No	77	Female	no
+No	48	Male	no
+No	38	Female	no
+No	65	Female	no
+No	65	Male	no
+No	71	Female	no
+No	66	Male	no
+No	53	Male	no
+No	68	Female	no
+Yes	36	Male	yes
+No	43	Male	yes
+No	52	Female	no
+No	74	Female	no
+No	53	Female	no
+No	73	Female	no
+No	61	Male	no
+No	29	Female	no
+No	75	Female	no
+No	60	Male	no
+No	60	Female	no
+No	45	Male	before
+No	21	Female	no
+No	38	Female	no
+No	38	Female	no
+No	41	Male	before
+No	46	Female	no
+No	49	Male	before
+No	41	Male	yes
+No	50	Male	no
+No	52	Female	no
+No	46	Male	no
+No	20	Male	no
+No	72	Female	no
+No	48	Female	no
+No	69	Female	no
+No	48	Female	no
+No	24	Male	no
+No	58	Male	no
+No	26	Female	no
+No	47	Male	no
+No	74	Male	no
+No	42	Male	no
+No	59	Male	yes
+No	69	Male	no
+No	69	Female	no
+No	43	Female	no
+No	53	Female	no
+Yes	19	Female	no
+No	70	Female	no
+Yes	66	Female	no
+Yes	76	Female	no
+Yes	51	Male	before
+Yes	73	Male	before
+Yes	53	Male	before
+No	61	Female	no
+Yes	44	Male	no
+Yes	79	Female	no
+Yes	56	Male	no
+No	22	Female	no
+No	47	Female	no
+Yes	31	Female	no
+Yes	69	Female	no
+No	61	Female	no
+Yes	75	Female	no
+Yes	76	Female	no
+No	75	Female	no
+No	64	Female	no
+Yes	65	Female	no
+No	55	Male	before
+Yes	63	Female	no
+No	22	Male	no
+Yes	38	Male	no
+Yes	43	Male	no
+No	80	Male	no
+No	38	Female	no
+No	68	Male	no
+No	19	Female	no
+No	60	Female	no
+No	41	Male	no
+No	39	Male	no
+No	74	Female	no
+No	20	Female	no
+No	42	Male	no
+No	64	Male	yes
+No	38	Female	no
+No	47	Male	no
+No	26	Female	no
+No	37	Male	no
+No	37	Male	yes
+No	35	Female	no
+No	63	Female	no
+No	40	Female	no
+No	74	Female	no
+No	31	Female	no
+No	78	Male	no
+No	60	Female	no
+No	19	Female	no
+No	36	Male	no
+No	48	Female	no
+No	48	Male	before
+No	34	Male	yes
+No	49	Female	no
+No	44	Female	no
+No	37	Female	no
+No	46	Female	no
+No	48	Female	no
+No	31	Female	no
+No	71	Female	no
+No	38	Female	no
+No	26	Female	no
+No	19	Male	no
+No	66	Female	no
+No	60	Female	no
+No	52	Female	no
+No	22	Male	no
+No	44	Female	no
+Yes	37	Male	yes
+No	55	Female	no
+No	18	Male	no
+Yes	43	Female	no
+Yes	69	Female	no
+Yes	40	Female	no
+Yes	29	Male	yes
+No	39	Female	no
+No	50	Female	no
+No	48	Male	no
+No	81	Female	no
+No	74	Male	no
+No	48	Male	no
+No	76	Female	no
+No	46	Female	no
+No	27	Female	no
+No	21	Female	no
+No	75	Female	no
+No	65	Female	no
+No	54	Male	no
+No	18	Female	no
+No	57	Female	no
+No	41	Female	no
+No	52	Male	no
+No	20	Male	no
+No	65	Male	no
+No	47	Female	no
+No	20	Male	no
+No	44	Female	no
+No	53	Male	no
+No	44	Female	no
+No	51	Female	no
+No	50	Female	no
+No	41	Male	no
+No	38	Female	no
+No	20	Male	no
+No	18	Female	no
+No	63	Male	before
+No	51	Female	no
+No	71	Female	no
+Yes	30	Male	no
+No	71	Female	no
+No	27	Male	no
+No	48	Female	no
+No	43	Male	before
+No	50	Male	before
+No	23	Female	no
+No	51	Female	no
+No	26	Female	no
+No	79	Male	no
+No	42	Male	no
+No	18	Male	no
+No	72	Male	no
+No	29	Female	no
+No	18	Female	no
+No	53	Male	no
+No	56	Female	no
+No	86	Male	no
+No	41	Female	no
+No	45	Female	no
+No	58	Female	no
+No	26	Female	no
+No	60	Female	no
+No	44	Male	yes
+Yes	55	Male	no
+No	35	Female	no
+No	61	Female	no
+No	62	Male	no
+No	56	Female	no
+No	61	Female	no
+No	45	Male	no
+No	28	Male	no
+No	35	Male	no
+No	21	Female	no
+No	77	Male	no
+No	61	Female	no
+No	74	Female	no
+No	69	Female	no
+No	43	Female	no
+No	78	Female	no
+Yes	78	Female	no
+Yes	28	Female	no
+Yes	67	Female	no
+Yes	28	Female	no
+No	42	Female	no
+Yes	71	Female	no
+No	26	Female	no
+Yes	38	Male	no
+No	19	Female	no
+Yes	54	Female	no
+Yes	36	Male	before
+Yes	37	Female	no
+Yes	53	Male	no
+No	46	Male	no
+No	65	Female	no
+No	19	Male	yes
+No	21	Male	no
+No	23	Female	no
+No	20	Male	yes
+No	22	Male	yes
+No	56	Female	no
+No	50	Female	no
+No	19	Male	no
+No	22	Female	no
+No	44	Female	no
+No	21	Male	no
+No	28	Male	yes
+No	22	Female	no
+No	28	Male	no
+No	32	Female	no
+No	48	Male	no
+No	28	Female	no
+No	45	Female	no
+No	27	Female	no
+No	71	Female	no
+No	20	Female	no
+No	23	Male	no
+No	22	Male	no
+No	40	Male	no
+No	76	Male	no
+No	75	Female	no
+Yes	70	Female	no
+No	32	Male	no
+No	50	Male	before
+No	40	Male	before
+No	64	Female	no
+Yes	84	Female	no
+No	50	Female	no
+No	51	Male	yes
+No	58	Female	no
+No	61	Female	no
+No	37	Female	no
+No	72	Male	no
+No	58	Female	no
+No	34	Male	no
+No	18	Female	no
+No	32	Male	no
+No	41	Female	no
+No	72	Female	no
+No	47	Female	no
+No	78	Male	no
+No	50	Female	no
+No	51	Female	no
+No	53	Female	no
+Yes	49	Female	no
+No	18	Male	no
+No	63	Female	no
+No	50	Female	no
+No	37	Female	no
+No	46	Female	no
+Yes	43	Female	yes
+No	54	Male	no
+No	65	Female	no
+No	40	Male	no
+No	64	Female	no
+No	71	Male	no
+No	44	Female	no
+No	52	Female	no
+No	64	Male	no
+No	31	Female	no
+No	43	Female	no
+No	75	Male	no
+No	59	Male	no
+No	59	Female	no
+No	43	Female	no
+No	87	Female	no
+No	54	Female	no
+No	55	Male	no
+No	67	Female	no
+No	40	Male	before
+No	48	Female	no
+No	58	Female	no
+No	37	Female	no
+No	71	Female	no
+No	29	Male	no
+No	72	Female	no
+No	38	Female	no
+No	35	Male	no
+No	19	Male	no
+No	61	Female	no
+No	19	Female	no
+No	38	Female	no
+No	62	Female	no
+No	36	Male	yes
+No	26	Male	no
+No	54	Male	no
+No	41	Female	no
+No	35	Female	no
+No	48	Female	no
+No	79	Female	no
+No	54	Male	no
+No	18	Female	no
+No	72	Male	no
+No	33	Male	no
+No	51	Female	no
+No	49	Male	before
+No	24	Male	no
+No	32	Female	no
+No	38	Female	no
+No	56	Female	no
+No	71	Female	no
+No	62	Female	no
+No	81	Male	no
+No	23	Male	no
+No	57	Female	no
+No	77	Male	no
+No	22	Male	no
+No	38	Male	yes
+No	48	Male	before
+No	25	Female	no
+No	77	Female	no
+No	77	Male	before
+No	72	Female	no
+No	43	Male	yes
+No	61	Female	no
+No	56	Female	no
+No	18	Female	no
+No	78	Female	no
+No	77	Female	no
+No	45	Female	no
+No	30	Female	no
+No	61	Female	no
+No	40	Female	no
+No	46	Female	no
+No	69	Female	no
+No	21	Female	no
+No	40	Female	no
+No	32	Male	no
+No	63	Male	no
+No	44	Female	no
+No	41	Female	no
+No	51	Female	no
+No	55	Female	no
+No	58	Female	no
+No	20	Female	no
+No	76	Male	no
+No	47	Male	no
+No	47	Male	no
+No	27	Female	no
+No	75	Female	no
+No	60	Female	no
+No	35	Female	no
+No	49	Female	no
+No	60	Male	no
+No	33	Female	yes
+No	47	Male	no
+No	75	Male	no
+No	50	Male	no
+No	37	Female	no
+No	42	Female	no
+No	40	Male	yes
+No	74	Female	no
+No	23	Female	no
+No	32	Female	no
+No	43	Female	no
+No	33	Female	no
+No	20	Female	no
+No	62	Male	no
+No	26	Male	no
+No	52	Female	no
+No	74	Female	no
+No	32	Male	yes
+No	56	Male	no
+No	25	Female	no
+No	48	Male	no
+Yes	53	Male	no
+No	40	Female	no
+No	66	Male	no
+No	60	Male	no
+No	55	Female	no
+No	39	Female	no
+No	60	Male	before
+No	46	Male	no
+No	35	Male	no
+No	40	Male	no
+No	25	Female	no
+No	18	Male	no
+No	53	Female	no
+No	56	Male	before
+No	21	Male	no
+No	34	Male	no
+No	75	Female	no
+No	21	Male	no
+No	20	Female	no
+No	57	Male	no
+No	75	Male	no
+No	67	Male	no
+No	60	Female	no
+No	54	Female	no
+No	66	Female	no
+No	41	Female	no
+No	60	Female	no
+No	46	Female	no
+No	21	Female	no
+No	66	Female	no
+No	22	Female	no
+No	23	Male	no
+No	70	Female	no
+No	71	Male	no
+No	66	Male	before
+No	24	Male	yes
+No	37	Male	yes
+No	21	Female	yes
+No	41	Male	before
+No	51	Male	no
+No	62	Male	no
+No	55	Female	no
+No	29	Female	no
+No	22	Female	no
+No	48	Female	no
+No	72	Female	no
+No	85	Female	no
+No	58	Female	no
+No	73	Female	no
+No	69	Female	no
+No	34	Female	no
+No	46	Male	yes
+No	35	Female	no
+No	40	Female	no
+No	28	Female	no
+No	34	Female	no
+No	27	Male	no
+No	68	Female	no
+No	48	Male	no
+No	23	Female	no
+No	61	Female	no
+No	40	Male	yes
+No	64	Female	no
+No	44	Female	no
+No	65	Female	no
+No	33	Female	no
+No	46	Female	no
+No	33	Male	no
+No	54	Female	no
+No	23	Female	no
+No	22	Female	no
+No	58	Male	before
+No	20	Female	no
+No	41	Male	yes
+No	66	Male	no
+No	64	Male	before
+No	62	Female	no
+Yes	43	Female	no
+No	40	Female	no
+No	42	Female	no
+No	44	Male	before
+No	18	Female	no
+No	49	Female	no
+No	64	Female	no
+No	69	Male	no
+No	36	Male	no
+No	34	Female	no
+No	42	Female	no
+No	70	Female	no
+No	76	Male	no
+No	38	Male	yes
+No	70	Female	no
+No	43	Female	no
+No	61	Female	no
+No	64	Male	no
+Yes	47	Male	no
+No	50	Male	no
+No	36	Female	no
+No	84	Female	no
+No	74	Female	no
+No	38	Female	no
+No	27	Female	no
+Yes	39	Male	no
+No	48	Male	no
+No	65	Male	no
+No	41	Male	no
+No	25	Female	no
+No	29	Female	no
+No	36	Male	no
+No	61	Female	no
+No	63	Female	no
+No	43	Female	no
+No	53	Female	no
+No	40	Female	no
+No	49	Female	no
+No	22	Male	no
+No	51	Female	no
+No	19	Male	no
+Yes	27	Male	no
+No	39	Female	no
+No	70	Female	no
+Yes	60	Male	no
+No	37	Male	no
+No	35	Female	no
+No	72	Female	no
+No	23	Male	yes
+No	55	Female	no
+No	56	Female	no
+No	26	Female	no
+No	49	Male	no
+No	63	Male	no
+No	41	Female	no
+No	64	Female	no
+Yes	63	Female	no
+No	40	Female	no
+No	30	Female	no
+No	50	Female	no
+No	70	Male	no
+No	46	Female	no
+No	50	Male	no
+No	22	Male	no
+No	64	Female	no
+No	70	Female	no
+No	46	Female	no
+No	38	Female	no
+No	46	Female	no
+No	36	Female	no
+No	75	Female	no
+No	52	Male	no
+No	64	Female	no
+No	44	Female	no
+No	38	Female	no
+No	50	Male	no
+No	67	Female	no
+No	24	Female	no
+No	42	Female	no
+No	28	Female	no
+No	64	Male	no
+No	23	Female	no
+No	45	Female	no
+No	44	Male	no
+No	53	Male	no
+No	24	Male	no
+No	54	Male	yes
+No	37	Female	no
+No	52	Male	no
+No	45	Male	no
+No	24	Female	no
+No	37	Female	no
+No	52	Male	no
+No	58	Male	no
+No	76	Female	no
+No	57	Male	no
+No	24	Male	yes
+No	42	Female	no
+No	60	Male	no
+No	39	Male	no
+No	63	Female	no
+Yes	33	Female	no
+Yes	63	Male	before
+No	76	Female	no
+No	56	Female	no
+No	28	Male	yes
+No	45	Male	no
+No	45	Male	no
+No	63	Female	no
+No	25	Female	no
+No	30	Female	no
+Yes	24	Male	no
+No	39	Male	no
+Yes	42	Male	before
+Yes	50	Female	no
+No	18	Female	no
+Yes	53	Male	no
+No	27	Female	no
+No	45	Female	no
+No	36	Female	no
+No	24	Male	no
+No	56	Female	no
+No	38	Female	no
+No	72	Female	no
+No	87	Female	no
+No	62	Female	no
+No	35	Female	no
+Yes	31	Male	no
+No	67	Female	no
+No	39	Male	before
+No	67	Female	no
+No	29	Male	no
+No	45	Male	yes
+No	67	Male	no
+No	23	Male	no
+No	40	Female	no
+No	53	Male	before
+Yes	41	Female	no
+No	19	Male	yes
+No	53	Female	no
+No	73	Female	no
+No	24	Female	no
+No	61	Female	no
+No	43	Male	no
+No	46	Female	no
+No	65	Female	no
+No	63	Female	no
+No	80	Female	no
+No	67	Female	no
+No	75	Female	no
+No	53	Female	no
+No	57	Female	no
+No	26	Male	yes
+No	39	Female	no
+No	65	Female	no
+No	26	Female	no
+No	73	Male	no
+No	66	Male	no
+No	54	Male	no
+No	64	Female	no
+No	28	Male	no
+No	41	Male	no
+No	61	Male	before
+No	75	Male	no
+No	50	Male	no
+No	50	Female	no
+No	62	Female	no
+No	46	Female	no
+No	48	Male	yes
+No	53	Female	no
+No	64	Female	no
+No	47	Female	no
+No	51	Female	no
+No	24	Female	no
+No	55	Male	before
+Yes	55	Male	no
+Yes	75	Male	no
+No	44	Female	no
+No	65	Female	no
+No	60	Female	no
+No	52	Male	before
+No	32	Female	no
+No	53	Male	before
+No	25	Female	no
+No	71	Male	no
+Yes	43	Female	no
+No	44	Female	no
+No	47	Male	no
+No	29	Female	no
+No	70	Female	no
+No	45	Female	no
+No	32	Female	no
+No	67	Female	no
+No	65	Female	no
+No	19	Male	no
+No	40	Male	no
+No	49	Female	no
+No	61	Female	no
+No	18	Male	no
+No	82	Female	no
+No	78	Female	no
+No	90	Male	no
+No	41	Female	no
+No	85	Female	no
+No	59	Female	no
+No	49	Male	no
+No	67	Female	no
+No	64	Female	no
+No	67	Female	no
+No	33	Female	no
+No	57	Male	no
+No	60	Female	no
+No	87	Male	no
+No	46	Female	no
+No	53	Female	no
+No	73	Male	no
+No	83	Male	no
+No	52	Female	no
+No	47	Male	no
+No	70	Male	no
+No	35	Female	no
+No	39	Male	no
+No	22	Female	no
+No	56	Female	no
+No	64	Male	no
+No	72	Male	no
+No	74	Male	no
+No	48	Female	no
+No	24	Female	no
+No	29	Male	yes
+No	51	Male	no
+No	43	Male	before
+No	19	Male	yes
+No	36	Female	no
+No	40	Female	no
+No	34	Male	no
+No	33	Female	no
+No	45	Male	no
+Yes	35	Female	no
+No	26	Female	no
+Yes	53	Female	no
+Yes	67	Female	no
+No	73	Male	no
+No	71	Female	no
+No	35	Female	no
+No	51	Female	no
+No	72	Female	no
+No	38	Female	no
+No	63	Male	no
+No	53	Female	no
+No	27	Female	no
+No	36	Female	no
+No	64	Female	no
+No	53	Female	no
+No	24	Male	yes
+No	58	Male	yes
+No	62	Male	no
+No	47	Female	no
+No	26	Female	no
+Yes	32	Female	no
+No	64	Female	no
+No	24	Female	no
+No	81	Female	no
+No	64	Male	before
+Yes	51	Female	no
+No	28	Female	no
+No	79	Female	no
+No	21	Male	no
+No	39	Female	no
+No	22	Female	no
+No	78	Female	no
+No	73	Female	no
+No	52	Female	no
+No	62	Female	no
+No	68	Male	no
+No	45	Male	no
+No	27	Female	no
+No	36	Female	no
+No	72	Female	no
+No	75	Female	no
+No	18	Female	no
+No	73	Female	no
+No	72	Female	no
+No	41	Male	before
+No	47	Male	before
+No	40	Female	no
+No	58	Female	no
+Yes	53	Male	no
+No	26	Male	yes
+No	48	Female	no
+No	77	Male	no
+No	19	Male	no
+No	51	Male	no
+No	63	Male	no
+No	44	Male	no
+No	78	Female	no
+No	57	Male	no
+No	56	Female	no
+No	37	Female	no
+Yes	47	Female	no
+No	31	Female	no
+No	72	Female	no
+No	64	Female	no
+No	56	Male	no
+No	49	Female	no
+No	52	Female	no
+Yes	54	Male	before
+No	66	Male	no
+No	21	Female	no
+No	63	Male	no
+No	65	Female	no
+No	33	Female	no
+No	40	Female	no
+No	30	Female	no
+No	65	Female	no
+No	41	Female	no
+No	27	Female	no
+No	80	Female	no
+No	72	Male	no
+No	71	Female	no
+No	50	Female	no
+No	78	Male	no
+No	51	Female	no
+No	72	Female	no
+No	75	Female	no
+No	50	Female	no
+No	52	Female	no
+No	79	Male	no
+No	25	Female	no
+No	19	Female	no
+No	59	Female	no
+No	60	Female	no
+No	71	Female	no
+No	63	Male	before
+No	36	Female	no
+No	49	Male	no
+No	31	Female	no
+No	62	Male	no
+No	70	Female	no
+No	19	Male	no
+No	57	Female	no
+No	64	Female	no
+No	54	Male	no
+No	66	Male	no
+No	60	Female	no
+No	69	Female	no
+No	43	Female	no
+No	49	Female	no
+No	45	Female	no
+No	45	Female	no
+No	47	Female	no
+No	24	Male	no
+No	54	Male	before
+No	57	Female	no
+No	32	Female	no
+No	34	Male	no
+No	53	Female	no
+No	46	Female	no
+No	58	Female	no
+No	57	Female	no
+No	75	Female	no
+No	55	Male	before
+No	49	Male	before
+No	27	Female	no
+No	65	Female	no
+No	24	Female	no
+No	22	Female	no
+No	58	Female	before
+No	21	Female	yes
+Yes	49	Male	no
+No	70	Male	no
+No	80	Female	no
+No	44	Female	no
+No	74	Male	no
+No	72	Male	no
+No	64	Female	no
+No	35	Male	yes
+No	86	Female	no
+No	46	Female	no
+No	77	Male	no
+Yes	23	Male	yes
+No	41	Male	no
+No	79	Female	no
+No	76	Female	no
+No	61	Male	no
+No	49	Female	no
+No	47	Female	no
+No	25	Male	no
+No	74	Female	no
+No	72	Female	no
+No	65	Male	no
+No	39	Female	no
+No	20	Female	no
+No	42	Male	no
+No	45	Female	no
+No	64	Female	no
+No	24	Male	no
+No	38	Female	no
+No	56	Male	no
+No	60	Female	no
+No	37	Female	no
+No	27	Male	no
+No	22	Male	no
+No	50	Male	no
+No	19	Male	no
+No	55	Male	no
+No	60	Male	no
+No	61	Female	no
+No	71	Male	no
+No	39	Female	no
+No	79	Female	no
+No	55	Female	no
+No	41	Male	no
+No	20	Female	no
+No	35	Female	yes
+No	24	Female	no
+No	28	Male	no
+No	32	Male	no
+No	53	Female	no
+No	52	Female	no
+No	65	Male	no
+No	63	Female	no
+No	53	Female	no
+No	45	Female	no
+No	37	Female	no
+No	57	Female	no
+No	52	Male	no
+No	65	Female	no
+No	61	Female	no
+No	74	Male	no
+No	51	Female	no
+No	60	Male	before
+Yes	53	Male	before
+No	74	Female	no
+No	70	Male	no
+Yes	53	Female	no
+No	37	Male	no
+No	62	Male	no
+No	18	Female	no
+No	64	Female	no
+No	25	Female	no
+No	45	Male	no
+No	62	Female	no
+No	66	Male	no
+No	39	Male	no
+No	60	Male	no
+No	19	Female	no
+No	41	Male	no
+No	67	Female	no
+No	42	Male	before
+No	25	Female	no
+No	20	Male	no
+No	53	Female	no
+No	21	Male	no
+No	65	Male	before
+No	29	Female	no
+No	79	Female	no
+No	61	Male	no
+No	57	Male	no
+Yes	65	Female	no
+Yes	67	Male	no
+Yes	50	Male	no
+No	56	Female	no
+No	73	Male	no
+No	61	Female	no
+No	74	Male	no
+No	22	Male	no
+No	25	Female	no
+No	48	Female	no
+Yes	62	Female	no
+Yes	45	Female	no
+No	50	Female	no
+No	18	Male	no
+Yes	33	Male	no
+Yes	18	Female	no
+No	51	Male	no
+No	38	Female	no
+No	59	Female	no
+Yes	42	Male	no
+No	72	Male	yes
+No	48	Female	no
+No	32	Male	yes
+No	52	Female	no
+No	67	Female	no
+No	66	Female	no
+No	77	Female	no
+No	50	Female	no
+No	32	Male	no
+No	70	Male	no
+No	25	Male	yes
+No	57	Female	no
+No	62	Female	no
+No	41	Female	yes
+No	19	Female	no
+No	37	Female	no
+No	66	Female	no
+No	30	Female	no
+No	44	Female	no
+No	52	Female	no
+No	62	Male	no
+No	32	Female	yes
+No	38	Female	no
+No	49	Female	no
+No	41	Female	no
+No	52	Female	no
+No	37	Female	no
+No	64	Male	no
+No	20	Female	no
+No	20	Male	no
+No	49	Female	no
+No	70	Male	no
+No	33	Female	no
+No	30	Female	no
+No	53	Male	before
+No	28	Female	no
+No	29	Male	no
+No	56	Male	no
+No	24	Male	no
+No	33	Female	no
+No	40	Male	yes
+No	27	Female	no
+No	22	Female	no
+No	27	Female	no
+No	69	Female	no
+No	20	Male	no
+No	75	Male	no
+No	61	Male	yes
+No	22	Male	no
+No	28	Female	no
+No	28	Male	no
+No	22	Female	yes
+No	66	Female	no
+No	66	Male	before
+No	25	Male	yes
+No	63	Female	no
+No	20	Female	no
+No	51	Male	no
+No	38	Female	no
+No	21	Female	no
+No	43	Female	no
+No	45	Female	no
+No	23	Female	no
+No	50	Female	no
+No	18	Female	no
+No	22	Female	no
+No	38	Female	no
+No	75	Female	no
+No	66	Male	no
+No	40	Female	no
+No	60	Male	before
+No	67	Male	no
+No	37	Female	no
+No	47	Male	no
+No	59	Female	no
+No	78	Female	no
+No	69	Female	no
+No	26	Female	no
+No	73	Female	no
+No	73	Female	no
+No	18	Male	no
+No	39	Female	no
+No	77	Female	no
+No	38	Female	no
+No	55	Female	no
+No	19	Male	no
+No	21	Female	no
+No	68	Female	no
+No	22	Female	no
+No	76	Female	no
+No	32	Female	no
+No	68	Female	no
+No	60	Female	no
+No	65	Female	no
+No	63	Male	no
+No	52	Male	no
+No	51	Male	no
+No	61	Female	no
+No	34	Male	yes
+No	26	Male	no
+No	46	Male	no
+No	29	Male	no
+No	20	Male	no
+No	26	Female	no
+No	18	Female	no
+No	69	Male	no
+No	37	Female	no
+No	37	Male	no
+No	66	Female	no
+No	42	Female	no
+No	84	Female	no
+No	48	Female	no
+No	72	Female	no
+No	72	Male	no
+No	73	Female	no
+No	72	Male	no
+No	34	Female	no
+No	88	Male	no
+No	40	Female	yes
+No	72	Female	no
+No	41	Male	before
+No	51	Male	yes
+No	39	Male	before
+No	39	Female	no
+No	51	Female	no
+No	49	Male	no
+No	71	Male	no
+Yes	63	Male	before
+Yes	28	Male	yes
+Yes	29	Male	no
+No	75	Female	no
+Yes	32	Male	yes
+No	35	Male	no
+No	57	Male	no
+Yes	22	Female	no
+No	18	Male	no
+Yes	44	Male	no
+Yes	48	Female	no
+No	30	Male	yes
+Yes	49	Female	no
+No	70	Male	before
+Yes	65	Female	no
+Yes	30	Male	yes
+Yes	52	Male	no
+No	39	Male	no
+No	56	Female	no
+Yes	43	Female	no
+No	22	Male	no
+Yes	61	Female	no
+Yes	44	Female	no
+No	67	Female	no
+No	38	Female	no
+Yes	54	Male	no
+No	39	Male	yes
+Yes	74	Male	no
+Yes	23	Female	no
+No	24	Male	no
+Yes	27	Male	no
+No	33	Male	yes
+No	63	Female	no
+No	21	Male	yes
+No	54	Male	no
+Yes	18	Female	no
+Yes	73	Male	no
+No	45	Male	no
+No	40	Male	no
+Yes	43	Female	no
+No	42	Female	no
+No	38	Female	yes
+Yes	19	Female	no
+Yes	45	Female	no
+No	26	Male	yes
+Yes	25	Male	no
+Yes	66	Male	no
+No	36	Male	no
+No	31	Female	no
+No	23	Female	no
+No	71	Male	no
+No	54	Female	no
+No	58	Female	no
+No	28	Male	no
+No	26	Female	no
+No	26	Male	no
+No	21	Male	no
+No	38	Female	no
+No	20	Female	no
+No	32	Male	no
+No	67	Female	no
+No	55	Female	no
+No	72	Female	no
+Yes	45	Female	no
+No	21	Female	no
+No	28	Female	no
+No	39	Female	no
+No	40	Male	no
+No	47	Female	no
+No	44	Male	yes
+No	33	Male	no
+No	69	Female	no
+No	28	Female	no
+No	25	Male	no
+No	37	Female	no
+No	48	Male	no
+No	28	Female	no
+No	26	Female	no
+No	19	Female	no
+No	53	Female	no
+No	55	Female	no
+No	39	Male	no
+No	21	Male	no
+No	46	Male	before
+No	58	Female	no
+No	38	Female	no
+No	36	Female	no
+No	59	Male	before
+No	48	Female	no
+No	36	Male	no
+No	24	Female	no
+Yes	71	Male	no
+No	42	Female	no
+No	61	Female	no
+No	21	Male	no
+No	63	Female	no
+No	34	Female	no
+No	37	Female	no
+No	44	Female	no
+No	50	Male	no
+No	45	Female	no
+No	74	Female	no
+No	23	Female	no
+No	71	Male	no
+No	66	Male	no
+No	70	Female	no
+No	45	Female	no
+No	51	Male	no
+No	78	Female	no
+No	39	Female	no
+No	65	Male	no
+No	63	Male	no
+No	67	Male	no
+No	36	Male	no
+No	62	Female	no
+No	60	Female	no
+No	18	Female	no
+No	71	Male	no
+No	22	Female	no
+No	28	Female	no
+No	73	Female	no
+No	21	Male	yes
+No	68	Female	no
+No	62	Female	no
+Yes	43	Female	no
+No	27	Female	no
+No	77	Male	before
+No	72	Female	no
+No	82	Male	no
+No	59	Female	no
+No	60	Male	no
+No	69	Female	no
+No	69	Female	no
+No	22	Female	no
+No	65	Female	no
+No	18	Male	no
+No	43	Female	yes
+No	65	Male	no
+No	44	Female	no
+No	35	Male	no
+No	54	Female	no
+Yes	36	Female	no
+No	28	Male	no
+No	56	Female	no
+No	79	Female	no
+No	66	Male	no
+No	73	Female	no
+No	77	Female	no
+No	76	Female	no
+No	42	Female	no
+No	18	Male	no
+No	64	Female	no
+No	56	Female	no
+No	79	Male	no
+No	64	Female	no
+Yes	49	Male	no
+Yes	21	Male	no
+Yes	42	Female	no
+Yes	25	Female	no
+Yes	41	Female	no
+No	52	Male	no
+No	80	Female	no
+No	30	Female	no
+No	21	Female	no
+No	18	Male	no
+No	47	Female	no
+No	50	Female	no
+No	50	Female	no
+No	67	Male	no
+No	18	Male	no
+No	53	Male	no
+No	18	Female	no
+No	56	Female	no
+Yes	70	Female	no
+Yes	41	Female	no
+No	54	Male	no
+No	33	Female	no
+No	21	Male	no
+No	56	Female	no
+No	19	Male	no
+No	31	Male	no
+No	66	Female	no
+No	48	Male	yes
+No	47	Female	no
+No	53	Male	no
+No	83	Female	no
+No	22	Female	no
+No	74	Female	no
+No	70	Male	no
+No	73	Female	no
+No	37	Female	no
+No	36	Male	no
+Yes	32	Female	no
+No	65	Male	no
+No	27	Female	no
+No	18	Male	no
+No	30	Female	no
+No	28	Female	no
+No	36	Male	no
+No	71	Female	no
+No	70	Female	no
+Yes	52	Male	no
+No	53	Female	no
+No	43	Male	no
+No	49	Female	no
+No	22	Female	no
+No	65	Female	no
+No	27	Male	no
+No	23	Female	no
+No	51	Male	no
+No	83	Female	no
+No	33	Male	no
+No	32	Female	no
+No	45	Male	no
+No	39	Male	no
+No	18	Male	no
+No	42	Male	no
+No	48	Female	no
+No	29	Female	no
+No	51	Female	no
+No	40	Female	no
+No	50	Female	no
+No	83	Female	no
+No	40	Female	no
+No	74	Male	no
+No	52	Female	no
+No	48	Female	no
+No	34	Female	no
+No	75	Male	no
+No	73	Female	no
+No	76	Female	no
+Yes	51	Female	no
+No	52	Male	no
+No	40	Female	no
+No	52	Female	no
+No	44	Female	no
+No	33	Female	no
+No	62	Female	no
+No	33	Male	no
+No	75	Female	no
+No	73	Female	no
+No	41	Female	yes
+No	71	Female	no
+No	67	Male	no
+No	73	Female	no
+No	51	Male	before
+No	35	Male	no
+No	63	Female	no
+No	46	Female	no
+No	49	Male	no
+No	36	Male	no
+No	61	Female	no
+No	66	Female	no
+No	63	Male	no
+No	56	Male	no
+No	67	Male	no
+No	67	Male	no
+No	63	Female	no
+No	70	Female	no
+No	76	Female	no
+No	74	Female	no
+No	73	Male	no
+No	63	Female	no
+No	64	Female	no
+No	29	Female	no
+No	19	Male	no
+No	38	Female	no
+No	63	Female	no
+No	55	Female	no
+No	74	Female	no
+No	64	Male	no
+No	45	Female	no
+No	65	Female	no
+No	66	Female	no
+No	60	Female	no
+No	32	Female	no
+No	66	Female	no
+No	47	Male	before
+No	33	Female	no
+No	18	Male	no
+Yes	52	Female	no
+Yes	65	Female	no
+No	43	Male	no
+No	45	Male	no
+Yes	54	Male	no
+No	65	Male	no
+No	27	Male	no
+Yes	59	Male	no
+Yes	32	Female	no
+No	19	Male	no
+No	35	Female	no
+Yes	67	Male	before
+Yes	77	Female	no
+No	36	Female	no
+No	47	Female	no
+No	73	Female	no
+No	69	Female	no
+No	34	Female	no
+No	70	Female	no
+No	56	Female	no
+No	84	Male	no
+No	18	Male	no
+No	63	Male	no
+No	60	Female	no
+No	60	Female	no
+No	71	Male	no
+No	61	Female	no
+No	48	Male	yes
+No	52	Female	no
+No	53	Male	no
+No	40	Female	yes
+No	28	Female	no
+No	63	Male	no
+No	40	Female	no
+No	52	Female	no
+No	52	Male	before
+No	41	Male	before
+No	21	Female	no
+No	26	Female	no
+No	48	Female	no
+No	53	Female	no
+No	74	Female	no
+No	52	Female	no
+No	33	Male	no
+No	52	Female	no
+No	30	Male	no
+No	28	Female	no
+Yes	53	Male	no
+No	50	Female	no
+No	68	Male	before
+No	53	Male	no
+No	71	Female	no
+Yes	44	Female	no
+No	70	Female	no
+No	27	Male	no
+No	64	Female	no
+No	64	Female	no
+No	38	Female	no
+No	49	Female	no
+No	42	Male	no
+No	75	Female	no
+No	64	Male	no
+No	31	Male	no
+No	41	Male	no
+Yes	55	Female	no
+No	37	Female	yes
+No	55	Female	no
+No	31	Female	no
+No	48	Female	no
+Yes	55	Female	no
+Yes	32	Male	yes
+Yes	51	Female	no
+No	49	Male	no
+No	19	Male	no
+No	61	Female	no
+No	41	Male	no
+No	54	Female	no
+No	23	Male	no
+No	40	Male	no
+No	43	Female	no
+Yes	62	Male	before
+No	30	Female	no
+Yes	50	Female	no
+Yes	53	Female	no
+No	35	Male	no
+Yes	39	Female	no
+No	37	Female	no
+Yes	29	Female	no
+No	21	Female	no
+No	22	Male	no
+Yes	45	Female	no
+Yes	27	Female	no
+No	56	Female	no
+No	26	Male	no
+No	18	Female	yes
+Yes	24	Female	no
+No	53	Male	no
+No	35	Female	no
+No	67	Male	no
+No	18	Male	yes
+No	21	Male	no
+No	59	Female	no
+No	37	Female	no
+No	74	Male	no
+No	35	Female	no
+No	25	Female	no
+No	43	Female	yes
+No	58	Female	no
+No	63	Female	no
+No	41	Male	no
+No	32	Male	yes
+No	65	Female	no
+No	65	Female	no
+No	65	Male	no
+No	63	Female	no
+No	61	Female	no
+No	75	Female	no
+Yes	26	Female	no
+No	35	Male	before
+No	56	Female	no
+No	38	Female	no
+No	31	Female	no
+No	36	Female	no
+No	59	Female	no
+No	59	Female	no
+No	63	Female	no
+No	24	Female	no
+No	66	Male	no
+No	67	Male	no
+No	30	Male	no
+No	44	Female	no
+No	25	Female	no
+No	39	Male	yes
+No	73	Female	no
+No	20	Female	no
+No	78	Male	no
+No	39	Female	no
+No	19	Male	no
+No	35	Male	yes
+No	75	Female	no
+No	60	Female	no
+No	23	Male	no
+No	65	Female	no
+No	37	Female	no
+No	39	Male	no
+No	61	Male	no
+No	20	Female	no
+No	39	Female	no
+No	48	Female	no
+No	67	Female	no
+No	44	Male	no
+No	61	Female	no
+No	55	Female	no
+No	53	Female	no
+No	62	Male	no
+No	64	Male	no
+No	65	Female	no
+No	55	Female	no
+No	58	Female	no
+No	49	Male	no
+No	70	Female	no
+No	53	Female	no
+No	42	Female	no
+No	66	Female	no
+No	62	Female	no
+No	53	Female	no
+No	64	Female	no
+No	35	Female	no
+No	61	Female	no
+No	37	Male	no
+No	63	Male	no
+No	73	Female	no
+No	47	Male	no
+No	34	Male	yes
+No	22	Female	no
+No	54	Male	before
+No	27	Male	no
+No	22	Male	no
+No	71	Female	no
+No	55	Female	no
+No	47	Female	no
+No	51	Female	no
+No	41	Male	no
+No	46	Female	no
+No	53	Male	no
+No	61	Male	no
+No	23	Female	no
+No	58	Female	no
+No	56	Female	no
+No	80	Male	no
+No	48	Female	no
+Yes	19	Female	no
+No	20	Female	no
+No	53	Female	no
+No	34	Male	yes
+No	65	Female	no
+No	26	Male	yes
+No	27	Male	no
+No	42	Female	no
+No	25	Female	no
+No	65	Female	no
+No	46	Female	no
+No	65	Female	no
+No	32	Female	no
+No	66	Female	no
+No	63	Male	no
+No	79	Female	no
+No	63	Male	no
+No	57	Male	before
+No	65	Female	no
+No	58	Female	no
+No	56	Female	no
+No	63	Female	no
+No	62	Female	no
+No	79	Male	no
+No	32	Male	no
+Yes	65	Female	no
+No	66	Female	no
+No	24	Female	no
+No	32	Female	no
+Yes	43	Male	no
+No	80	Male	no
+No	49	Female	no
+No	49	Female	no
+No	54	Male	no
+No	60	Female	no
+No	62	Female	no
+No	60	Female	no
+No	34	Male	no
+No	28	Male	no
+No	21	Female	no
+No	37	Female	no
+No	19	Female	no
+No	28	Female	no
+No	42	Male	no
+No	70	Female	no
+No	46	Female	no
+No	25	Female	no
+No	65	Female	no
+Yes	41	Male	no
+No	51	Male	before
+No	62	Female	no
+No	37	Female	no
+No	44	Female	no
+No	57	Female	before
+No	27	Male	no
+No	52	Female	no
+No	72	Female	no
+No	48	Female	no
+No	69	Female	no
+No	57	Male	before
+No	44	Female	no
+No	48	Male	before
+No	50	Male	before
+No	65	Female	no
+No	55	Male	no
+No	62	Female	no
+No	60	Female	no
+No	48	Female	no
+No	18	Male	no
+No	35	Female	no
+No	24	Female	no
+No	38	Female	no
+No	18	Male	no
+No	65	Female	no
+No	62	Female	no
+No	66	Female	no
+No	56	Female	no
+No	62	Female	no
+No	29	Female	no
+No	18	Male	no
+No	21	Female	no
+No	79	Female	no
+No	41	Female	no
+No	65	Female	no
+No	23	Female	no
+No	53	Female	no
+No	58	Female	no
+No	60	Female	no
+No	67	Female	no
+No	91	Male	no
+No	62	Female	no
+No	66	Female	no
+Yes	35	Female	no
+No	25	Female	no
+No	33	Female	yes
+No	51	Male	before
+No	53	Female	no
+No	28	Male	yes
+No	19	Male	no
+No	27	Female	no
+No	45	Male	yes
+No	52	Male	before
+No	33	Female	no
+No	54	Male	yes
+No	24	Female	no")
+```
+
+
+
+## 7.1
+```{r}
+
+#STILL NEEEDDDDD WTFFF
+HomesValid <- read.csv("data-raw/HomesValid.csv", stringsAsFactors = FALSE)
+HomesDisc <- read.csv("data-raw/HomesDisc.csv", stringsAsFactors = FALSE)
+```
+
+
+
+## 7.2
+```{r}
+Walkervalid <- read.csv("data-raw/Walkervalid.csv", stringsAsFactors = FALSE)
+Walkerdisc <- read.csv("data-raw/Walkerdisc.csv", stringsAsFactors = FALSE)
+```
+
+
+
+
+
+

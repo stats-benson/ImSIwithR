@@ -1,0 +1,11 @@
+#' Dung Beetles Dataset
+#'
+#' A dataset showing type of "cap" worn by dung beetle, and the time taken for each beetle to roll their ball of dung to the edge of a platform.
+#'
+#' @format A data frame with 49 rows and 2 variables:
+#' \describe{
+#'   \item{time}{Time in seconds for beetle to roll dung ball to the edge of a wooden platform.  (Quantitative continuous rounded to hundreth of a second.)}
+#'   \item{treatment}{Type of "cap" given to dung beetle ("clearcap" or "blackcap")}
+#' }
+#' @source Dacke, Baird, Byrne, Scholtz, and Warrant (“Dung Beetles Use the Milky Way for Orientation,” Current Biology, 23, 2013)
+"DungBeetles"

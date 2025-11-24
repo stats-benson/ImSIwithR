@@ -1,0 +1,14 @@
+Package: ImSIwithR
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("Jacob", "Benson", , "jbenson2470@gmail.com", role = c("aut", "cre"))
+Description: Collection of all datasets used in the ImSI (Intermediate Statistical Investigations) textbook. Included documentation and data for streamlined use in explorations in R. 
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends: 
+    R (>= 3.5)
+LazyData: true
