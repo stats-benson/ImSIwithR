@@ -1,5 +1,5 @@
 Package: ImSIwithR
-Title: What the Package Does (One Line, Title Case)
+Title: Dataset for Explorations from Intermediate Statistical Investigations 
 Version: 0.0.0.9000
 Authors@R: 
     person("Jacob", "Benson", , "jbenson2470@gmail.com", role = c("aut", "cre"))

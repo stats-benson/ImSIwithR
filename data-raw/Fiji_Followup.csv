@@ -1,0 +1,534 @@
+Barcode_ID,H2O_Source.x,HouseholdSize,TwoWkDiarr_initial,Month_water_cost_initial,Children,TwoWkDiarr_followup,Month_water_cost_followup,watersource
+100135,Bore Hole,4,0,0,0,0,0,BoreHole
+100137,Bore Hole,4,0,20,2,0,0,BoreHole
+100144,Bore Hole,4,0,20,0,0,0,BoreHole
+100148,Bore Hole,3,0,20,0,0,0,BoreHole
+100150,Bore Hole,3,0,20,2,0,0,BoreHole
+100151,Bore Hole,3,0,20,0,0,0,BoreHole
+100155,Bore Hole,4,0,0,4,0,0,BoreHole
+100161,Bore Hole,6,0,0,0,0,0,BoreHole
+100162,Bore Hole,4,0,25,0,0,0,BoreHole
+100163,Well,3,1,0,0,0,0,other
+100164,Bore Hole,2,0,0,0,0,0,BoreHole
+100165,Well,5,0,0,2,0,0,other
+100167,Bore Hole,5,0,10,0,0,0,BoreHole
+100175,Bore Hole,4,2,0,1,0,0,BoreHole
+100177,Bore Hole,5,0,0,1,0,0,BoreHole
+100180,Bore Hole,5,0,50,0,0,0,BoreHole
+100186,Well,5,0,10,1,0,0,other
+100188,Bore Hole,6,0,0,0,0,0,BoreHole
+100194,Bore Hole,3,0,0,1,0,0,BoreHole
+100198,Bore Hole,2,0,20,4,NA,0,BoreHole
+100199,Bore Hole,4,1,0,1,0,0,BoreHole
+100200,Well,5,0,10,2,0,0,other
+100201,Bore Hole,4,0,10,1,0,0,BoreHole
+100203,Bore Hole,4,0,10,2,0,0,BoreHole
+100206,Bore Hole,9,0,10,2,0,0,BoreHole
+100207,Bore Hole,2,0,30,2,0,0,BoreHole
+100211,Tap (Untreated),2,0,0,0,0,0,other
+100213,Bore Hole,2,0,0,0,0,0,BoreHole
+100216,Bore Hole,4,0,10,3,0,0,BoreHole
+100218,Bore Hole,3,0,25,0,0,0,BoreHole
+100220,Bore Hole,4,4,15,2,0,0,BoreHole
+100225,Bore Hole,3,2,20,3,0,0,BoreHole
+100227,Bore Hole,4,2,0,0,0,0,BoreHole
+100228,Bore Hole,2,0,0,2,0,0,BoreHole
+100232,Bore Hole,2,0,0,2,0,0,BoreHole
+100239,Bore Hole,5,0,0,0,0,0,BoreHole
+100248,Bore Hole,6,0,10,2,0,0,BoreHole
+100254,Bore Hole,3,0,10,0,0,0,BoreHole
+100255,Bore Hole,2,2,10,0,0,0,BoreHole
+100259,Bore Hole,3,0,20,0,0,0,BoreHole
+100262,Bore Hole,2,0,0,1,0,0,BoreHole
+100263,Bore Hole,2,0,0,2,0,0,BoreHole
+100264,Bore Hole,3,0,0,0,0,0,BoreHole
+100265,Well,9,5,0,2,0,0,other
+100266,Bore Hole,4,0,20,1,0,0,BoreHole
+100268,Bore Hole,2,0,3,1,0,0,BoreHole
+100274,Bore Hole,5,0,10,2,0,0,BoreHole
+100276,Bore Hole,7,0,0,3,0,0,BoreHole
+100277,Bore Hole,2,0,40,2,0,0,BoreHole
+100278,Bore Hole,4,2,70,0,0,0,BoreHole
+100281,Bore Hole,5,0,20,1,0,0,BoreHole
+100283,Bore Hole,6,0,20,0,0,0,BoreHole
+100287,Bore Hole,3,2,18,1,0,0,BoreHole
+100288,Bore Hole,2,0,0,0,0,0,BoreHole
+100302,Bore Hole,3,0,10,1,0,0,BoreHole
+100303,Bore Hole,2,0,0,2,0,0,BoreHole
+100305,Bore Hole,2,0,0,3,0,0,BoreHole
+100306,Bore Hole,2,0,20,1,0,0,BoreHole
+100320,Bore Hole,2,0,20,3,0,0,BoreHole
+100322,Bore Hole,3,0,20,1,0,0,BoreHole
+100325,Bore Hole,3,1,20,3,0,0,BoreHole
+100326,Bore Hole,2,0,10,1,0,0,BoreHole
+100329,Bore Hole,4,0,10,0,0,0,BoreHole
+100330,Bore Hole,4,0,0,1,0,0,BoreHole
+100331,Catchment,2,0,0,2,0,0,other
+100332,Bore Hole,5,0,10,3,0,0,BoreHole
+100333,Bore Hole,3,0,10,3,0,0,BoreHole
+100335,Bore Hole,5,3,10,3,NA,0,BoreHole
+100336,Bore Hole,3,0,10,2,0,0,BoreHole
+100338,Bore Hole,2,0,10,1,0,0,BoreHole
+100340,Bore Hole,2,0,20,0,0,0,BoreHole
+100341,Bore Hole,1,1,10,0,0,0,BoreHole
+100343,Bore Hole,3,0,40,2,0,0,BoreHole
+100345,Bore Hole,3,0,10,0,0,0,BoreHole
+100347,Bore Hole,2,0,2,1,0,0,BoreHole
+100354,Bore Hole,4,0,10,0,0,0,BoreHole
+100463,Bore Hole,8,4,20,4,0,0,BoreHole
+100464,Bore Hole,2,0,15,1,0,0,BoreHole
+100465,Bore Hole,NA,3,0,3,0,0,BoreHole
+100466,Bore Hole,10,6,0,13,0,0,BoreHole
+100467,Bore Hole,6,6,0,6,0,0,BoreHole
+100468,Bore Hole,2,NA,0,3,0,0,BoreHole
+100469,Tap (Treated),12,0,0,7,0,0,other
+100471,Bore Hole,2,0,10,5,0,0,BoreHole
+100476,Catchment,4,1,0,0,0,0,other
+100477,Catchment,4,0,20,0,0,0,other
+100478,Catchment,4,0,0,2,NA,0,other
+100480,Catchment,3,2,0,3,0,0,other
+100481,Catchment,2,0,0,0,0,0,other
+100482,Catchment,5,0,0,1,0,0,other
+100484,Catchment,3,0,0,6,0,0,other
+100486,Catchment,6,0,0,5,0,0,other
+100487,Catchment,4,0,0,3,0,0,other
+100489,Catchment,5,0,4,2,0,0,other
+100490,Catchment,NA,6,0,2,0,0,other
+100491,Catchment,4,0,0,3,0,0,other
+100492,Catchment,4,0,0,2,0,0,other
+100495,Bore Hole,3,0,0,NA,0,0,BoreHole
+100496,Bore Hole,2,1,30,4,NA,0,BoreHole
+100497,Bore Hole,2,0,0,3,0,0,BoreHole
+100499,Bore Hole,2,0,0,2,0,0,BoreHole
+100500,Bore Hole,3,0,10,0,0,0,BoreHole
+100501,Bore Hole,3,0,0,2,0,0,BoreHole
+100502,Bore Hole,2,0,0,3,0,0,BoreHole
+100503,Bore Hole,2,0,0,2,0,0,BoreHole
+100504,Bore Hole,2,0,0,1,0,0,BoreHole
+100505,Bore Hole,3,0,0,1,0,0,BoreHole
+100507,Bore Hole,2,0,0,0,0,0,BoreHole
+100509,Bore Hole,2,0,0,0,2,0,BoreHole
+100512,Bore Hole,4,1,0,1,0,0,BoreHole
+100513,Bore Hole,2,0,NA,1,0,0,BoreHole
+100514,Bore Hole,5,1,0,0,0,0,BoreHole
+100519,Bore Hole,3,0,0,2,0,0,BoreHole
+100521,Bore Hole,2,0,0,3,0,0,BoreHole
+100524,Bore Hole,2,0,0,4,0,0,BoreHole
+100528,Bore Hole,3,0,0,0,0,0,BoreHole
+100529,Bore Hole,2,0,0,5,0,0,BoreHole
+100534,Bore Hole,3,0,0,0,0,0,BoreHole
+100538,Bore Hole,2,0,0,4,0,0,BoreHole
+100539,Bore Hole,2,0,0,3,0,0,BoreHole
+100541,Bore Hole,2,0,0,1,0,0,BoreHole
+100544,Bore Hole,2,0,6,6,0,0,BoreHole
+100547,Bore Hole,3,0,100,1,0,0,BoreHole
+100548,Bore Hole,3,0,0,5,0,0,BoreHole
+100549,Bore Hole,2,NA,20,2,0,0,BoreHole
+100551,Bore Hole,2,0,10,0,0,0,BoreHole
+100552,Bore Hole,5,0,30,0,0,0,BoreHole
+100553,Bore Hole,2,0,0,2,0,0,BoreHole
+100554,River/Creek,5,0,0,1,0,0,other
+100555,River/Creek,1,0,0,0,0,0,other
+100557,River/Creek,6,2,0,5,0,0,other
+100558,River/Creek,2,0,0,4,0,0,other
+100559,River/Creek,3,0,0,2,0,0,other
+100560,River/Creek,2,0,10,2,0,0,other
+100918,Bore Hole,NA,0,0,0,0,0,BoreHole
+100919,Bore Hole,NA,0,0,0,0,0,BoreHole
+100947,Catchment,2,0,0,1,0,0,other
+100956,Catchment,2,0,0,2,0,0,other
+100966,Catchment,1,0,0,0,0,0,other
+100974,Catchment,3,0,0,1,0,0,other
+100976,Catchment,3,0,0,1,0,0,other
+100977,Catchment,1,0,0,0,0,0,other
+100978,Catchment,2,0,0,3,0,0,other
+100979,Catchment,5,0,0,1,0,0,other
+100980,Catchment,1,0,0,0,0,0,other
+100981,Catchment,2,0,0,2,0,0,other
+100982,Catchment,2,0,0,4,0,0,other
+100984,Catchment,2,0,0,0,0,0,other
+100987,Catchment,2,0,0,2,0,0,other
+100988,Catchment,3,0,0,3,0,0,other
+100989,Catchment,3,0,0,3,0,0,other
+100990,Catchment,2,2,0,0,0,0,other
+100991,Catchment,2,0,0,0,0,0,other
+100992,Catchment,3,0,0,NA,0,0,other
+100993,Catchment,3,0,0,1,1,0,other
+100994,Catchment,2,0,0,2,0,0,other
+100996,Catchment,2,0,0,3,0,0,other
+100997,Catchment,2,0,0,1,0,0,other
+100999,Catchment,2,0,0,3,0,0,other
+101000,Catchment,3,0,0,0,0,0,other
+101001,Catchment,2,0,0,1,0,0,other
+101003,Catchment,2,0,0,1,0,0,other
+101005,Catchment,2,0,0,0,0,0,other
+101006,Catchment,2,0,0,1,0,0,other
+101007,Catchment,2,0,0,4,0,0,other
+101009,Catchment,2,0,0,1,0,0,other
+101010,Catchment,2,0,0,0,0,0,other
+101011,Catchment,1,0,0,0,0,0,other
+101012,Catchment,2,0,0,3,0,0,other
+101015,Catchment,3,0,0,4,0,0,other
+101016,Catchment,2,0,0,3,0,0,other
+101017,Catchment,2,0,0,1,0,0,other
+101018,Catchment,2,0,0,1,0,0,other
+101022,Catchment,2,0,0,1,0,0,other
+101024,Catchment,1,0,0,0,0,0,other
+101029,Catchment,2,0,0,1,0,0,other
+101034,Catchment,2,0,0,0,0,0,other
+101037,Catchment,3,0,0,3,0,0,other
+101039,Catchment,3,0,0,0,0,0,other
+101046,Catchment,2,1,0,1,0,0,other
+101047,Catchment,3,0,0,3,0,0,other
+101055,Catchment,2,2,0,1,0,0,other
+101062,Catchment,3,0,0,2,0,0,other
+101066,Catchment,2,0,0,1,0,0,other
+101067,Catchment,2,0,0,4,0,0,other
+101073,Catchment,3,0,0,4,0,0,other
+101076,Catchment,2,0,0,1,0,0,other
+101078,Catchment,3,0,0,0,0,0,other
+101080,Catchment,2,0,0,3,0,0,other
+101090,Catchment,3,0,0,1,0,0,other
+101122,Catchment,3,0,0,0,0,0,other
+101129,Catchment,2,0,0,1,0,0,other
+101143,Catchment,3,0,0,1,0,0,other
+101151,Catchment,2,0,0,4,0,0,other
+101154,Catchment,2,0,0,0,0,0,other
+101157,Catchment,3,0,0,0,0,0,other
+101158,Catchment,2,0,0,3,0,0,other
+101160,Catchment,4,0,0,1,0,0,other
+101165,Catchment,3,0,0,0,0,0,other
+101167,Catchment,4,0,0,1,0,0,other
+101170,Catchment,2,0,0,2,0,0,other
+101171,Catchment,NA,0,0,0,0,0,other
+101174,Catchment,2,0,0,3,0,0,other
+101178,River/Creek,6,0,0,0,0,0,other
+101179,Catchment,3,0,0,2,0,0,other
+101180,Catchment,3,0,0,1,0,0,other
+101181,River/Creek,3,0,0,3,0,0,other
+101185,Tap (Untreated),2,0,0,0,0,0,other
+101186,River/Creek,2,0,0,2,0,0,other
+101189,Tap (Untreated),3,0,0,1,0,0,other
+101191,Tap (Untreated),2,0,0,0,0,0,other
+101196,River/Creek,5,0,0,0,0,0,other
+101198,River/Creek,2,0,0,3,0,0,other
+101199,River/Creek,2,0,0,0,0,0,other
+101200,Catchment,3,0,0,2,0,0,other
+101205,Catchment,5,0,0,2,0,0,other
+101206,Tap (Untreated),4,0,0,0,0,0,other
+101207,Catchment,3,0,0,0,0,0,other
+101210,Tap (Untreated),4,0,0,0,0,36,other
+101211,River/Creek,2,0,0,3,0,0,other
+101212,River/Creek,4,0,0,1,0,0,other
+101213,Catchment,2,0,0,1,0,0,other
+101217,Catchment,2,0,0,2,0,0,other
+101218,Tap (Untreated),3,0,0,1,0,0,other
+101222,River/Creek,2,0,0,2,0,0,other
+101387,River/Creek,6,0,0,0,0,0,other
+101389,River/Creek,3,0,0,0,0,0,other
+101390,River/Creek,2,0,0,2,0,0,other
+101393,River/Creek,3,0,0,3,0,0,other
+101395,River/Creek,2,0,0,0,0,0,other
+101396,River/Creek,2,0,0,3,0,0,other
+101399,River/Creek,4,0,0,3,0,0,other
+101402,River/Creek,3,0,0,0,0,0,other
+101403,River/Creek,2,0,0,0,0,0,other
+101404,River/Creek,4,0,0,3,0,0,other
+101408,River/Creek,2,0,0,0,0,0,other
+101409,River/Creek,2,0,0,0,0,0,other
+101410,River/Creek,4,0,0,4,0,0,other
+101412,River/Creek,2,0,0,1,0,0,other
+101414,River/Creek,3,0,0,3,0,0,other
+101417,River/Creek,4,0,0,4,0,0,other
+101418,River/Creek,4,0,0,0,0,0,other
+101419,River/Creek,2,0,0,0,0,0,other
+101420,River/Creek,2,0,0,0,0,0,other
+101421,River/Creek,2,0,0,0,0,0,other
+101422,River/Creek,2,0,0,1,0,0,other
+101423,River/Creek,5,0,0,4,0,0,other
+101424,River/Creek,2,0,0,2,0,0,other
+101426,River/Creek,3,0,0,2,0,0,other
+101427,River/Creek,2,0,0,1,0,0,other
+101429,River/Creek,1,0,0,0,0,0,other
+101431,River/Creek,3,0,0,2,0,0,other
+101434,River/Creek,2,0,0,1,0,0,other
+101436,River/Creek,2,0,0,0,0,0,other
+101437,River/Creek,4,0,0,3,0,0,other
+101438,River/Creek,2,0,0,2,0,0,other
+101439,River/Creek,4,0,0,3,0,0,other
+101441,River/Creek,1,0,0,0,0,0,other
+101442,River/Creek,1,0,0,1,0,0,other
+101446,River/Creek,2,0,0,0,0,0,other
+101447,River/Creek,2,0,0,2,0,0,other
+101448,River/Creek,4,0,0,0,0,0,other
+101449,River/Creek,3,0,0,0,0,0,other
+101450,River/Creek,4,0,0,3,0,0,other
+101451,River/Creek,1,0,0,1,0,0,other
+101452,River/Creek,1,0,0,0,0,0,other
+101454,River/Creek,6,0,0,2,0,0,other
+101455,River/Creek,3,0,0,3,0,0,other
+101458,River/Creek,3,0,0,3,0,0,other
+101459,River/Creek,3,0,0,3,0,0,other
+101460,River/Creek,2,0,0,2,0,0,other
+101461,River/Creek,4,0,0,2,0,0,other
+101465,River/Creek,3,0,0,1,0,0,other
+101466,River/Creek,3,0,0,2,0,0,other
+101467,River/Creek,2,0,0,2,0,0,other
+101468,River/Creek,2,0,0,2,0,0,other
+101469,River/Creek,2,0,0,0,0,0,other
+101470,River/Creek,2,0,0,2,0,0,other
+101471,River/Creek,1,0,0,0,0,0,other
+101472,River/Creek,4,0,0,0,0,0,other
+101473,River/Creek,2,0,0,3,0,0,other
+101476,River/Creek,2,0,0,4,NA,0,other
+101478,River/Creek,2,0,0,2,0,0,other
+101479,Tap (Untreated),3,0,0,3,0,0,other
+101481,Tap (Untreated),2,0,0,2,0,0,other
+101482,Tap (Untreated),4,0,0,3,0,0,other
+101485,River/Creek,5,0,0,1,0,0,other
+101486,Tap (Untreated),2,0,0,2,0,0,other
+101487,Tap (Untreated),2,0,0,0,0,0,other
+101488,River/Creek,6,0,0,4,0,0,other
+101489,Tap (Untreated),3,0,0,0,0,0,other
+101490,Tap (Untreated),2,0,0,2,0,0,other
+101491,Tap (Untreated),2,0,0,2,0,0,other
+101492,Tap (Untreated),2,0,0,3,0,10,other
+101493,Tap (Untreated),2,0,0,4,0,0,other
+101494,River/Creek,3,0,0,2,0,0,other
+101495,Tap (Untreated),4,0,0,0,0,0,other
+101497,Tap (Untreated),5,0,0,1,0,0,other
+101499,Tap (Untreated),5,0,0,3,1,10,other
+101502,Tap (Untreated),3,0,0,2,0,0,other
+101505,Tap (Treated),5,0,0,5,0,0,other
+101506,Tap (Untreated),4,0,0,0,0,0,other
+101509,River/Creek,5,0,0,2,0,0,other
+101510,Tap (Untreated),5,0,0,1,0,0,other
+101511,River/Creek,4,0,0,0,0,0,other
+101512,Tap (Untreated),4,0,0,3,0,0,other
+101513,Tap (Untreated),5,0,0,1,0,0,other
+110103,Well,2,0,0,0,0,0,other
+110104,Well,4,0,0,0,0,0,other
+110105,Well,1,0,0,0,0,0,other
+110108,Well,3,0,0,2,0,0,other
+110109,Well,1,0,0,1,0,0,other
+110110,Well,3,0,0,0,0,0,other
+110111,Catchment,3,0,0,1,0,0,other
+110112,Well,2,0,0,0,0,0,other
+110116,Bore Hole,2,0,0,1,0,0,BoreHole
+110117,Bore Hole,7,0,0,3,0,0,BoreHole
+110118,Well,5,0,0,2,0,0,other
+110119,Bore Hole,3,0,0,0,0,0,BoreHole
+110120,Bore Hole,4,0,0,2,0,0,BoreHole
+110121,Bore Hole,3,0,0,1,0,0,BoreHole
+110122,Bore Hole,3,0,0,0,0,0,BoreHole
+110123,Bore Hole,2,0,0,0,0,0,BoreHole
+110124,Bore Hole,5,0,0,0,0,0,BoreHole
+110125,Bore Hole,4,0,0,1,0,0,BoreHole
+110129,Bore Hole,4,0,0,2,0,0,BoreHole
+110130,Bore Hole,2,0,0,5,0,0,BoreHole
+110131,Bore Hole,2,0,0,0,0,0,BoreHole
+110133,Bore Hole,2,0,0,3,0,0,BoreHole
+110134,Tap (Untreated),4,0,0,4,1,0,other
+110135,Well,3,0,0,3,0,15,other
+110137,Tap (Untreated),3,0,0,0,0,0,other
+110138,Bore Hole,3,0,0,0,0,0,BoreHole
+110139,Bore Hole,4,0,0,2,0,0,BoreHole
+110140,Bore Hole,4,0,0,2,0,0,BoreHole
+110141,Tap (Treated),4,0,70,0,0,0,other
+110142,River/Creek,2,0,0,0,0,0,other
+110144,Bore Hole,2,0,0,3,0,80,BoreHole
+110148,River/Creek,5,0,0,1,0,0,other
+110150,River/Creek,2,0,0,0,0,0,other
+110151,River/Creek,2,0,0,4,0,0,other
+110155,Catchment,2,0,0,2,0,0,other
+110158,Catchment,3,0,0,4,0,0,other
+110161,Catchment,2,0,0,0,0,0,other
+110163,Catchment,5,0,0,1,0,0,other
+110167,Catchment,2,0,0,2,0,0,other
+110168,Catchment,5,0,0,1,0,0,other
+110170,Catchment,3,0,0,3,0,0,other
+110171,Catchment,1,0,0,1,2,0,other
+110173,Catchment,2,0,0,2,0,0,other
+110174,Catchment,5,0,0,2,0,0,other
+110175,Catchment,5,0,0,0,0,0,other
+110176,Catchment,2,0,0,0,0,0,other
+110178,Catchment,4,0,0,2,0,0,other
+112001,Tap (Treated),1,0,0,1,0,0,other
+112002,Tap (Untreated),1,0,0,4,0,0,other
+112004,Tap (Treated),6,0,0,5,0,0,other
+112005,Tap (Treated),2,0,0,0,0,0,other
+112006,Tap (Treated),1,0,0,0,0,0,other
+112007,Tap (Treated),3,0,0,0,0,0,other
+112009,Tap (Treated),5,0,0,3,0,0,other
+112010,Tap (Untreated),6,2,0,4,0,0,other
+112011,Tap (Untreated),5,1,0,3,0,0,other
+112012,Tap (Untreated),7,2,0,2,0,0,other
+112014,Tap (Untreated),2,0,0,2,0,0,other
+112015,Tap (Untreated),3,1,0,3,0,0,other
+112018,River/Creek,4,0,0,0,0,0,other
+112019,Tap (Treated),7,1,0,7,0,0,other
+112022,Catchment,2,1,0,0,0,0,other
+112024,Tap (Treated),1,0,0,1,0,0,other
+112026,Tap (Treated),6,1,0,2,0,0,other
+112028,Tap (Treated),2,0,0,1,0,0,other
+112030,Tap (Treated),4,0,0,5,0,0,other
+112031,River/Creek,3,0,0,2,0,0,other
+112034,Tap (Treated),3,0,0,0,0,0,other
+112036,Tap (Untreated),2,0,0,4,0,0,other
+112042,Tap (Untreated),2,0,0,4,0,0,other
+112045,Tap (Treated),1,0,0,0,0,0,other
+112047,Tap (Untreated),5,0,0,0,0,0,other
+112049,Tap (Treated),3,0,0,1,0,0,other
+112050,Tap (Untreated),3,1,0,2,0,0,other
+112051,Tap (Untreated),3,0,0,2,0,0,other
+112053,Tap (Untreated),6,2,0,3,0,0,other
+112055,Tap (Treated),6,1,0,6,0,0,other
+112056,Tap (Treated),5,1,0,2,0,0,other
+112057,Tap (Untreated),5,0,0,1,0,0,other
+112059,Tap (Untreated),3,0,0,3,0,0,other
+112062,Catchment,2,0,0,0,0,0,other
+112063,Tap (Treated),2,0,0,3,0,0,other
+112064,Tap (Untreated),3,0,20,0,0,0,other
+112065,Tap (Treated),2,0,0,2,0,0,other
+112066,Tap (Treated),2,0,0,0,0,0,other
+112068,Tap (Untreated),7,0,0,5,0,0,other
+112074,Tap (Untreated),4,0,0,3,0,0,other
+112075,Tap (Treated),1,0,0,5,0,0,other
+112077,Tap (Untreated),1,0,0,4,0,0,other
+112078,Tap (Treated),2,0,0,4,0,0,other
+112080,Tap (Treated),3,0,0,3,0,0,other
+112081,Tap (Treated),2,1,20,2,0,0,other
+112082,Tap (Treated),3,0,0,1,0,0,other
+112083,Tap (Treated),3,0,0,2,0,0,other
+112084,Tap (Treated),2,0,0,1,0,0,other
+112088,Tap (Untreated),6,2,50,2,0,0,other
+112090,Tap (Treated),5,0,0,2,0,0,other
+112093,Tap (Treated),4,0,0,0,0,0,other
+112094,Tap (Untreated),3,0,0,0,0,0,other
+112095,Tap (Treated),2,0,0,3,NA,0,other
+112097,Tap (Treated),6,0,0,0,0,0,other
+112099,Tap (Untreated),4,0,3,0,0,0,other
+112100,Tap (Treated),5,0,0,4,0,0,other
+112101,Tap (Treated),3,0,0,1,0,0,other
+112106,Tap (Treated),3,0,0,3,0,0,other
+112112,Tap (Treated),1,0,0,2,0,0,other
+112118,Tap (Treated),4,2,0,1,0,0,other
+112119,Tap (Treated),2,0,0,3,0,0,other
+112120,Tap (Treated),2,0,0,4,0,0,other
+112121,Tap (Treated),5,0,0,2,0,0,other
+112122,Tap (Treated),8,1,0,1,0,0,other
+112123,Tap (Treated),3,2,0,5,0,0,other
+112125,Tap (Untreated),5,1,0,2,0,0,other
+112126,Tap (Treated),4,0,0,4,0,0,other
+112128,Tap (Treated),4,1,0,0,0,0,other
+112130,Tap (Treated),4,0,0,6,0,0,other
+112134,Tap (Treated),2,1,0,3,0,0,other
+112135,Tap (Treated),4,0,0,3,0,0,other
+112136,Tap (Untreated),2,0,0,0,0,0,other
+112140,Tap (Treated),4,0,0,1,0,0,other
+112141,Tap (Untreated),5,0,0,3,0,0,other
+112142,Tap (Treated),2,0,0,0,0,0,other
+112144,Tap (Treated),4,0,0,4,0,0,other
+112145,Tap (Untreated),5,0,0,1,0,0,other
+112150,Tap (Treated),2,1,0,3,0,0,other
+112152,Tap (Untreated),5,0,0,0,0,0,other
+112156,Tap (Treated),2,0,0,1,0,0,other
+112157,Tap (Treated),2,0,0,1,0,0,other
+112158,Tap (Untreated),7,1,0,3,0,0,other
+112160,Tap (Untreated),2,0,0,4,0,0,other
+112161,Tap (Untreated),4,0,0,2,0,0,other
+112162,Tap (Treated),3,0,0,1,0,0,other
+112167,Tap (Untreated),4,0,0,1,0,0,other
+112169,Tap (Untreated),2,1,0,1,0,0,other
+112174,Tap (Untreated),3,2,0,2,0,0,other
+112175,Tap (Untreated),9,3,0,3,0,0,other
+112177,Tap (Treated),2,0,0,1,0,0,other
+112179,Tap (Untreated),5,0,0,0,0,0,other
+112182,Tap (Untreated),2,0,0,0,0,0,other
+112191,Tap (Treated),1,0,0,0,0,0,other
+112193,Tap (Treated),2,0,0,3,0,0,other
+112195,Bore Hole,2,0,0,0,0,0,BoreHole
+112197,Well,4,0,0,0,0,0,other
+112198,Bore Hole,4,0,0,3,0,0,BoreHole
+112199,Tap (Untreated),5,0,5,1,0,0,other
+112201,Tap (Untreated),3,0,0,2,0,0,other
+112205,Tap (Treated),4,0,0,0,0,0,other
+112206,Tap (Treated),2,0,0,1,0,0,other
+112207,Bore Hole,4,0,0,2,0,0,BoreHole
+112208,Well,3,0,0,1,0,0,other
+112209,Tap (Untreated),4,0,0,2,0,0,other
+112211,Tap (Untreated),2,2,0,1,0,0,other
+112212,Tap (Untreated),2,0,0,3,0,0,other
+112214,Tap (Untreated),4,0,0,3,0,0,other
+112215,Tap (Untreated),8,0,0,0,0,0,other
+112221,Bore Hole,2,0,0,2,0,0,BoreHole
+112222,Tap (Untreated),8,4,0,4,0,0,other
+112227,Tap (Treated),5,0,0,0,0,0,other
+112228,Tap (Untreated),2,1,0,1,0,0,other
+112229,Tap (Treated),4,0,0,1,0,0,other
+112231,Bore Hole,3,0,0,0,0,50,BoreHole
+112233,Tap (Treated),3,0,0,2,0,0,other
+112237,Well,4,0,0,0,0,0,other
+112238,Bore Hole,2,0,0,0,0,0,BoreHole
+112241,Tap (Untreated),4,0,0,2,0,0,other
+112242,Tap (Treated),2,0,0,2,0,0,other
+112243,Tap (Treated),2,0,0,1,0,0,other
+112246,Tap (Untreated),4,1,0,2,0,0,other
+112247,Tap (Treated),2,0,0,2,0,0,other
+112248,Tap (Treated),3,0,0,2,0,0,other
+112249,Tap (Untreated),2,1,0,4,0,0,other
+125000,Tap (Untreated),2,0,0,4,0,0,other
+125001,Bore Hole,3,0,0,3,0,0,BoreHole
+125002,Bore Hole,3,0,0,4,0,0,BoreHole
+125021,Tap (Treated),3,0,0,5,0,0,other
+125022,Tap (Treated),3,1,0,0,0,0,other
+125023,Tap (Treated),2,0,0,0,0,0,other
+125024,Tap (Treated),1,0,0,0,0,0,other
+125025,Well,1,0,0,0,0,0,other
+125026,Well,5,0,0,1,0,0,other
+125027,Well,3,0,0,2,0,0,other
+125028,Well,2,0,0,0,0,0,other
+125030,Well,3,0,0,0,0,0,other
+125032,Well,2,0,0,3,0,0,other
+125033,Well,6,0,0,2,0,0,other
+125034,Bore Hole,2,0,0,1,0,0,BoreHole
+125036,Bore Hole,2,0,0,3,0,0,BoreHole
+125037,Bore Hole,3,1,0,0,0,0,BoreHole
+125038,Tap (Treated),3,0,0,0,0,0,other
+125039,Well,1,0,0,2,0,0,other
+125040,Tap (Treated),3,0,0,0,0,0,other
+125041,Bore Hole,5,0,0,0,0,0,BoreHole
+125042,Bore Hole,5,0,0,1,0,0,BoreHole
+125043,Bore Hole,3,0,0,0,0,18,BoreHole
+125045,Well,5,0,0,3,0,0,other
+125046,Bore Hole,4,0,0,0,0,0,BoreHole
+125047,Bore Hole,5,0,0,0,0,0,BoreHole
+125049,Bore Hole,5,0,0,0,0,0,BoreHole
+125051,Bore Hole,3,0,0,5,0,0,BoreHole
+125052,Bore Hole,4,0,0,0,0,0,BoreHole
+125053,Well,2,0,0,0,0,0,other
+125054,Well,3,0,0,2,0,50,other
+125055,Well,4,0,0,1,0,0,other
+125057,Well,4,0,0,1,0,0,other
+125058,Well,4,0,0,2,0,0,other
+125059,Well,7,0,0,0,0,0,other
+125061,Bore Hole,3,0,0,0,0,0,BoreHole
+125065,Well,4,0,0,1,0,0,other
+125066,Well,2,0,0,0,0,0,other
+125067,Well,3,0,0,3,0,0,other
+125068,Well,2,0,0,0,0,0,other
+125069,Well,2,0,0,0,0,0,other
+125070,Well,1,1,0,0,0,0,other
+125071,Well,3,0,0,0,0,0,other
+125075,Well,4,0,0,0,0,0,other
+125077,Well,2,0,0,2,0,0,other
+125081,River/Creek,5,0,12,5,0,0,other
+125082,Well,5,0,0,5,0,0,other
+125088,Well,4,1,0,0,0,0,other
+125094,River/Creek,4,0,0,2,0,0,other
+125095,Catchment,4,0,0,3,0,0,other
+125099,Bore Hole,3,0,0,NA,0,0,BoreHole
+125101,River/Creek,4,1,0,1,0,0,other
+125103,River/Creek,2,0,6,0,0,0,other
+125108,River/Creek,2,NA,0,3,0,0,other
+125109,Catchment,2,0,0,1,0,0,other
