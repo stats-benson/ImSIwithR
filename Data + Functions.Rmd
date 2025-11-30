@@ -7282,10 +7282,17 @@ No	24	Female	no")
 ```{r}
 
 #STILL NEEEDDDDD WTFFF
-HomesValid <- read.csv("data-raw/HomesValid.csv", stringsAsFactors = FALSE)
-HomesDisc <- read.csv("data-raw/HomesDisc.csv", stringsAsFactors = FALSE)
+Fiji_Initial <- read.csv("data-raw/Fiji_Initial.csv", stringsAsFactors = FALSE)
+Fiji_Followup <- read.csv("data-raw/Fiji_Followup.csv", stringsAsFactors = FALSE)
+Fiji_Final <- read.csv("data-raw/Fiji_Final.csv", stringsAsFactors = FALSE)
 ```
 
+```{r}
+Fiji_Final <- Fiji_Final %>%
+  select(-X)
+Fiji_Followup <- Fiji_Followup%>%
+  rename( H2O_Source = H2O_Source.x)
+```
 
 
 ## 7.2

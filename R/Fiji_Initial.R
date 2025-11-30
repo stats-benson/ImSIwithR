@@ -1,0 +1,18 @@
+#' Fiji_Initial Dataset
+#'
+#'
+#' Fiji, a country comprised of over 300 islands in the southwest Pacific Ocean, is well known as a tropical resort paradise. However, nearly half the population of native Fijians live in isolated, rural villages, with little to no infrastructure for clean drinking water. Ongoing efforts to provide clean drinking water include a country-wide initiative to provide long-lasting filtration solutions.
+#' In a study, researchers surveyed all households at the time of the filter installation and obtained self-reported information on family health and economic indicators during the previous month. In order to evaluate the impact of these filtration solutions on public health and economic indicators. (The plan was to return approximately two months after the installation to ask similar questions.)
+#'
+#' @format A data frame with 1463 rows and 7 variables:
+#' \describe{
+#'   \item{HouseholdSize}{Response to how many adults (18 years or older) live in your home at least two weeks per month. (Quantitative discrete)}
+#'   \item{Adults_D}{Indicates the number of days out of the last two weeks in which adults had diarrhea. (Quantitative, discrete)}
+#'   \item{H2O_Cost}{Amount of money spent on bottled water in the last month. (Quantitative, in Fijian Dollars)}
+#'   \item{Under17}{Number of children under 17 in the household. (Quantitative, Discrete)}
+#'   \item{Child1_D}{Number of days in the last two weeks that the first child experienced diarrhea. (Quantitative, discrete)}
+#'   \item{Barcode_ID}{Indicates the barcode of the filter that was installed in the house and allows for tracking of the filters over time. (ID)}
+#'   \item{Has_Barcode}{Simply indicates if the house has a barcode associated with the filter. ("Yes" or "No")}
+#' }
+#' @source Tintle, N., Chance, B., Cobb, G., Rossman, A., Roy, S., & VanderStoep, J. (2019). Intermediate Statistical Investigations. John Wiley & Sons. Household Water Use dataset.
+"Fiji_Initial"
