@@ -7287,7 +7287,6 @@ No	24	Female	no")
 ## 7.1
 ```{r}
 
-#STILL NEEEDDDDD WTFFF
 Fiji_Initial <- read.csv("data-raw/Fiji_Initial.csv", stringsAsFactors = FALSE)
 Fiji_Followup <- read.csv("data-raw/Fiji_Followup.csv", stringsAsFactors = FALSE)
 Fiji_Final <- read.csv("data-raw/Fiji_Final.csv", stringsAsFactors = FALSE)
