@@ -42,6 +42,27 @@ read_list <- function(raw_data) {
 ```
 
 ## Load and save datasets (example with built-in cars & iris) (1.2 and 1.3 dataset)
+
+```{r}
+housing_data <- read_list("sqft	price/1000	lake
+2700	639.9	lakefront
+3353	898	lakefront
+1600	410	lakefront
+1740	529.9	lakefront
+1907	495	lakefront
+3262	749.9	lakefront
+1336	199.9	notlakefront
+2410	324.9	notlakefront
+903	119	notlakefront
+3168	309.9	notlakefront
+1668	179.9	notlakefront
+2276	210	notlakefront
+2240	238.5	notlakefront")
+```
+
+
+
+
 ```{r}
 DungBeetles <- tribble(
   ~time,   ~treatment,
