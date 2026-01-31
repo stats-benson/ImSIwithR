@@ -166,7 +166,13 @@ Strawberries <- read_list("Firmness	Storage	Variety
 9.5	ModifiedAir	Allstar
 5	ModifiedAir	Bounty
 7.3	ModifiedAir	Kent
-11.5	ModifiedAir	Selva")
+11.5	ModifiedAir	Selva
+4.2	ModifiedAir	Vesper
+6.9	Control	Allstar
+4.3	Control	Bounty
+5.8	Control	Kent
+8.2	Control	Selva
+3.4	Control	Vesper")
 ```
 
 ## 2.3
