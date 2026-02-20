@@ -6,7 +6,6 @@ date: "2025-10-02"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
 library(ggplot2)
 library(mosaic)
 library(dplyr)
@@ -7328,6 +7327,9 @@ Walkerdisc <- read.csv("data-raw/Walkerdisc.csv", stringsAsFactors = FALSE)
 ```
 
 
+```{r}
+hurricanesB <- read.csv("data-raw/hurricanesB.csv", stringsAsFactors = FALSE)
+```
 
 
 
